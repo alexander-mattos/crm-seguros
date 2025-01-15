@@ -1,0 +1,107 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form name="Form" method="post" action="https://app.com.br" id="Form">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Início</li>
+                <li class="breadcrumb-item">Gestão Financeira</li>
+                <li class="breadcrumb-item">Cadastros</li>
+                <li class="breadcrumb-item active">Contas</li>
+            </ol>
+            <div id="UpdatePanel1">
+                <div class="container-fluid">
+                    <div class="animated fadeIn">
+                        <app-navbar></app-navbar>
+                        <div class="page-header mb-3">
+                            <div class="container-fluid">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4><i class="fas fa-vault mr-2"></i>Contas</h4>
+                                    </div>
+                                    <div class="col-auto ml-auto">
+                                        <div class="btn-group" role="group" aria-label="Second group">
+                                            <a id="Voltar" class="btn btn-dark"
+                                                href="javascript:__doPostBack(Voltar)"><i
+                                                    class="fas fa-arrow-alt-circle-left mr-2"></i>Voltar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-accent-crm">
+                            <div class="card-header">
+                                <strong><i class="fas fa-edit"></i></strong>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Banco:</label>
+                                            <select name="ctl00$ContentPlaceHolder1$ddlBanco"
+                                                id="ctl00_ContentPlaceHolder1_ddlBanco" class="form-control"
+                                                autocomplete="off">
+                                                <option value="0">Selecione</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Agência:</label>
+                                            <input name="ctl00$ContentPlaceHolder1$txAgencia" type="text"
+                                                id="ctl00_ContentPlaceHolder1_txAgencia" class="form-control"
+                                                autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Conta:</label>
+                                            <input name="ctl00$ContentPlaceHolder1$txConta" type="text"
+                                                id="ctl00_ContentPlaceHolder1_txConta" class="form-control"
+                                                autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Saldo:</label>
+                                            <input name="ctl00$ContentPlaceHolder1$txSaldo" type="text"
+                                                id="ctl00_ContentPlaceHolder1_txSaldo" class="form-control"
+                                                data-mask="moeda" autocomplete="off" value="0,00"
+                                                style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Descrição:</label>
+                                            <input name="ctl00$ContentPlaceHolder1$txDescricao" type="text"
+                                                id="ctl00_ContentPlaceHolder1_txDescricao" class="form-control"
+                                                autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ctl00_ContentPlaceHolder1_pnlBotao">
+
+                                <div class="card-footer text-center">
+                                    <a id="ctl00_ContentPlaceHolder1_lnkSalvar" class="btn btn-success"
+                                        href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkSalvar&#39;,&#39;&#39;)"><i
+                                            class="fas fa-check mr-2"></i>Salvar</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="ctl00$ContentPlaceHolder1$hfCodigo" id="ctl00_ContentPlaceHolder1_hfCodigo"
+                    autocomplete="off">
+                <input type="hidden" name="ctl00$ContentPlaceHolder1$hfTipo" id="ctl00_ContentPlaceHolder1_hfTipo"
+                    value="new" autocomplete="off">
+
+            </div>
+
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

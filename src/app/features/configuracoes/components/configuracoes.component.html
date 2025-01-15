@@ -1,0 +1,510 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Início</li>
+                <li class="breadcrumb-item">Configurações</li>
+                <li class="breadcrumb-menu d-md-down-none" style="display: none;">
+                    <div class="btn-group">
+                        <a class="btn" navigateurl="javascript:void(0);">
+                            <i class="fas fa-question mr-2"></i>Ajuda
+                        </a>
+                    </div>
+                </li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div class="d-flex justify-content-between mb-2">
+                        <div>
+                            <h4 class="page-title"><i class="fas fa-cog mr-2"></i>Configurações</h4>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-4">
+                            <div class="card">
+                                <img class="card-img-top" src="./configuracoes_files/bg-meus-dados.jpg" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">Minha Corretora</h5>
+                                    <p class="card-text">Configurações de sua corretora.</p>
+                                    <div class="list-group">
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Empresas/edit.aspx?tp=nNB/8iX/U0U=&amp;r=U+6pOAVExvmCTsp9NHCZ9Q==">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i class="fa-solid fa-circle-arrow-right mr-2"></i>Meus
+                                                    dados
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Altere os dados cadastrais de sua empresa.</p>
+                                        </a>
+                                        <a id="ctl00_ContentPlaceHolder1_linhaUnidadesNegocio"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/EmpresasUnidadesNegocio/home.aspx?r=U+6pOAVExvmCTsp9NHCZ9Q==">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Unidades de
+                                                    Negócio</h5>
+                                            </div>
+                                            <p class="mb-0">Altere os dados cadastrais de suas unidades de negócio.
+                                            </p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Usuarios/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Usuários
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Altere os dados cadastrais de seus usuários.</p>
+                                        </a>
+                                        <a id="ctl00_ContentPlaceHolder1_linhaAcessos"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Empresas/acessos.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Acessos</h5>
+                                            </div>
+                                            <p class="mb-0">Verifique como está o acesso de usuário ao sistema.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Baixas/apolices.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Apólices
+                                                    Vencidas</h5>
+                                            </div>
+                                            <p class="mb-0">Liste e dê baixa em suas apólices vencidas.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Backup/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Backup</h5>
+                                            </div>
+                                            <p class="mb-0">Efetuar backup do sistema.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Clientes/importador.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Importação
+                                                    de Clientes</h5>
+                                            </div>
+                                            <p class="mb-0">Importe seu arquivo de cliente para dentro do CRM.</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ctl00_ContentPlaceHolder1_cardOportunidades" class="card">
+                                <img class="card-img-top" src="./configuracoes_files/bg-oportunidade.jpg" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">Oportunidades</h5>
+                                    <p class="card-text">Configurações do módulo de Oportunidades.</p>
+                                    <div class="list-group">
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/AreaDepartamento/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i class="fa-solid fa-circle-arrow-right mr-2"></i>
+                                                    <span
+                                                        id="ctl00_ContentPlaceHolder1_lblAcao">Área/Departamento</span>
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">
+                                                <span id="ctl00_ContentPlaceHolder1_lblDesc">Altere, inclua ou
+                                                    exclua uma Área/Departamento</span>
+                                            </p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/AnoFiscal/default.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i class="fa-solid fa-circle-arrow-right mr-2"></i>Ano
+                                                    Fiscal
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Configurar Ano Fiscal.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Segmento/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i class="fa-solid fa-circle-arrow-right mr-2"></i>Área
+                                                    Técnica
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua uma Área Técnica.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Tecnicos/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Técnicos
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua um Técnico.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Canais/default.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Canais</h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua um Canal.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/CanaisOrigem/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Origem Canal
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua uma Origem de um Canal.</p>
+                                        </a>
+                                        <a id="ctl00_ContentPlaceHolder1_linhaSegmentoCanal"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/SegmentosSantander/default.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Segmento
+                                                    Canal</h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua um Segmento Canal.</p>
+                                        </a>
+
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Divisoes/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Divisões
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua Divisões.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Filiais/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Filiais/Geografia
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua uma Filial/Geografia.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Funil/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Funis de
+                                                    Venda</h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua Funis de Venda.</p>
+                                        </a>
+
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Origem/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Oportunidade
+                                                    Origem</h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua Origens de Oportunidades.</p>
+                                        </a>
+                                        <a id="ctl00_ContentPlaceHolder1_linhaTiposCampanha"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/TiposCampanha/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Tipos de
+                                                    Campanha</h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua um Tipo de Campanha.</p>
+                                        </a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-4">
+                            <div id="ctl00_ContentPlaceHolder1_cardAdministrativo" class="card">
+                                <img class="card-img-top" src="./configuracoes_files/bg-administrativo.jpg" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">Administrativo</h5>
+                                    <p class="card-text">Configurações de tabelas disponíveis para personalização.
+                                    </p>
+                                    <div class="list-group">
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Bancos/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Bancos</h5>
+                                            </div>
+                                            <p class="mb-0">Verifique como está o acesso de usuário ao sistema.</p>
+                                        </a>
+                                        <a id="ctl00_ContentPlaceHolder1_linhaApolicesVencidas"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Baixas/apolices.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Apólices
+                                                    Vencidas</h5>
+                                            </div>
+                                            <p class="mb-0">Liste e dê baixa em suas apólices vencidas.</p>
+                                        </a>
+                                        <a id="ctl00_ContentPlaceHolder1_linhaBases"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Bases/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Bases</h5>
+                                            </div>
+                                            <p class="mb-0">Incluir/Alterar registros de Base.</p>
+                                        </a>
+                                        <a id="ctl00_ContentPlaceHolder1_linhaCorretoras"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Corretoras/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Corretoras
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Cadastro de corretoras.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/FaixaEtaria/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Faixa Etária
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Insira/altere um registro de faixa etária.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/FluxoAtividades/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Fluxo de
+                                                    Atividades</h5>
+                                            </div>
+                                            <p class="mb-0">Configurações de seu Fluxo de Atividades.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/EmailTemplate/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Modelos de
+                                                    Mídia</h5>
+                                            </div>
+                                            <p class="mb-0">Insira/altere configurações de modelos de mídia.</p>
+                                        </a>
+                                        <a id="ctl00_ContentPlaceHolder1_linhaPortes"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Portes/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Portes</h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua um Porte de um Cliente.</p>
+                                        </a>
+                                        <a id="ctl00_ContentPlaceHolder1_linhaConsistencias"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Consistencias/documentos.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Consistências
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Consistências dos cadastros.</p>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ctl00_ContentPlaceHolder1_cardMultiCalculo" class="card">
+                                <img class="card-img-top" src="./configuracoes_files/bg-multi-calculo.jpg" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">Multi Cálculo</h5>
+                                    <p class="card-text">Configurações do módulo de Multi Cálculo.</p>
+                                    <div class="list-group">
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/LoginSeguradoras/default.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Login das
+                                                    Seguradoras</h5>
+                                            </div>
+                                            <p class="mb-0">nsira/altere configurações de Login das Seguradoras.</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ctl00_ContentPlaceHolder1_cardProdutosCoberturasSeguradoras" class="card">
+                                <img class="card-img-top" src="./configuracoes_files/bg-coberturas.jpg" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">Produtos, Coberturas e Seguradoras</h5>
+                                    <p class="card-text">Configurações de Produtos, Coberturas e Seguradoras.</p>
+                                    <div class="list-group">
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Produtos/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Produtos e
+                                                    Coberturas</h5>
+                                            </div>
+                                            <p class="mb-0">Altere os dados de Produtos e Coberturas.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Fornecedores/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Seguradoras
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Altere os dados de Seguradoras.</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div id="ctl00_ContentPlaceHolder1_cardLeads" class="card">
+                                <img class="card-img-top" src="./configuracoes_files/bg-leads.jpg" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">Leads</h5>
+                                    <p class="card-text">Configurações disponíveis do módulo de Leads.</p>
+                                    <div class="list-group">
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/LeadsFases/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Fases</h5>
+                                            </div>
+                                            <p class="mb-0">Visualize, altere ou inclua uma fase.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/LeadsOrigens/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Origens</h5>
+                                            </div>
+                                            <p class="mb-0">Visualize, altere ou inclua uma origem.</p>
+                                        </a>
+
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/LeadsSetores/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Setores</h5>
+                                            </div>
+                                            <p class="mb-0">Visualize, altere ou inclua um setor.</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ctl00_ContentPlaceHolder1_cardProdutoresNiveisRegras" class="card">
+                                <img class="card-img-top" src="./configuracoes_files/bg-produtores.jpg" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">Produtores, Níveis de Produtor e Regras de Comissão</h5>
+                                    <p class="card-text">Configurações de Produtores, Níveis e Regras de Comissão.
+                                    </p>
+                                    <div class="list-group">
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/ProdutorNivel/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Nível dos
+                                                    Produtores</h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua Nível de Produtores.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/Produtores/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Produtores
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua Produtores.</p>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/RegrasComissao/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Regras de
+                                                    Comissão</h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua suas Regras de Comissão.</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ctl00_ContentPlaceHolder1_cardSinistros" class="card">
+                                <img class="card-img-top" src="./configuracoes_files/bg-sinistro.jpg" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">Sinistros</h5>
+                                    <p class="card-text">Configurações do módulo de Sinistros.</p>
+                                    <div class="list-group">
+                                        <a id="ctl00_ContentPlaceHolder1_linhaSinistrosOrigem"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/SinistrosOrigem/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Origem</h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua uma Origem do Sinistro.</p>
+                                        </a>
+                                        <a id="ctl00_ContentPlaceHolder1_linhaSinistrosSeveridade"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/SinistrosSeveridade/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Severidade
+                                                </h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua uma Severidade do Sinistro.</p>
+                                        </a>
+                                        <a id="ctl00_ContentPlaceHolder1_linhaSinistrosStatus"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/SinistrosStatus/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Status</h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua um Status do Sinistro.</p>
+                                        </a>
+                                        <a id="ctl00_ContentPlaceHolder1_linhaSinistrosTipo"
+                                            class="list-group-item list-group-item-action flex-column align-items-start"
+                                            href="https://app.crmseguros.com.br/TiposCaso/home.aspx">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><i
+                                                        class="fa-solid fa-circle-arrow-right mr-2"></i>Tipos de
+                                                    Sinistro</h5>
+                                            </div>
+                                            <p class="mb-0">Altere, inclua ou exclua um Tipo de Sinistro.</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .card-img-top {
+                    border-bottom: 2px solid #aaaaaa;
+                }
+
+                .list-group-item:first-child {
+                    border-top-left-radius: 0 !important;
+                    border-top-right-radius: 0 !important;
+                }
+
+                .list-group-item:last-child {
+                    border-bottom-right-radius: 0 !important;
+                    border-bottom-left-radius: 0 !important;
+                }
+            </style>
+
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,200 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form [formGroup]="filtroForm" (ngSubmit)="pesquisar()">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Início</li>
+                <li class="breadcrumb-item active">Clientes</li>
+                <li class="breadcrumb-menu d-md-down-none" style="display: none;">
+                    <div class="btn-group" role="group" aria-label="Button group">
+                        <a class="btn" href="">
+                            <i class="fas fa-question mr-2"></i>Ajuda
+                        </a>
+                    </div>
+                </li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div>
+                        <div class="page-header mb-3">
+                            <div class="container-fluid">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4><i class="fas fa-user-friends mr-2"></i>Clientes</h4>
+                                    </div>
+                                    <div class="col-auto ml-auto">
+                                        <div class="btn-list">
+                                            <a [routerLink]="['/clientes/incluir']" class="btn btn-success">
+                                                <i class="fas fa-plus"></i><span class="d-none d-md-inline ml-2">Novo
+                                                    Cliente</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card card-accent-crm">
+                                    <div class="card-header">
+                                        <strong><i class="fas fa-filter"></i></strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <label>Nome:</label>
+                                                    <input formControlName="nome" type="text" maxlength="70" id=""
+                                                        class="form-control" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Nome Social:</label>
+                                                    <input formControlName="nomeSocial" type="text" maxlength="30"
+                                                        class="form-control" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Tipo pessoa:</label>
+                                                    <select formControlName="tipoPessoa" class="form-control"
+                                                        autocomplete="off">
+                                                        <option selected="selected" value="0">Selecione</option>
+                                                        <option value="Física">Física</option>
+                                                        <option value="Jurídica">Jurídica</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Unidade de Negócio:</label>
+                                                    <select formControlName="unidadeNegocio" class="form-control">
+                                                        <option selected="selected" value="0">Selecione</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Status:</label>
+                                                    <select formControlName="status" id="" class="form-control"
+                                                        autocomplete="off">
+                                                        <option selected="selected" value="TODOS">TODOS</option>
+                                                        <option value="CLIENTE">CLIENTE</option>
+                                                        <option value="INATIVO">INATIVO</option>
+                                                        <option value="NÃO INFORMADO">NÃO INFORMADO</option>
+                                                        <option value="PARCEIRO">PARCEIRO</option>
+                                                        <option value="PROSPECT">PROSPECT</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex">
+                                        <button type="button" class="btn btn-danger" (click)="redefinirPesquisa()">
+                                            Redefinir pesquisa
+                                        </button>
+                                        <button type="submit" class="btn btn-primary ml-auto">
+                                            Pesquisar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="card card-accent-crm">
+                                    <div class="card-header">
+                                        <strong><i class="fas fa-bars"></i></strong>
+                                    </div>
+                                    <div>
+                                        <div *ngIf="loading" class="text-center">
+                                            <div class="spinner-border" role="status">
+                                                <span class="sr-only">Carregando...</span>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="!loading && !error" class="row">                                            
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <div class="table-responsive">
+                                                        <div>
+                                                            <table *ngIf="clientes.length > 0"
+                                                                class="table table-borderless border-0 mb-0"
+                                                                style="border-collapse:collapse;">
+                                                                <tbody>
+                                                                    <tr class="border-bottom">
+                                                                        <th scope="col">&nbsp;</th>
+                                                                        <th scope="col">&nbsp;</th>
+                                                                        <th scope="col">Nome</th>
+                                                                        <th scope="col">Nome Social</th>
+                                                                        <th scope="col">Tipo de Pessoa</th>
+                                                                        <th scope="col">CNPJ/CPF</th>
+                                                                        <th scope="col">Data de Nascimento</th>
+                                                                        <th scope="col">Status</th>
+                                                                    </tr>
+                                                                    <tr *ngFor="let cliente of clientes"
+                                                                        class="border-bottom">
+                                                                        <td class="text-center bg-white border-right"
+                                                                            style="width:3%;">
+                                                                            <a
+                                                                                [routerLink]="['/clientes/dash', cliente.id]">
+                                                                                <i class="fas fa-edit"></i></a>
+                                                                        </td>
+                                                                        <td class="border-right text-center"
+                                                                            style="width:3%;">
+                                                                            <div class="avatar bg-white rounded-0"
+                                                                                style="background-image: url(perfil.png); height:46px; width:46px;">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>{{cliente.nome}}</td>
+                                                                        <td>{{cliente.nomeSocial || '-'}}</td>
+                                                                        <td>{{cliente.tipoPessoa | tipoPessoa}}</td>
+                                                                        <td>{{cliente.cnpjCpf || '-'}}</td>
+                                                                        <td>{{cliente.dtNascimento || '-'}}</td>
+                                                                        <td class="text-center">
+                                                                            <span [class]="cliente.status | statusCliente:'classe'">
+                                                                                {{cliente.status | statusCliente}}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <div *ngIf="clientes.length === 0"
+                                                                class="alert alert-warning text-center">
+                                                                Nenhum cliente encontrado.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <ul class="pagination justify-content-center mt-3">
+                                                            <li class="page-item disabled">
+                                                                <a class="page-link" href="">«
+                                                                    Anterior</a>
+                                                            </li>
+                                                            <li class="page-item">
+                                                                <span class="page-text page-text-active">1</span>
+                                                            </li>
+                                                            <li class="page-item"><span class="page-text">de</span>
+                                                            </li>
+                                                            <li class="page-item">
+                                                                <span class="page-text page-text-active">1</span>
+                                                            </li>
+                                                            <li class="page-item disabled">
+                                                                <a class="page-link" href="">Próxima
+                                                                    »</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

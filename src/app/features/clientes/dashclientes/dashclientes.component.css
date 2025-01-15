@@ -1,0 +1,40 @@
+.nav-tabs .nav-link {
+  color: #2f353a;
+  background: rgba(255, 255, 255, 0.5);
+  border-color: #cccccc;
+  cursor: pointer;
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  background: #ffffff;
+  border-color: #cccccc #cccccc #cccccc;
+}
+
+.nav-tabs .nav-link.active {
+  color: #495057;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.tab-pane.active {
+  display: block !important;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.show {
+  opacity: 1;
+}
+
+.button-space {
+  margin-right: 10px;
+  /* Ajuste o valor conforme necessário */
+}
+
+/* Remover margem no último botão, se necessário */
+.button-space:last-child {
+  margin-right: 0;
+}

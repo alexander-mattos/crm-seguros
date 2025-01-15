@@ -1,0 +1,185 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form [formGroup]="form">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Configurações</li>
+                <li class="breadcrumb-item">Importador de Clientes</li>
+                <li class="breadcrumb-menu d-md-down-none">
+                    <div class="btn-group">
+                        <a class="btn">
+                            <i class="fas fa-question mr-2"></i>Ajuda
+                        </a>
+                    </div>
+                </li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div class="form-row">
+                        <div class="col-lg-12">
+                            <div class="card card-accent-crm">
+                                <div class="card-header">
+                                    <strong><i class="fas fa-bars mr-2"></i>Importador de Clientes</strong>
+                                    <div class="card-header-actions">
+                                        <a class="btn btn-dark">
+                                            <i class="fas fa-arrow-alt-circle-left mr-2"></i>Voltar</a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Tipo:</label>
+                                                <select formControlName="tipo" class="form-control">
+                                                    <option value="1">Contatos do Google</option>
+                                                    <option selected="selected" value="2">Planilha</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="form-group">
+                                                <label>Arquivo:</label>
+                                                <input type="file" class="form-control" (change)="onFileChange($event)"
+                                                    accept=".xlsx,.xls" #fileInput>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="text-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success" (click)="verificarArquivo()"
+                                                [disabled]="!arquivoSelecionado">
+                                                <i class="fas fa-check mr-2"></i>Verificar
+                                            </button>
+                                            <button type="button" class="btn btn-info" (click)="baixarTemplate()">
+                                                <i class="fas fa-download mr-2"></i>Baixar planilha
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-12">
+                            <div class="card card-accent-crm">
+                                <div class="card-header">
+                                    <strong><i class="fas fa-bars mr-2"></i>Listagem</strong>
+                                    <div class="card-header-actions">
+                                        <div class="btn-group">
+                                            <button class="btn btn-success" (click)="importarSelecionados()"
+                                                [disabled]="!hasClientesSelecionados() || loading">
+                                                <i class="fas" [class.fa-upload]="!loading" [class.fa-spinner]="loading"
+                                                    [class.fa-spin]="loading"></i>
+                                                <span class="ml-2">
+                                                    {{ loading ? 'Importando...' : 'Importar Selecionados' }}
+                                                </span>
+                                            </button>
+                                            <div class="progress mt-2" *ngIf="loading">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                                    [style.width.%]="progress">
+                                                    {{ progress }}%
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless border-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <input type="checkbox" (change)="selecionarTodos($event)"
+                                                            [ngModel]="todosClientesSelecionados"
+                                                            [ngModelOptions]="{standalone: true}">
+                                                    </th>
+                                                    <th>Nome</th>
+                                                    <th>Tipo</th>
+                                                    <th>CPF/CNPJ</th>
+                                                    <th>Email</th>
+                                                    <th>Telefones</th>
+                                                    <th>Endereços</th>
+                                                    <th>Status</th>
+                                                    <th>Válido</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngIf="clientesParaImportar.length === 0">
+                                                    <td colspan="9">
+                                                        <div class="alert alert-warning">
+                                                            Nenhum registro encontrado.
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr *ngFor="let cliente of clientesParaImportar">
+                                                    <td>
+                                                        <input type="checkbox" [(ngModel)]="cliente.selecionado"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            [disabled]="!cliente.valido">
+                                                    </td>
+                                                    <td>{{cliente.nome}}</td>
+                                                    <td>
+                                                        <!-- Melhoramos a exibição do tipo de pessoa -->
+                                                        <span [ngClass]="{'text-primary': cliente.tipoPessoa === 'F', 
+                                                                        'text-success': cliente.tipoPessoa === 'J'}">
+                                                            {{cliente.tipoPessoa === 'F' ? 'Física' : 'Jurídica'}}
+                                                        </span>
+                                                    </td>
+                                                    <td>{{cliente.cnpjCpf}}</td>
+                                                    <td>{{cliente.email}}</td>
+                                                    <td>
+                                                        <!-- Nova forma de exibir múltiplos telefones -->
+                                                        <div *ngFor="let tel of cliente.telefones">
+                                                            <small>
+                                                                <span [ngClass]="{'text-primary': tel.tipo === '1',
+                                                                                'text-success': tel.tipo === '2',
+                                                                                'text-info': tel.tipo === '4',
+                                                                                'text-warning': tel.tipo === '5'}">
+                                                                    {{getTipoTelefone(tel.tipo)}}:
+                                                                </span>
+                                                                {{tel.numero}}
+                                                                <span *ngIf="tel.ramal">(Ramal: {{tel.ramal}})</span>
+                                                            </small>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <!-- Nova forma de exibir múltiplos endereços -->
+                                                        <div *ngFor="let end of cliente.enderecos">
+                                                            <small>
+                                                                <strong>{{getTipoEndereco(end.tipo)}}:</strong>
+                                                                {{end.cidade}}/{{end.estado}}
+                                                                <i *ngIf="end.correspondencia === 'S'"
+                                                                    class="fas fa-envelope text-info ml-1"
+                                                                    title="Endereço de correspondência"></i>
+                                                            </small>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                            [ngClass]="{'badge badge-success': cliente.status === 'ATIVO',
+                                                                        'badge badge-danger': cliente.status === 'INATIVO',
+                                                                        'badge badge-warning': cliente.status === 'PENDENTE'}">
+                                                            {{cliente.status}}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <i [class]="cliente.valido ? 'fas fa-check text-success' : 'fas fa-times text-danger'"
+                                                            [title]="cliente.valido ? 'Dados válidos' : 'Dados inválidos'"></i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

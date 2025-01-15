@@ -1,0 +1,79 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Telefones</li>
+                <li class="breadcrumb-menu d-md-down-none">
+                    <div class="btn-group">
+                        <a class="btn">
+                            <i class="fas fa-question mr-2"></i>Ajuda
+                        </a>
+                    </div>
+                </li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div class="form-row">
+                        <div class="col-lg-12">
+                            <div class="card card-accent-crm">
+                                <div class="card-header">
+                                    <strong><i class="fas fa-edit mr-2"></i>Dados Básicos</strong>
+                                    <div class="card-header-actions">
+                                        <a class="btn btn-dark"><i
+                                                class="fas fa-arrow-alt-circle-left mr-2"></i>Voltar</a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label class="req">Tipo:</label>
+                                                <select formControlName="tipo" class="form-control">
+                                                    <option value="">Selecione</option>
+                                                    <option *ngFor="let opt of tipoTelefoneOptions" [value]="opt.value">
+                                                        {{opt.label}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="req">Telefone:</label>
+                                                <input formControlName="numero" class="form-control" telefoneMask
+                                                    [class.is-invalid]="form.get('numero')?.invalid && form.get('numero')?.touched">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>Ramal:</label>
+                                                <input formControlName="ramal" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>Contato:</label>
+                                                <input formControlName="contato" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="card-footer">
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+                                                Incluir telefone
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

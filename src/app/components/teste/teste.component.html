@@ -1,0 +1,276 @@
+<app-header></app-header>
+<div class="app-body">
+  <app-sidebar></app-sidebar>
+  <main class="main">
+    <div class="main-container">
+      <mat-card>
+        <mat-card-content>
+          <form [formGroup]="form">
+            <mat-tab-group>
+              <mat-tab label="Documento">
+                <div class="tab-content">
+                  <div class="grid-container">
+                    <div class="left-column">
+                      <h3>Dados do Documento</h3>
+                      <div class="form-row">
+                        <mat-form-field>
+                          <mat-label>Data Emissão</mat-label>
+                          <input matInput formControlName="dataEmissao" readonly>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                          <mat-label>Nº Apólice</mat-label>
+                          <input matInput formControlName="numeroApolice" readonly>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                          <mat-label>Nº Endosso</mat-label>
+                          <input matInput formControlName="numeroEndosso" readonly>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Data Proposta</mat-label>
+                          <input matInput formControlName="dataProposta" mask="00/00/0000" [dropSpecialCharacters]="false"
+                            placeholder="DD/MM/YYYY">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                          <mat-label>Tipo do Documento</mat-label>
+                          <mat-select formControlName="tipoDocumento">
+                            <mat-option value="A">Apólice</mat-option>
+                            <mat-option value="C">Endosso de Cobrança</mat-option>
+                            <mat-option value="D">Devolução de Documento</mat-option>
+                            <mat-option value="F">Fatura</mat-option>
+                            <mat-option value="I">Endosso Cancelamento de Item</mat-option>
+                            <mat-option value="M">Endosso sem Prêmio</mat-option>
+                            <mat-option value="R">Endosso de Restituição</mat-option>
+                            <mat-option value="X">Endosso Cancelamento de
+                              Apólice</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Motivo do Endosso</mat-label>
+                          <mat-select formControlName="motivoEndosso">
+                            <mat-option value="Alteração Apólice">Alteração
+                              Apólice</mat-option>
+                            <mat-option value="Alteração de Itens">Alteração de
+                              Itens</mat-option>
+                            <mat-option value="Alteração do Local do Risco/CEP de Pernoite">Alteração
+                              do Local do Risco/CEP de Pernoite</mat-option>
+                            <mat-option value="Cancelamento de Apólice">Cancelamento de
+                              Apólice</mat-option>
+                            <mat-option value="Cancelamento de Itens">Cancelamento de
+                              Itens</mat-option>
+                            <mat-option value="Cancelamento por Falecimento do Segurado">Cancelamento
+                              por Falecimento do Segurado</mat-option>
+                            <mat-option value="Cancelamento por Falta de Pagamento">Cancelamento por
+                              Falta de Pagamento</mat-option>
+                            <mat-option value="Cancelamento por Perda Total">Cancelamento
+                              por Perda Total</mat-option>
+                            <mat-option value="Cancelamento por Solicitação da Seguradora">Cancelamento
+                              por Solicitação da Seguradora</mat-option>
+                            <mat-option value="Cancelamento por Solicitação do Segurado">Cancelamento
+                              por Solicitação do Segurado</mat-option>
+                            <mat-option value="Inclusão de Itens">Inclusão de
+                              Itens</mat-option>
+                            <mat-option value="Prorrogação de Apólice">Prorrogação de
+                              Apólice</mat-option>
+                            <mat-option value="Substituição de Itens">Substituição de
+                              Itens</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Nº Apólice Endossada</mat-label>
+                          <input matInput formControlName="numeroApoliceEndossada">
+                        </mat-form-field>
+
+                        <div class="documento-status">
+                          <mat-icon>{{isEndosso ? 'refresh' : 'note_add'}}</mat-icon>
+                          <span>{{isEndosso ? 'Endosso' : 'Documento Novo'}}</span>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Seguradora</mat-label>
+                          <mat-select formControlName="seguradoraId">
+                            <mat-option *ngFor="let seg of seguradoras" [value]="seg.id">
+                              {{seg.nome}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Ramo</mat-label>
+                          <mat-select formControlName="ramoId">
+                            <mat-option *ngFor="let ramo of ramos" [value]="ramo.id">
+                              {{ramo.codigo}} - {{ramo.nome}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Produto</mat-label>
+                          <mat-select formControlName="produtoId">
+                            <mat-option *ngFor="let produto of produtos" [value]="produto.id">
+                              {{produto.codigo}} - {{produto.nome}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Cliente</mat-label>
+                          <input type="text" formControlName="nomeCliente" matInput [formControl]="clienteCtrl"
+                            [matAutocomplete]="auto">
+                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)"
+                            (optionSelected)="selecionarCliente($event)">
+                            <mat-option *ngFor="let cliente of clientesFiltrados | async" [value]="cliente">
+                              {{cliente.nome}}
+                              <small *ngIf="cliente.cnpjCpf">({{cliente.cnpjCpf}})</small>
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Nº Proposta</mat-label>
+                          <input matInput formControlName="numeroProposta">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                          <mat-label>Vigência de</mat-label>
+                          <input matInput formControlName="vigenciaInicio" mask="00/00/0000" [dropSpecialCharacters]="false"
+                            placeholder="DD/MM/YYYY">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                          <mat-label>Até</mat-label>
+                          <input matInput formControlName="vigenciaFim" mask="00/00/0000" [dropSpecialCharacters]="false"
+                            placeholder="DD/MM/YYYY">
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="center-column">
+                      <h3>Prêmios</h3>
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Forma de Pagamento</mat-label>
+                          <mat-select formControlName="formaPagamento">
+                            <mat-option value="4">BOLETO BANCÁRIO</mat-option>
+                            <mat-option value="3">CARNÊ</mat-option>
+                            <mat-option value="1">CARTÃO DE CRÉDITO</mat-option>
+                            <mat-option value="5">CARTÃO DE CRÉDITO PORTO
+                              SEGURO</mat-option>
+                            <mat-option value="6">PIX</mat-option>
+                            <mat-option value="2">DÉBITO EM CONTA</mat-option>
+                            <mat-option value="7">FATURA MENSAL</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Qtde de Parcelas</mat-label>
+                          <input matInput type="number" formControlName="numeroParcelas">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="" formArrayName="valores">
+                        <mat-form-field *ngFor="let input of valores.controls; let i = index" appearance="outline">
+                          <mat-label>{{ getLabel(i) }}</mat-label>
+                          <input currencyMask matInput [formControlName]="i"
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left', allowNegative: false }"
+                            placeholder="Digite o valor" [readonly]="i === 5" />
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="right-column">
+                      <h3>Parcelas</h3>
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Valor 1ª Parcela</mat-label>
+                          <input currencyMask matInput type="text" formControlName="primeiraParcela"
+                          [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left', allowNegative: false }">
+                        </mat-form-field>
+                      </div>
+
+                      <h3>Comissão</h3>
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Base</mat-label>
+                          <input currencyMask matInput formControlName="comissaoBase"
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left', allowNegative: false }"
+                            readonly>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Percentual</mat-label>
+                          <input matInput type="number" formControlName="percentualComissao" 
+                           placeholder="(%)">
+                        </mat-form-field>
+                      </div>
+                      <div class="form-row">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Valor</mat-label>
+                          <input currencyMask matInput type="text" formControlName="valorComissao"
+                            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left', allowNegative: false }"
+                            readonly>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <mat-tab label="Parcelas">
+
+              </mat-tab>
+
+              <mat-tab label="Comissões">
+
+              </mat-tab>
+
+              <mat-tab>
+
+              </mat-tab>
+
+              <mat-tab>
+
+              </mat-tab>
+
+              <mat-tab>
+
+              </mat-tab>
+
+              <mat-tab>
+
+              </mat-tab>
+
+              <mat-tab>
+
+              </mat-tab>
+
+              <mat-tab>
+
+              </mat-tab>
+            </mat-tab-group>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </main>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,320 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form [formGroup]="form" (ngSubmit)="onsubmit()">
+            <div>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Atividades</li>
+                    <li class="breadcrumb-menu d-md-down-none" style="display: none;">
+                        <div class="btn-group">
+                            <a class="btn">
+                                <i class="fas fa-question mr-2"></i>Ajuda
+                            </a>
+                        </div>
+                    </li>
+                </ol>
+                <div class="container-fluid">
+                    <div class="animated fadeIn">
+                        <div class="form-row">
+                            <div class="col-lg-12">
+                                <div class="card card-accent-crm">
+                                    <div class="card-header">
+                                        <strong><i class="fas fa-edit mr-2"></i>Dados Básicos</strong>
+                                        <div class="card-header-actions">
+                                            <div class="btn-group">
+                                                <a class="btn btn-dark"><i
+                                                        class="fas fa-arrow-alt-circle-left mr-2"></i>Voltar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div *ngIf="loading" class="spinner-border text-primary" role="status">
+                                            <span class="sr-only">Carregando...</span>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>Cliente:</label>
+                                                    <div class="input-group">
+                                                        <input type="text" [value]="clienteNome" disabled
+                                                            class="form-control">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fas fa-search"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="autocomplete-menu"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group" [class.d-none]="loading">
+                                                    <label>Referente à:</label>
+                                                    <select class="form-control" formControlName="referente">
+                                                        <option value="0">Selecione</option>
+                                                        <option value="D">Apólice</option>
+                                                        <option value="C">Certificado</option>
+                                                        <option value="CL">Cliente</option>
+                                                        <option selected="selected" value="O">Oportunidade</option>
+                                                        <option value="S">Sinistro</option>
+                                                        <option value="L">Leads</option>
+                                                        <option value="R">Reunião</option>
+                                                        <option value="X">Outros</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <label>Oportunidade:</label>
+                                                    <select disabled="disabled" class="form-control">
+                                                        <option value="0">Selecione</option>
+                                                        <option selected="selected" value="84007">
+                                                            84007|COTAÇÃO|21/11/2024</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="req">Tipo:</label>
+                                                    <select class="form-control" formControlName="tipo">
+                                                        <option value="0">Selecione</option>
+                                                        <option value="17">Acompanhar</option>
+                                                        <option value="18">Acompanhar Cotação</option>
+                                                        <option value="27">Alteração</option>
+                                                        <option value="9">Apresentar cotação</option>
+                                                        <option value="29">Carta de Nomeação</option>
+                                                        <option value="11">Certificado</option>
+                                                        <option value="5">Contato</option>
+                                                        <option value="16">Email enviado</option>
+                                                        <option value="7">Enviar apresentação</option>
+                                                        <option value="3">Enviar email</option>
+                                                        <option value="4">Enviar Fax</option>
+                                                        <option value="26">Exclusão</option>
+                                                        <option value="28">Faturamento</option>
+                                                        <option value="19">Feedback</option>
+                                                        <option value="25">Inclusão</option>
+                                                        <option value="15">Indicação</option>
+                                                        <option value="10">Ligação</option>
+                                                        <option value="20">Outros</option>
+                                                        <option value="8">Preparar Proposta</option>
+                                                        <option value="24">Reclamação</option>
+                                                        <option value="14">Renovação outro corretor</option>
+                                                        <option value="6">Retornar Contato</option>
+                                                        <option value="21">Reunião Agendada</option>
+                                                        <option value="22">Reunião Realizada</option>
+                                                        <option value="13">Seguro Novo</option>
+                                                        <option value="12">Sinistro</option>
+                                                        <option value="2">Telefonar para</option>
+                                                        <option value="1">Visita agendada</option>
+                                                        <option value="23">WhatsApp</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <div class="form-group">
+                                                    <label class="req">Assunto:</label>
+                                                    <input type="text" class="form-control" formControlName="assunto">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="req">Data:</label>
+                                                    <div class="input-group">
+                                                        <input type="text" maxlength="10" class="form-control"
+                                                            formControlName="data">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fas fa-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Hora:</label>
+                                                    <select class="form-control" formControlName="hora">
+                                                        <option value="00:00">00:00</option>
+                                                        <option value="00:30">00:30</option>
+                                                        <option value="01:00">01:00</option>
+                                                        <option value="01:30">01:30</option>
+                                                        <option value="02:00">02:00</option>
+                                                        <option value="02:30">02:30</option>
+                                                        <option value="03:00">03:00</option>
+                                                        <option value="03:30">03:30</option>
+                                                        <option value="04:00">04:00</option>
+                                                        <option value="04:30">04:30</option>
+                                                        <option value="05:00">05:00</option>
+                                                        <option value="05:30">05:30</option>
+                                                        <option value="06:00">06:00</option>
+                                                        <option value="06:30">06:30</option>
+                                                        <option value="07:00">07:00</option>
+                                                        <option value="07:30">07:30</option>
+                                                        <option value="08:00">08:00</option>
+                                                        <option value="08:30">08:30</option>
+                                                        <option value="09:00">09:00</option>
+                                                        <option value="09:30">09:30</option>
+                                                        <option value="10:00">10:00</option>
+                                                        <option value="10:30">10:30</option>
+                                                        <option value="11:00">11:00</option>
+                                                        <option value="11:30">11:30</option>
+                                                        <option value="12:00">12:00</option>
+                                                        <option value="12:30">12:30</option>
+                                                        <option value="13:00">13:00</option>
+                                                        <option value="13:30">13:30</option>
+                                                        <option value="14:00">14:00</option>
+                                                        <option value="14:30">14:30</option>
+                                                        <option value="15:00">15:00</option>
+                                                        <option value="15:30">15:30</option>
+                                                        <option value="16:00">16:00</option>
+                                                        <option value="16:30">16:30</option>
+                                                        <option value="17:00">17:00</option>
+                                                        <option value="17:30">17:30</option>
+                                                        <option value="18:00">18:00</option>
+                                                        <option value="18:30">18:30</option>
+                                                        <option value="19:00">19:00</option>
+                                                        <option value="19:30">19:30</option>
+                                                        <option value="20:00">20:00</option>
+                                                        <option value="20:30">20:30</option>
+                                                        <option value="21:00">21:00</option>
+                                                        <option value="21:30">21:30</option>
+                                                        <option value="22:00">22:00</option>
+                                                        <option value="22:30">22:30</option>
+                                                        <option value="23:00">23:00</option>
+                                                        <option value="23:30">23:30</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Local:</label>
+                                                    <input type="text" class="form-control" formControlName="local">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>Descrição:</label>
+                                                    <div style="height: 200px;">
+                                                        <textarea class="form-control" formControlName="descricao"
+                                                            rows="9" cols="20">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Atribuído à:</label>
+                                                    <select class="form-control">
+                                                        <option selected="selected" value="P">Alguém</option>
+                                                        <option value="D">Departamento</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <label>Usuário:</label>
+                                                    <select class="form-control">
+                                                        <option selected="selected" value="10379">ALEXANDER MATTOS
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Status:</label>
+                                                    <select class="form-control">
+                                                        <option value="I">Iniciada</option>
+                                                        <option selected="selected" value="N">Não Iniciada</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Recorrente:</label>
+                                                    <select class="form-control">
+                                                        <option value="0">Selecione</option>
+                                                        <option value="S">Sim</option>
+                                                        <option value="N">Não</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Enviar por email?</label>
+                                                    <select class="form-control">
+                                                        <option value="S">Sim</option>
+                                                        <option selected="selected" value="N">Não</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Concluída:</label>
+                                                    <select class="form-control">
+                                                        <option value="S">Sim</option>
+                                                        <option selected="selected" value="N">Não</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Data Conclusão:</label>
+                                                    <div class="input-group">
+                                                        <input disabled="disabled" class="form-control">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fas fa-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>Resultado:</label>
+                                                    <div style="height: 200px;">
+                                                        <textarea class="form-control" formControlName="resultado"
+                                                            rows="9" cols="20">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="card-footer">
+                                            <div class="text-center">
+                                                <div class="btn-group">
+                                                    <button type="submit" class="btn btn-success">
+                                                        <i class="fas fa-plus"></i>
+                                                        <span class="d-none d-md-inline ms-2">Incluir atividade</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

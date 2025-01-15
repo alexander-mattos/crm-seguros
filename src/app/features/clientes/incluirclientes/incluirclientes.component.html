@@ -1,0 +1,321 @@
+<app-header></app-header>
+<div class="app-body">
+  <app-sidebar></app-sidebar>
+  <main class="main">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">Início</li>
+        <li class="breadcrumb-item active">Clientes</li>
+        <li class="breadcrumb-menu d-md-down-none" style="display: none;">
+        </li>
+      </ol>
+      <div class="container-fluid">
+        <div class="animated fadeIn">
+          <div>
+            <div class="page-header border-bottom mb-3">
+              <div class="container-fluid">
+                <div class="row pb-3 pt-2 align-items-center">
+                  <div class="col">
+                    <h4 class="page-title"><i class="fas fa-user-friends mr-2"></i>Clientes</h4>
+                  </div>
+                  <div class="col-auto ms-auto">
+                    <div class="btn-list">
+                      <button (click)="voltar()" class="btn btn-dark">
+                        <i class="fas fa-arrow-alt-circle-left"></i>
+                        <span class="d-none d-md-inline ms-2">Voltar</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="alert alert-{{feedback.tipo}}" *ngIf="feedback">
+              {{ feedback.mensagem }}
+            </div>
+            <div class="row my-3">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <strong><i class="fas fa-edit mr-2"></i>Dados Básicos</strong>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-lg-8">
+                        <div class="form-group">
+                          <label class="req">Nome:</label>
+                          <input formControlName="nome" type="text" maxlength="100" class="form-control"
+                            [class.is-invalid]="isFieldInvalid('nome')">
+                          <div class="text-danger"
+                            *ngIf="form.get('nome')?.errors?.['required'] && form.get('nome')?.touched">
+                            Nome é obrigatório
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <label>Nome Social:</label>
+                          <input formControlName="nomeSocial" type="text" maxlength="30" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label>Tipo de Pessoa:</label>
+                          <select formControlName="tipoPessoa" class="form-control"
+                            (change)="onTipoPessoaChange($event)">
+                            <option value="0">Selecione</option>
+                            <option value="F">FÍSICA</option>
+                            <option value="J">JURÍDICA</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label>CNPJ/CPF:</label>
+                          <input formControlName="cnpjCpf" type="text" class="form-control"
+                            [cpfCnpjMask]="form.get('tipoPessoa')?.value || 'F'"
+                            [maxlength]="form.get('tipoPessoa')?.value === 'F' ? '14' : '18'"
+                            [class.is-invalid]="isFieldInvalid('cnpjCpf')">
+                          <div class="invalid-feedback" *ngIf="form.get('cnpjCpf')?.errors?.['cpfInvalido']">
+                            CPF inválido
+                          </div>
+                          <div class="invalid-feedback" *ngIf="form.get('cnpjCpf')?.errors?.['cnpjInvalido']">
+                            CNPJ inválido
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label>Status:</label>
+                          <select formControlName="status" class="form-control">
+                            <option value="0">Selecione</option>
+                            <option value="1">CLIENTE</option>
+                            <option value="8">INATIVO</option>
+                            <option value="4">NÃO INFORMADO</option>
+                            <option value="3">PARCEIRO</option>
+                            <option value="2">PROSPECT</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label>Cliente desde:</label>
+                          <input formControlName="clienteDesde" type="text" maxlength="7" class="form-control"
+                            mask="00/0000" placeholder="MM/AAAA">
+                        </div>
+                      </div>
+                    </div>
+                    <ng-container *ngIf="form.get('tipoPessoa')?.value === 'F'">
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label>Data de Nascimento:</label>
+                            <input formControlName="dtNascimento" type="text" class="form-control" mask="00/00/0000"
+                              [dropSpecialCharacters]="false" placeholder="DD/MM/AAAA">
+                          </div>
+                        </div>
+                        <div class="col-lg-2">
+                          <div class="form-group">
+                            <label>Sexo:</label>
+                            <select formControlName="sexo" class="form-control">
+                              <option selected="selected" value="0">Selecione</option>
+                              <option value="M">Masculino</option>
+                              <option value="F">Feminino</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-lg-2">
+                          <div class="form-group">
+                            <label>RG:</label>
+                            <input formControlName="rg" type="text" maxlength="12" class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-lg-2">
+                          <div class="form-group">
+                            <label>Data de Expedição:</label>
+                            <input formControlName="dtExpedicao" type="text" class="form-control" mask="00/00/0000"
+                              [dropSpecialCharacters]="false" placeholder="DD/MM/AAAA">
+                          </div>
+                        </div>
+                        <div class="col-lg-2">
+                          <div class="form-group">
+                            <label>Orgão Expedidor:</label>
+                            <input formControlName="emissor" type="text" maxlength="20" class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label>Nº Registro CNH:</label>
+                            <input formControlName="cnh" type="text" class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label>Orgão Emissor CNH:</label>
+                            <input formControlName="emissorCnh" type="text" class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label>Vencimento CNH:</label>
+                            <input formControlName="dtvencCnh" type="text" class="form-control" mask="00/00/0000"
+                              [dropSpecialCharacters]="false" placeholder="DD/MM/AAAA">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label>Estado Civil:</label>
+                            <select formControlName="estadoCivil" class="form-control">
+                              <option value="0">Selecione</option>
+                              <option value="1">Casado(a)</option>
+                              <option value="3">Desquitado(a)</option>
+                              <option value="5">Divorciado(a)</option>
+                              <option value="6">Separado(a)</option>
+                              <option value="4">Solteiro(a)</option>
+                              <option value="7">União Estável</option>
+                              <option value="2">Viúvo(a)</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label>Cônjuge:</label>
+                            <input formControlName="conjuge" type="text" maxlength="40" class="form-control">
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                    <div class="row">
+                      <div class="col-lg-2">
+                        <div class="form-group">
+                          <label>Origem:</label>
+                          <select formControlName='origem' class="form-control">
+                            <option value="0">Selecione</option>
+                            <option value="1">ANÚNCIO</option>
+                            <option value="2">INDICAÇÃO</option>
+                            <option value="3">INTERNET</option>
+                            <option value="4">TELEFONE</option>
+                            <option value="5">INSTAGRAM</option>
+                            <option value="6">FACEBOOK</option>
+                            <option value="7">GOOGLE</option>
+                            <option value="99">OUTROS</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="form-group">
+                          <label>Comercial/Parceiro:</label>
+                          <select formControlName="responsavel" class="form-control">
+                            <option value="0">Selecione</option>
+                            <option value="1">ALEXANDER MATTOS</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <label>E-mail:</label>
+                          <input formControlName='email' type="text" maxlength="70" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <label>Site:</label>
+                          <input formControlName='site' type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label>Faturamento/Renda:</label>
+                            <input formControlName='faturamento' type="text" class="form-control" mask="separator.2"
+                              prefix="R$ " thousandSeparator="." decimalMarker=",">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label>Atividade/Profissão:</label>
+                            <input formControlName="atividade" type="text" maxlength="100" class="form-control">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label>Nº de funcionários:</label>
+                          <select formControlName="nrFuncionarios" class="form-control">
+                            <option value="0">Selecione</option>
+                            <option value="1">até 200</option>
+                            <option value="2">de 200 a 500</option>
+                            <option value="3">de 500 a 1000</option>
+                            <option value="4">de 1000 a 3000</option>
+                            <option value="5">de 3000 a 5000</option>
+                            <option value="6">+ de 5000</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label>Unidade de Negócio:</label>
+                          <select formControlName="unidadeNegocio" class="form-control">
+                            <option value="0">Selecione</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label>Instagram:</label>
+                          <input formControlName="instagram" type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label>Facebook:</label>
+                          <input formControlName="facebook" type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <label>O cliente permite o uso de seus dados?</label>
+                          <select formControlName="lgpd" class="form-control">
+                            <option selected="selected" value="0">Selecione</option>
+                            <option value="S">Sim</option>
+                            <option value="N">Não</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <label>Data inclusão:</label>
+                          <input formControlName="dtInclusao" type="text" id="DataInclusao" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <label>Data alteração:</label>
+                          <input formControlName="dtAlteracao" type="text" id="dtAlteracao" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="card-footer text-center">
+                      <button type="submit" class="btn btn-success mx-2" [disabled]="!form.valid">
+                        Salvar
+                      </button>
+                      <button type="button" (click)="voltar()" class="btn btn-dark mx-2">
+                        Voltar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </main>
+</div>
+<app-footer></app-footer>

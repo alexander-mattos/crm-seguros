@@ -1,0 +1,240 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form name="Form" method="post" action="" id="Form">
+            <div class="container-fluid mt-3">
+                <div class="animated fadeIn">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="UpdatePanel1">
+                                <div class="card card-accent-crm">
+                                    <div class="border-bottom card-body">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <h4>
+                                                    <i class="fas fa-calendar-alt mr-3"></i>Atividades
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="badge badge-success me-2">Nenhuma</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="alert alert-info">
+                                                    A listagem abaixo é limitada a 5 registros. Para
+                                                    ver tudo, clique em
+                                                    <strong><a href="https://app.com.br/atividades/">Ver
+                                                            todas as
+                                                            atividades</a></strong>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>Tipo Atribuição:</label>
+                                                    <select name="TipoAtribuicao" onchange="" id="TipoAtribuicao"
+                                                        class="form-control" autocomplete="off">
+                                                        <option selected="selected" value="P">
+                                                            Alguém
+                                                        </option>
+                                                        <option value="D">Departamento</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="Atividades_pnlAlguem">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Atribuído para:</label>
+                                                        <select name="AtribuidoPor" onchange="" id="AtribuidoPor"
+                                                            class="form-control" autocomplete="off">
+                                                            <option selected="selected" value="10379">
+                                                                ALEXANDER MATTOS
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Filtros:</label>
+                                                        <select name="FiltroAtividades" onchange=""
+                                                            id="FiltroAtividades" class="form-control"
+                                                            autocomplete="off">
+                                                            <option selected="selected" value="H">
+                                                                Hoje
+                                                            </option>
+                                                            <option value="SA">Somente Atrasadas</option>
+                                                            <option value="A">Amanhã</option>
+                                                            <option value="S">Esta Semana</option>
+                                                            <option value="M">Este Mês</option>
+                                                            <option value="T">Todas</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="divider"></div>
+                                        <div class="alert alert-warning text-center m-3">
+                                            Nenhuma atividade encontrada.
+                                        </div>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <a class="btn btn-dark" href="https://app.com.br/Atividades/"><i
+                                                class="fas fa-plus mr-2"></i>Ver todas as
+                                            atividades</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div id="Aniversariantes_UpdatePanel1">
+                                <div class="card card-accent-crm">
+                                    <div class="card-body">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <h4 class="mb-3">
+                                                    <i class="fas fa-birthday-cake mr-3"></i>Aniversariantes
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="badge badge-primary">
+                                            Hoje (<span id="QuantidadeAniversariantesHoje">0</span>)
+                                        </div>
+                                        <div class="badge badge-primary">
+                                            Este mês (<span id="QuantidadeAniversariantesMes">0</span>)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="divider"></div>
+                                    <div class="alert alert-warning text-center m-3">
+                                        Nenhuma atividade encontrada.
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <a class="btn btn-dark" href="https://app.com.br/Aniversariantes/"><i
+                                            class="fas fa-plus mr-2"></i>Ver todos
+                                        aniversariantes</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div id="Renovacoes_UpdatePanel1">
+                                <div class="card card-accent-crm">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <h4 class="mb-3">
+                                                    <i class="fas fa-retweet mr-3"></i>Renovações
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="badge badge-indigo">
+                                                Total em Novembro (<span id="QuantidadeRenovacoesMes">0</span>)
+                                            </div>
+                                            <div class="badge badge-indigo">
+                                                Vencidas em Novembro (<span id="QuantidadeRenovacoesVencidas">0</span>)
+                                            </div>
+                                            <div class="badge badge-indigo">
+                                                Hoje (<span id="QuantidadeRenovacoesHoje">0</span>)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="divider"></div>
+                                        <div class="alert alert-warning text-center m-3">
+                                            Nenhuma atividade encontrada.
+                                        </div>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <a class="btn btn-dark" href="https://app.com.br/Renovacoes/"><i
+                                                class="fas fa-plus mr-2"></i>Ver todas
+                                            renovações</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-12">
+                        <div class="card-deck mb-3">
+                            <div class="card card-accent-crm">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h4 class="mb-3">
+                                                <i class="fas fa-chart-pie mr-3"></i>Vendas por
+                                                Fase
+                                            </h4>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div id="chartA" style="min-height: 365px">
+                                                <div>
+                                                    <div>
+                                                        Nada por aqui
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card card-accent-crm">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h4 class="mb-3">
+                                                <i class="fas fa-chart-pie mr-3"></i>Fechadas/Perdidas
+                                            </h4>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div id="chartB" style="min-height: 350px">
+                                                <div>
+                                                    <div></div>
+                                                    Nada por aqui
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card card-accent-crm">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h4 class="mb-3">
+                                                <i class="fas fa-chart-pie mr-3"></i>Vendas por
+                                                Origem
+                                            </h4>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div id="chartC" style="min-height: 365px">
+                                                <div>
+                                                    <div></div>
+                                                    Nada por aqui
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

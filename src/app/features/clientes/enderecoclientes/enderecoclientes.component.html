@@ -1,0 +1,131 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Endereços</li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div class="form-row">
+                        <div class="col-lg-12">
+                            <div class="card card-accent-crm">
+                                <div class="card-header">
+                                    <strong><i class="fas fa-edit mr-2"></i>Dados Básicos</strong>
+                                    <div class="card-header-actions">
+                                        <div class="btn-group">
+                                            <a class="btn btn-dark"><i
+                                                    class="fas fa-arrow-alt-circle-left mr-2"></i>Voltar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label class="req">
+                                                    <span>Tipo Endereço:</span></label>
+                                                <select formControlName="tipo" class="form-control">
+                                                    <option value="">Selecione</option>
+                                                    <option *ngFor="let opt of tipoEnderecoOptions" [value]="opt.value">
+                                                        {{opt.label}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label for="cep" class="req"><span>CEP:</span></label>
+                                                <input formControlName="cep" type="text" class="form-control" cepMask
+                                                    (blur)="fetchAddress($event)" placeholder="00000-000" maxlength="9">
+                                                <div
+                                                    *ngIf="form.get('cep')?.invalid && (form.get('cep')?.dirty || form.get('cep')?.touched)">
+                                                    <div *ngIf="form.get('cep')?.errors?.['required']">CEP é
+                                                        obrigatório.</div>
+                                                    <div *ngIf="form.get('cep')?.errors?.['pattern']">CEP inválido.
+                                                        Use 8 dígitos numéricos.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="req"><span>Endereço:</span></label>
+                                                <input formControlName="endereco" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label class="req">
+                                                    <span>Número:</span></label>
+                                                <input formControlName="numero" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Complemento:</span></label>
+                                                <input formControlName="complemento" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label class="req">
+                                                    <span>Bairro:</span></label>
+                                                <input formControlName="bairro" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label class="req">
+                                                    <span>Cidade:</span></label>
+                                                <input formControlName="cidade" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label class="req">
+                                                    <span>Estado:</span></label>
+                                                <input formControlName="estado" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Correspondência:</span></label>
+                                                <select formControlName="correspondencia" class="form-control"
+                                                    autocomplete="off">
+                                                    <option value="0">Selecione</option>
+                                                    <option value="S">Sim</option>
+                                                    <option value="N">Não</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <label><span>Aos cuidados</span></label>
+                                                <input formControlName="aoscuidados" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+                                            Incluir endereço
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

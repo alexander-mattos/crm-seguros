@@ -1,0 +1,106 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form name="Form" method="post" action="https://app.com.br" id="Form">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Início</li>
+                <li class="breadcrumb-item">Gestão Financeira</li>
+                <li class="breadcrumb-item">Cadastros</li>
+                <li class="breadcrumb-item active">Centros de Custo</li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <app-navbar></app-navbar>
+                    <div id="UpdatePanel1">
+                        <div class="page-header mb-3">
+                            <div class="container-fluid">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4><i class="fas fa-copy mr-2"></i>Centros de Custo</h4>
+                                    </div>
+                                    <div class="col-auto ml-auto">
+                                        <div class="btn-list">
+                                            <a class="btn btn-success"
+                                                href="/financeiro/cadastros/centrodecustos/incluir"><i
+                                                    class="fas fa-plus"></i><span class="d-none d-md-inline ml-2">Novo
+                                                    Registro</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card card-accent-crm">
+                                    <div class="card-header"><strong><i class="fas fa-filter"></i></strong></div>
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>Descrição:</label>
+                                                    <input name="Descricao" type="text"
+                                                        id="Descricao" class="form-control"
+                                                        autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex">
+                                        <a id="Limpar" class="btn btn-danger"
+                                            href="javascript:__doPostBack(Limpar)"><i
+                                                class="fas fa-trash mr-2"></i>Redefinir pesquisa</a>
+                                        <a id="Pesquisar" class="btn btn-primary ml-auto"
+                                            href="javascript:__doPostBack(Pesquisar)"><i
+                                                class="fas fa-search mr-2"></i>Pesquisar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="card card-accent-crm">
+                                    <div class="card-header">
+                                        <strong><i class="fas fa-bars"></i></strong>
+                                    </div>
+                                    <div id="CentrosDeCusto_UpdatePanel1">
+                                        <div id="CentrosDeCusto_pnlSemRegistros">
+                                            <div class="alert alert-warning text-center mb-0">Nenhum registro
+                                                encontrado.</div>
+                                        </div>
+                                    </div>
+                                    <div class="modal" role="dialog" id="modalResumo" tabindex="-1"
+                                        data-keyboard="false" data-backdrop="static">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"><i class="fas fa-server mr-2"></i>Itens
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close" onclick="fecharResumo();" autocomplete="off">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body p-0" id="modalResumoConteudo">
+                                                    <div class="d-flex justify-content-center my-4"
+                                                        id="modalResumoLoading">
+                                                        <div class="spinner-border text-primary" role="status"><span
+                                                                class="sr-only">Carregando...</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer d-none" id="modalResumoFooter">
+                                                    <a class="btn btn-success"
+                                                        href="https://app.com.br/FluxoDeCaixa/Cadastros/CentrosDeCusto/#"
+                                                        id="modalResumoIr" target="_blank">Visualizar Apólice</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

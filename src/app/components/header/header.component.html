@@ -1,0 +1,103 @@
+<header class="app-header navbar" id="topo">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show"
+        autocomplete="off">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="https://app.com.br">
+        <img class="navbar-brand-full" src="logo.png" width="140" height="40" alt="CRMSeguros" />
+        <img class="navbar-brand-minimized" src="logo-menor.png" width="30" height="30" alt="CRMSeguros" />
+    </a>
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show"
+        id="esconderMenu" style="display: none" autocomplete="off">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="ml-auto form-inline d-none d-sm-inline-block" id="topo-pesquisa">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Pesquisar..." aria-label="Search" id="txPesquisa"
+                autocomplete="off" style="width: 667.5px" />
+            <div class="input-group-append">
+                <span class="input-group-text" style="
+                border-top-right-radius: 0.25rem;
+                border-bottom-right-radius: 0.25rem;
+              ">
+                    <i class="fas fa-search"></i>
+                </span>
+            </div>
+            <div id="autocomplete-pesquisa" class="autocomplete-menu"></div>
+        </div>
+    </div>
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item dropdown d-md-down-none">
+            <a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fas fa-plus" style="font-size: 1rem"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg hide">
+                <div class="dropdown-header px-3">
+                    <strong>Atalhos</strong>
+                </div>
+                <a class="dropdown-item" href="/clientes/incluir" target="_self"><i
+                        class="far fa-plus-square"></i>Novo cliente</a>
+                <a class="dropdown-item" href="https://app.com.br/Leads" target="_self"><i
+                        class="far fa-plus-square"></i>Novo lead</a>
+                <a class="dropdown-item" href="https://app.com.br/Oportunidades" target="_self"><i
+                        class="far fa-plus-square"></i>Nova oportunidade</a>
+                <a class="dropdown-item" href="https://app.com.br/Documentos" target="_self"><i
+                        class="far fa-plus-square"></i>Nova apólice</a>
+                <a class="dropdown-item" href="https://app.com.br" target="_self"><i
+                        class="far fa-plus-square"></i>Novo sinistro</a>
+                <a class="dropdown-item" href="https://app.com.br/Arquivos" target="_self"><i
+                        class="far fa-plus-square"></i>Novo arquivo</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown d-md-down-none" style="font-size: 1rem">
+            <a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fas fa-comments"></i>
+                <span class="badge badge-pill badge-danger" id="msgContador">0</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right pt-0 hide" style="min-width: 40rem">
+                <div class="dropdown-header px-3">
+                    <strong>Mensagens</strong>
+                </div>
+                <span id="msgDropDown"></span>
+            </div>
+        </li>
+        <li class="nav-item d-md-down-none" style="font-size: 1rem">
+            <a class="nav-link" href="https://app.com.br/Configuracoes" data-toggle="tooltip"
+                data-placement="bottom" data-original-title="Configurações">
+                <i class="fas fa-cog"></i>
+            </a>
+        </li>
+        <li class="nav-item dropdown" style="font-size: 1rem">
+            <a class="nav-link" data-toggle="dropdown" href="" role="button" aria-haspopup="true"
+                aria-expanded="false">
+                <img class="img-avatar" src="perfil.png" alt="ALEXANDER MATTOS" />
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-header text-center">
+                    <strong>ALEXANDER MATTOS</strong>
+                </div>
+                <a class="dropdown-item"
+                    href="https://app.com.br/Usuarios/?IdUsuario=snvi8uy6xVY=&amp;tp=nNB/8iX/U0U=&amp;r=/aJGlyHDi3Was7W5U1kojA==">
+                    <i class="fas fa-user"></i>Perfil
+                </a>
+                <a class="dropdown-item d-md-block d-lg-none"
+                    href="https://app.com.br/Configuracoes">
+                    <i class="fas fa-cog"></i>Configurações
+                </a>
+                <a class="dropdown-item d-md-block d-lg-none" href="https://app.com.br/logoff">
+                    <i class="fas fa-power-off"></i>Sair
+                </a>
+            </div>
+        </li>
+        <li class="nav-item d-md-down-none" style="font-size: 1rem">
+            <a class="nav-link text-danger" href="https://app.com.br/logoff" data-toggle="tooltip"
+                data-placement="bottom" data-original-title="Sair">
+                <i class="fas fa-power-off"></i>
+            </a>
+        </li>
+    </ul>
+    <div id="autocomplete-pesquisa-mobile" class="autocomplete-menu autocomplete-menu-mobile"></div>
+</header>

@@ -1,0 +1,128 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form name="Form" method="post" action="https://app.com.br/" id="Form">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Início</li>
+                <li class="breadcrumb-item">Gestão Financeira</li>
+                <li class="breadcrumb-item active">Lançamentos</li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <app-navbar></app-navbar>                   
+                    <div id="UpdatePanel1">
+                        <div class="page-header mb-3">
+                            <div class="container-fluid">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4><i class="fas fa-calculator mr-2"></i>Lançamentos</h4>
+                                    </div>
+                                    <div class="col-auto ml-auto">
+                                        <div class="btn-list">
+                                            <a class="btn btn-success"
+                                                href="/financeiro/lancamentos/incluir"><i
+                                                    class="fas fa-plus"></i><span class="d-none d-md-inline ml-2">Novo
+                                                    Registro</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card card-accent-crm">
+                                    <div class="card-header"><strong><i class="fas fa-filter"></i></strong></div>
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Data Vencimento:</label>
+                                                    <input name="DataVencimento" type="text"
+                                                        id="DataVencimento"
+                                                        class="form-control" data-mask="data" autocomplete="off"
+                                                        inputmode="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Data Pagamento:</label>
+                                                    <input name="DataPagamento" type="text"
+                                                        id="DataPagamento"
+                                                        class="form-control" data-mask="data" autocomplete="off"
+                                                        inputmode="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Fornecedor:</label>
+                                                    <input name="Fornecedor" type="text"
+                                                        id="Fornecedor" class="form-control"
+                                                        autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Tipo do Movimento:</label>
+                                                    <select name="TipoMovimento"
+                                                        id="TipoMovimento"
+                                                        class="form-control" autocomplete="off">
+                                                        <option selected="selected" value="0">Selecione</option>
+                                                        <option value="1">Débito</option>
+                                                        <option value="2">Crédito</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex">
+                                        <a id="Limpar" class="btn btn-danger"
+                                            href="javascript:__doPostBack(Limpar)"><i
+                                                class="fas fa-trash mr-2"></i>Redefinir pesquisa</a>
+                                        <a id="Pesquisar" class="btn btn-primary ml-auto"
+                                            href="javascript:__doPostBack(lnkPesquisar)"><i
+                                                class="fas fa-search mr-2"></i>Pesquisar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="card card-accent-crm">
+                                    <div class="card-header">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <a id="MesAnterior"
+                                                    class="btn btn-sm btn-dark"
+                                                    href="javascript:__doPostBack(MesAnterior)"><i
+                                                        class="fas fa-chevron-left"></i></a>
+                                            </div>
+                                            <div class="col text-center align-middle">
+                                                <h3 class="fw-bold mt-2">
+                                                    <span id="MesAtual">Novembro -
+                                                        2024</span>
+                                                </h3>
+                                            </div>
+                                            <div class="col-auto">
+                                                <a id="ProximoMes"
+                                                    class="btn btn-sm btn-dark"
+                                                    href="javascript:__doPostBack(ProximoMes)"><i
+                                                        class="fas fa-chevron-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <div id="LancamentosSemRegistros">
+                                            <div class="alert alert-warning m-2">
+                                                <div class="text-center">Nenhum registro encontrado.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

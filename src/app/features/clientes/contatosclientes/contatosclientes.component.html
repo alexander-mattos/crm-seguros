@@ -1,0 +1,150 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Contatos</li>
+                <li class="breadcrumb-menu d-md-down-none">
+                    <div class="btn-group">
+                        <a class="btn">
+                            <i class="fas fa-question mr-2"></i>Ajuda
+                        </a>
+                    </div>
+                </li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div class="form-row">
+                        <div class="col-lg-12">
+                            <div class="card card-accent-crm">
+                                <div class="card-header">
+                                    <strong><i class="fas fa-edit mr-2"></i>Dados Básicos</strong>
+                                    <div class="card-header-actions">
+                                        <a class="btn btn-dark"><i
+                                                class="fas fa-arrow-alt-circle-left mr-2"></i>Voltar</a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label class="req">Tipo do Contato:</label>
+                                                <select formControlName="tipo" class="form-control">
+                                                    <option value="0">Selecione</option>
+                                                    <option *ngFor="let opt of tipoContatosOptions" [value]="opt.value">
+                                                        {{opt.label}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <label class="req">Nome:</label>
+                                                <input formControlName="nome"maxlength="50" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Sexo:</label>
+                                                <select formControlName="sexo" class="form-control">
+                                                    <option selected="selected" value="0">Selecione</option>
+                                                    <option value="M">Masculino</option>
+                                                    <option value="F">Feminino</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Cargo:</label>
+                                                <input formControlName="cargo" maxlength="30" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Tratamento:</label>
+                                                <input formControlName="tratamento" maxlength="10" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Email:</label>
+                                                <div class="input-group">
+                                                    <input formControlName="email" maxlength="100" class="form-control">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-at"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>Data de Nascimento:</label>
+                                                <div class="input-group">
+                                                    <input formControlName="dtNascimento" maxlength="10" class="form-control">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>CPF:</label>
+                                                <input formControlName="cpf" maxlength="14" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Telefone:</label>
+                                                <div class="input-group">
+                                                    <input formControlName="telefone" class="form-control">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-phone"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Celular:</label>
+                                                <div class="input-group">
+                                                    <input formControlName="celular" class="form-control">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-mobile-screen"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+                                            Salvar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

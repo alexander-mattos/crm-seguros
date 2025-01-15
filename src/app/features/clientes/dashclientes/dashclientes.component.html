@@ -1,0 +1,1407 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Início</li>
+                <li class="breadcrumb-item active">Clientes</li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div>
+                        <div class="page-header border-bottom mb-3">
+                            <div class="container-fluid">
+                                <div class="row pb-3 pt-2 align-items-center">
+                                    <div class="col">
+                                        <h4 class="page-title"><i class="fas fa-user-friends mr-2"></i>Clientes</h4>
+                                    </div>
+                                    <div class="col-auto ms-auto">
+                                        <div>
+                                            <button class="btn btn-primary button-space" (click)="editarCliente()">
+                                                <i class="fas fa-pen"></i>
+                                                <span class="d-none d-md-inline">Editar Registro</span>
+                                            </button>
+                                            <button class="btn btn-danger button-space" (click)="excluirCliente()">
+                                                <i class="fas fa-trash"></i>
+                                                <span class="d-none d-md-inline">Excluir Registro</span>
+                                            </button>
+                                            <button class="btn btn-dark" (click)="voltar()">
+                                                <i class="fas fa-arrow-alt-circle-left"></i>
+                                                <span class="d-none d-md-inline">Voltar</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div *ngIf="loading" class="d-flex justify-content-center my-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Carregando...</span>
+                                </div>
+                            </div>
+
+                            <!-- Erro -->
+                            <div *ngIf="erro" class="alert alert-danger" role="alert">
+                                {{ erro }}
+                            </div>
+                            <div *ngIf="!loading && !erro">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card-group">
+                                            <div class="card">
+                                                <div class="card-body text-center">
+                                                    <h4 class="card-title pb-2">{{cliente?.nome}}</h4>
+                                                    <img src="perfil.png" class="rounded mx-auto d-block img-fluid"
+                                                        style="max-height: 200px; max-width: 200px;">
+                                                    <div class="btn-group mt-4">
+                                                        <a class="btn btn-success btn-sm" href="">
+                                                            <i class="fas fa-plus mr-2"></i>Incluir imagem</a>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer text-center">
+                                                    <a class="btn btn-dark " (click)="togglePerfilDetalhado()">
+                                                        <i class="fas fa-eye mr-2"></i>Visualizar Perfil</a>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <p class="card-text"><b>Nome Social:</b>
+                                                                {{cliente?.nomeSocial || 'Não informado'}}</p>
+                                                            <p class="card-text"><b>Tipo de Pessoa:</b>
+                                                                {{cliente?.tipoPessoaFormatado}}</p>
+                                                            <p class="card-text"><b>CNPJ/CPF:</b>
+                                                                {{cliente?.cnpjCpf || 'Não informado'}}</p>
+                                                            <p class="card-text"><b>Status:</b>
+                                                                {{cliente?.statusFormatado}}</p>
+                                                            <p class="card-text"><b>Cliente desde:</b>
+                                                                {{cliente?.clienteDesdeFormatado || 'Não informado'}}
+                                                            </p>
+                                                            <p class="card-text"><b>Data de Nascimento:</b>
+                                                                {{ cliente?.dtNascimentoFormatado || 'Não informado'}}
+                                                            </p>
+                                                            <p class="card-text"><b>Gênero:</b>
+                                                                {{cliente?.sexoFormatado}}</p>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <ul class="list-group rounded border mt-3">
+                                                                <li
+                                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                                    Qtde. Apólices
+                                                                    <span
+                                                                        class="badge badge-success badge-pill">0</span>
+                                                                </li>
+                                                                <li
+                                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                                    Qtde. Oportunidades
+                                                                    <span
+                                                                        class="badge badge-warning badge-pill">0</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title font-weight-bold">Email</h5>
+                                                    <p class="card-text">{{cliente?.email || 'Não informado'}}</p>
+                                                    <h5 class="card-title font-weight-bold">Contatos</h5>
+                                                    <p class="card-text">{{cliente?.nome || 'Sem contatos
+                                                        cadastrados!'}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row my-3" [style.display]="mostrarPerfil ? 'block' : 'none'">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong><i class="fas fa-edit mr-2"></i>Dados Básicos</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <label class="req">Nome:</label>
+                                                    <input type="text" [value]="cliente?.nome" class="form-control"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Nome Social:</label>
+                                                    <input type="text" [value]="cliente?.nomeSocial"
+                                                        class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Tipo de Pessoa:</label>
+                                                    <select [value]="cliente?.tipoPessoa" class="form-control" disabled>
+                                                        <option value="0">Selecione</option>
+                                                        <option selected="selected" value="F">Física</option>
+                                                        <option value="J">Jurídica</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>CNPJ/CPF:</label>
+                                                    <input type="text" [value]="cliente?.cnpjCpf" class="form-control"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Status:</label>
+                                                    <select [value]="cliente?.status" class="form-control" disabled>
+                                                        <option value="0">Selecione</option>
+                                                        <option value="1">CLIENTE</option>
+                                                        <option value="8">INATIVO</option>
+                                                        <option value="0">NÃO INFORMADO</option>
+                                                        <option value="3">PARCEIRO</option>
+                                                        <option selected="selected" value="2">PROSPECT</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Cliente desde:</label>
+                                                    <input type="text" [value]="cliente?.clienteDesde"
+                                                        class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="cliente?.tipoPessoa">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Data de Nascimento:</label>
+                                                        <input type="text" [value]="cliente?.dtNascimento"
+                                                            class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        <label>Sexo:</label>
+                                                        <select [value]="cliente?.sexo" class="form-control" disabled>
+                                                            <option value="0">Selecione</option>
+                                                            <option selected="selected" value="M">Masculino</option>
+                                                            <option value="F">Feminino</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        <label>RG:</label>
+                                                        <input type="text" [value]="cliente?.rg" class="form-control"
+                                                            disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        <label>Data de Expedição:</label>
+                                                        <input type="text" [value]="cliente?.dtExpedicao"
+                                                            class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        <label>Orgão Expedidor:</label>
+                                                        <input type="text" [value]="cliente?.emissor"
+                                                            class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Nº Registro CNH:</label>
+                                                        <input type="text" [value]="cliente?.cnh" class="form-control"
+                                                            disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Orgão Emissor CNH:</label>
+                                                        <input type="text" [value]="cliente?.emissorCnh"
+                                                            class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Vencimento CNH:</label>
+                                                        <input type="text" [value]="cliente?.dtvencCnh"
+                                                            class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Estado Civil:</label>
+                                                        <select [value]="cliente?.estadoCivil" class="form-control"
+                                                            disabled>
+                                                            <option value="0">Selecione</option>
+                                                            <option selected="selected" value="1">Casado(a)</option>
+                                                            <option value="3">Desquitado(a)</option>
+                                                            <option value="5">Divorciado(a)</option>
+                                                            <option value="6">Separado(a)</option>
+                                                            <option value="4">Solteiro(a)</option>
+                                                            <option value="7">União Estável</option>
+                                                            <option value="2">Viúvo(a)</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Cônjuge:</label>
+                                                        <input type="text" [value]="cliente?.conjuge"
+                                                            class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <label>Origem:</label>
+                                                    <select [value]="cliente?.origem" class="form-control" disabled>
+                                                        <option value="0">Selecione</option>
+                                                        <option value="1">ANÚNCIO</option>
+                                                        <option value="2">INDICAÇÃO</option>
+                                                        <option selected="selected" value="3">INTERNET</option>
+                                                        <option value="4">TELEFONE</option>
+                                                        <option value="5">INSTAGRAM</option>
+                                                        <option value="6">FACEBOOK</option>
+                                                        <option value="7">GOOGLE</option>
+                                                        <option value="99">OUTROS</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <label>Comercial/Parceiro:</label>
+                                                    <select [value]="cliente?.responsavel" class="form-control"
+                                                        disabled>
+                                                        <option value="0">Selecione</option>
+                                                        <option selected="selected" value="1">ALEXANDER MATTOS
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Email:</label>
+                                                    <input type="text" [value]="cliente?.email" class="form-control"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Site:</label>
+                                                    <input type="text" [value]="cliente?.site" class="form-control"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Faturamento/Renda:</label>
+                                                        <input type="text" [value]="cliente?.faturamento"
+                                                            class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Atividade:</label>
+                                                        <input type="text" [value]="cliente?.atividade"
+                                                            class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Nº de funcionários:</label>
+                                                    <select [value]="cliente?.nrFuncionarios" class="form-control"
+                                                        disabled>
+                                                        <option selected="selected" value="0">Selecione</option>
+                                                        <option value="4">até 200</option>
+                                                        <option value="1">de 200 a 500</option>
+                                                        <option value="2">de 500 a 1000</option>
+                                                        <option value="3">de 1000 a 3000</option>
+                                                        <option value="5">de 3000 a 5000</option>
+                                                        <option value="6">+ de 5000</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Unidade de Negócio:</label>
+                                                    <select [value]="cliente?.unidadeNegocio" class="form-control"
+                                                        disabled>
+                                                        <option selected="selected" value="0">Selecione</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Instagram:</label>
+                                                    <input type="text" [value]="cliente?.instagram" class="form-control"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Facebook:</label>
+                                                    <input type="text" [value]="cliente?.facebook" class="form-control"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>O cliente permite o uso de seus dados?</label>
+                                                    <select [value]="cliente?.lgpd" class="form-control" disabled>
+                                                        <option value="0">Selecione</option>
+                                                        <option selected="selected" value="S">Sim</option>
+                                                        <option value="N">Não</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Data inclusão:</label>
+                                                    <input type="text" [value]="cliente?.dtInclusao"
+                                                        class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Data alteração:</label>
+                                                    <input type="text" [value]="cliente?.dtAlteracao"
+                                                        class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row my-3">
+                                <div class="col-lg-12">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" [class.active]="activeTab === 'atividades'"
+                                                (click)="setActiveTab('atividades')">
+                                                <i class="fas fa-calendar mr-2"></i>Atividades</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" [class.active]="activeTab === 'notas'"
+                                                (click)="setActiveTab('notas')">
+                                                <i class="fas fa-sticky-note mr-2"></i>Notas</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" [class.active]="activeTab === 'enderecos'"
+                                                (click)="setActiveTab('enderecos')">
+                                                <i class="fas fa-address-card mr-2"></i>Endereços</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" [class.active]="activeTab === 'telefones'"
+                                                (click)="setActiveTab('telefones')">
+                                                <i class="fas fa-phone mr-2"></i>Telefones</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" [class.active]="activeTab === 'contatos'"
+                                                (click)="setActiveTab('contatos')">
+                                                <i class="fas fa-address-book mr-2"></i>Contatos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" [class.active]="activeTab === 'oportunidades'"
+                                                (click)="setActiveTab('oportunidades')">
+                                                <i class="fas fa-star mr-2"></i>Oportunidades</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" [class.active]="activeTab === 'apolices'"
+                                                (click)="setActiveTab('apolices')">
+                                                <i class="fas fa-file-alt mr-2"></i>Apólices</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" [class.active]="activeTab === 'arquivos'"
+                                                (click)="setActiveTab('arquivos')">
+                                                <i class="fas fa-folder mr-2"></i>Arquivos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" [class.active]="activeTab === 'sinistros'"
+                                                (click)="setActiveTab('sinistros')">
+                                                <i class="fas fa-shield-alt mr-2"></i>Sinistros</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" [class.show]="activeTab === 'atividades'"
+                                            [class.active]="activeTab === 'atividades'">
+                                            <div>
+                                                <div class="page-header border-bottom mb-3">
+                                                    <div class="container-fluid">
+                                                        <div class="row pb-3 pt-2 align-items-center">
+                                                            <div class="col">
+                                                                <h4 class="page-title"><i
+                                                                        class="fas fa-calendar mr-2"></i>Atividades
+                                                                </h4>
+                                                            </div>
+                                                            <div class="col-auto ms-auto">
+                                                                <div class="btn-list">
+                                                                    <button class="btn btn-success button-space"
+                                                                        (click)="novaAtividade($event)">
+                                                                        <i class="fas fa-plus"></i>
+                                                                        <span class="d-none d-md-inline ms-2"> Nova
+                                                                            atividade</span>
+                                                                    </button>
+                                                                    <button class="btn btn-primary button-space">
+                                                                        <i class="fas fa-phone-volume"></i>
+                                                                        <span class="d-none d-md-inline ms-2"> Registrar
+                                                                            uma Ligação</span>
+                                                                    </button>
+                                                                    <button class="btn btn-warning">
+                                                                        <i class="fab fa-whatsapp"></i>
+                                                                        <span class="d-none d-md-inline ms-2"> Enviar
+                                                                            WhatsApp</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="table-responsive">
+                                                            <div>
+                                                                <div>
+                                                                    <table class="table border-0 table-borderless"
+                                                                        cellspacing="0" rules="all" border="1"
+                                                                        style="border-collapse:collapse;">
+                                                                        <tbody>
+                                                                            <tr class="border-bottom">
+                                                                                <th scope="col">&nbsp;</th>
+                                                                                <th scope="col">&nbsp;</th>
+                                                                                <th scope="col">Tipo</th>
+                                                                                <th scope="col">Assunto</th>
+                                                                                <th scope="col">Início</th>
+                                                                                <th scope="col">Concluído</th>
+                                                                                <th scope="col">Data Conclusão</th>
+                                                                                <th scope="col">Atribuído para</th>
+                                                                                <th scope="col">Oportunidade</th>
+                                                                                <th scope="col">Cliente</th>
+                                                                                <th scope="col">Departamento</th>
+                                                                            </tr>
+                                                                            <tr
+                                                                                *ngIf="!atividades || atividades.length === 0">
+                                                                                <td colspan="11" class="text-center">
+                                                                                    <div
+                                                                                        class="alert alert-warning mb-0">
+                                                                                        Nenhum registro encontrado.
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr *ngFor="let atividade of atividades"
+                                                                                class="border-bottom">
+                                                                                <!-- Suas colunas existentes aqui -->
+                                                                            </tr>
+                                                                            <tr *ngFor="let atividade of atividades"
+                                                                                class="border-bottom">
+                                                                                <td class="text-center bg-white border-right"
+                                                                                    style="width:3%;">
+                                                                                    <a><i
+                                                                                            class="fas fa-search mr-2"></i></a>
+                                                                                </td>
+                                                                                <td class="border-right text-center"
+                                                                                    style="width:3%;">
+                                                                                    <i class="fas fa-circle text-success"
+                                                                                        [ngClass]="{'text-success': atividade.concluida === 'N', 'text-secondary': atividade.concluida === 'S'}"
+                                                                                        [title]="atividade.concluida === 'S' ? 'Atividade concluída' : 'Atividade futura'">
+                                                                                    </i>
+                                                                                </td>
+                                                                                <td class="text-center border-right"
+                                                                                    style="width:3%;">
+                                                                                    <i [class]="getIconeAtividade(atividade.tipo)"
+                                                                                        style="font-size: 22px;"></i>
+                                                                                </td>
+                                                                                <td style="width:30%;">
+                                                                                    <span>{{atividade.assunto}}</span>
+                                                                                </td>
+                                                                                <td style="width:10%;">{{atividade.data
+                                                                                    | date:'dd/MM/yyyy'}}</td>
+                                                                                <td style="width:3%;">
+                                                                                    <span class="badge d-block"
+                                                                                        [class]="'badge ' + (atividade.concluida === 'S' ? 'badge-success' : 'badge-danger') + ' d-block'">
+                                                                                        {{atividade.concluida === 'S' ?
+                                                                                        'Sim' : 'Não'}}
+                                                                                    </span>
+                                                                                </td>
+                                                                                <td style="width:10%;">
+                                                                                    {{atividade.dtConclusao ?
+                                                                                    (atividade.dtConclusao |
+                                                                                    date:'dd/MM/yyyy') : '-'}}</td>
+                                                                                <td style="width:15%;">
+                                                                                    {{atividade.responsavel}}</td>
+                                                                                <td style="width:9.3%;">
+                                                                                    {{atividade.oportunidade || '-'}}
+                                                                                </td>
+                                                                                <td style="width:9.3%;">
+                                                                                    {{atividade.cliente?.nome ||
+                                                                                    atividade.clienteNome || '-'}}
+                                                                                </td>
+                                                                                <td style="width:9.3%;">
+                                                                                    {{atividade.departamento || '-'}}
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div>
+                                                                    <ul class="pagination justify-content-center">
+                                                                        <li class="page-item disabled">
+                                                                            <a class="page-link">« Anterior</a>
+                                                                        </li>
+                                                                        <li class="page-item">
+                                                                            <span
+                                                                                class="page-text page-text-active">1</span>
+                                                                        </li>
+                                                                        <li class="page-item"><span
+                                                                                class="page-text">de</span></li>
+                                                                        <li class="page-item">
+                                                                            <span
+                                                                                class="page-text page-text-active">1</span>
+                                                                        </li>
+                                                                        <li class="page-item disabled">
+                                                                            <a class="page-link">Próxima »</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="page-header border-bottom border-top my-3">
+                                                    <div class="container-fluid">
+                                                        <div class="row pb-3 pt-4 align-items-center">
+                                                            <div class="col">
+                                                                <h4 class="page-title">
+                                                                    <i class="fas fa-calendar-minus mr-2"></i>Histórico
+                                                                    de Atividades
+                                                                </h4>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="table-responsive">
+                                                            <div>
+                                                                <div class="alert alert-warning text-center m-0">
+                                                                    Nenhuma registro encontrado.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" [class.show]="activeTab === 'notas'"
+                                            [class.active]="activeTab === 'notas'">
+                                            <div>
+                                                <div class="page-header border-bottom mb-3">
+                                                    <div class="container-fluid">
+                                                        <div class="row pb-3 pt-2 align-items-center">
+                                                            <div class="col">
+                                                                <h4 class="page-title"><i
+                                                                        class="fas fa-sticky-note mr-2"></i>Notas
+                                                                </h4>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <input formControlName="notas" class="form-control"
+                                                                    placeholder="Adicionar nota">
+                                                                <span class="input-group-append">
+                                                                    <button type="submit" class="btn btn-success">
+                                                                        <i class="fas fa-plus"></i>
+                                                                        <span class="d-none d-md-inline ml-2">Incluir
+                                                                            nota</span>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <div class="col-lg-12">
+                                                        <div class="table-responsive">
+                                                            <div>
+                                                                <div>
+                                                                    <table class="table border-0 table-borderless"
+                                                                        cellspacing="0" rules="all" border="1"
+                                                                        style="border-collapse:collapse;">
+                                                                        <tbody>
+                                                                            <tr class="border-bottom">
+                                                                                <th scope="col">&nbsp;</th>
+                                                                                <th scope="col">Nota</th>
+                                                                                <th scope="col">Criado por</th>
+                                                                                <th scope="col">Data Criação</th>
+                                                                            </tr>
+                                                                            <tr class="border-bottom">
+                                                                                <td class="text-center bg-white border-right"
+                                                                                    style="width:3%;">
+                                                                                    <a data-toggle="tooltip"
+                                                                                        data-placement="bottom"
+                                                                                        data-original-title="Excluir nota"><i
+                                                                                            class="fas fa-trash-alt"></i></a>
+                                                                                </td>
+                                                                                <td>Teste de notas</td>
+                                                                                <td style="width:25%;">ALEX MATTOS
+                                                                                </td>
+                                                                                <td style="width:10%;">03/01/2025
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div>
+                                                                    <ul class="pagination justify-content-end">
+                                                                        <li class="page-item disabled">
+                                                                            <a class="page-link">« Anterior</a>
+                                                                        </li>
+                                                                        <li class="page-item">
+                                                                            <span
+                                                                                class="page-text page-text-active">1</span>
+                                                                        </li>
+                                                                        <li class="page-item"><span
+                                                                                class="page-text">de</span></li>
+                                                                        <li class="page-item">
+                                                                            <span
+                                                                                class="page-text page-text-active">1</span>
+                                                                        </li>
+                                                                        <li class="page-item disabled">
+                                                                            <a class="page-link">Próxima »</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" [class.show]="activeTab === 'enderecos'"
+                                            [class.active]="activeTab === 'enderecos'">
+                                            <div class="page-header border-bottom mb-3">
+                                                <div class="container-fluid">
+                                                    <div class="row pb-3 pt-2 align-items-center">
+                                                        <div class="col">
+                                                            <h4 class="page-title"><i
+                                                                    class="fas fa-address-card mr-2"></i>Endereços
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-auto ms-auto">
+                                                            <div class="btn-list">
+                                                                <a class="btn btn-success"><i
+                                                                        class="fas fa-plus"></i><span
+                                                                        class="d-none d-md-inline ml-2">Novo
+                                                                        Registro</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div>
+                                                            <div class="table-responsive">
+                                                                <div>
+                                                                    <div *ngIf="enderecos.length === 0"
+                                                                        class="alert alert-warning" role="alert">
+                                                                        Nenhum registro encontrado.
+                                                                    </div>
+                                                                    <table class="table table-borderless border-0 mb-0"
+                                                                        cellspacing="0" rules="all" border="1"
+                                                                        style="border-collapse:collapse;">
+                                                                        <tbody>
+                                                                            <tr class="border-bottom">
+                                                                                <th scope="col">&nbsp;</th>
+                                                                                <th scope="col"><a>Tipo</a></th>
+                                                                                <th scope="col"><a>CEP</a></th>
+                                                                                <th scope="col"><a>Endereço</a></th>
+                                                                                <th scope="col"><a>Número</a></th>
+                                                                                <th scope="col"><a>Complemento</a></th>
+                                                                                <th scope="col"><a>Bairro</a></th>
+                                                                                <th scope="col"><a>Cidade</a></th>
+                                                                                <th scope="col"><a>Estado</a></th>
+                                                                            </tr>
+                                                                            <tr *ngFor="let endereco of enderecos"
+                                                                                class="border-bottom">
+                                                                                <td class="text-center bg-white border-right"
+                                                                                    style="width:3%;"><a><i
+                                                                                            class="fas fa-edit"></i></a>
+                                                                                </td>
+                                                                                <td>{{ getTipoEndereco(endereco.tipo) }}
+                                                                                </td>
+                                                                                <td>{{ endereco.cep }}</td>
+                                                                                <td>{{ endereco.endereco }}</td>
+                                                                                <td>{{ endereco.numero }}</td>
+                                                                                <td>{{ endereco.complemento || '-' }}
+                                                                                </td>
+                                                                                <td>{{ endereco.bairro }}</td>
+                                                                                <td>{{ endereco.cidade }}</td>
+                                                                                <td>{{ endereco.estado }}</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+
+                                                                <ul class="pagination justify-content-center mt-3">
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">« Anterior</a>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span
+                                                                            class="page-text page-text-active">1</span>
+                                                                    </li>
+                                                                    <li class="page-item"><span
+                                                                            class="page-text">de</span></li>
+                                                                    <li class="page-item">
+                                                                        <span
+                                                                            class="page-text page-text-active">1</span>
+                                                                    </li>
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">Próxima »</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" [class.show]="activeTab === 'telefones'"
+                                            [class.active]="activeTab === 'telefones'">
+                                            <div class="page-header border-bottom mb-3">
+                                                <div class="container-fluid">
+                                                    <div class="row pb-3 pt-2 align-items-center">
+                                                        <div class="col">
+                                                            <h4 class="page-title"><i
+                                                                    class="fas fa-phone mr-2"></i>Telefones</h4>
+                                                        </div>
+                                                        <div class="col-auto ms-auto">
+                                                            <div class="btn-list">
+                                                                <a [routerLink]="['/clientes/telefones', clienteId]"
+                                                                    class="btn btn-success">
+                                                                    <i class="fas fa-plus"></i><span
+                                                                        class="d-none d-md-inline ml-2">Novo
+                                                                        Registro</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div>
+                                                            <div class="table-responsive">
+                                                                <div>
+                                                                    <div *ngIf="telefones.length === 0"
+                                                                        class="alert alert-warning" role="alert">
+                                                                        Nenhum registro encontrado.
+                                                                    </div>
+                                                                    <table class="table table-borderless border-0 mb-0"
+                                                                        cellspacing="0" rules="all" border="1"
+                                                                        style="border-collapse:collapse;">
+                                                                        <tbody>
+                                                                            <tr class="border-bottom">
+                                                                                <th scope="col">&nbsp;</th>
+                                                                                <th scope="col"><a>Tipo</a></th>
+                                                                                <th scope="col"><a>Telefone</a></th>
+                                                                                <th scope="col"><a>Ramal</a></th>
+                                                                                <th scope="col"><a>Contato</a></th>
+                                                                            </tr>
+                                                                            <tr *ngFor="let telefone of telefones"
+                                                                                class="border-bottom">
+                                                                                <td class="text-center bg-white border-right"
+                                                                                    style="width:3%;"><a><i
+                                                                                            class="fas fa-edit"></i></a>
+                                                                                </td>
+                                                                                <td>{{ getTipoNome(telefone.tipo) }}
+                                                                                </td>
+                                                                                <td>{{ telefone.numero }}</td>
+                                                                                <td>{{ telefone.ramal || '-' }}</td>
+                                                                                <td>{{ telefone.contato || '-' }}</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <ul class="pagination justify-content-center mt-3">
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">« Anterior</a>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span
+                                                                            class="page-text page-text-active">1</span>
+                                                                    </li>
+                                                                    <li class="page-item"><span
+                                                                            class="page-text">de</span></li>
+                                                                    <li class="page-item">
+                                                                        <span
+                                                                            class="page-text page-text-active">1</span>
+                                                                    </li>
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">Próxima »</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" [class.show]="activeTab === 'contatos'"
+                                            [class.active]="activeTab === 'contatos'">
+                                            <div class="page-header border-bottom mb-3">
+                                                <div class="container-fluid">
+                                                    <div class="row pb-3 pt-2 align-items-center">
+                                                        <div class="col">
+                                                            <h4 class="page-title"><i
+                                                                    class="fas fa-address-book mr-2"></i>Contatos
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-auto ms-auto">
+                                                            <div class="btn-list">
+                                                                <a [routerLink]="['/clientes/contatos', clienteId]"
+                                                                    class="btn btn-success">
+                                                                    <i class="fas fa-plus"></i><span
+                                                                        class="d-none d-md-inline ml-2">Novo
+                                                                        Registro</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div>
+                                                            <div class="table-responsive">
+                                                                <div>
+                                                                    <div *ngIf="contatos.length === 0"
+                                                                        class="alert alert-warning" role="alert">
+                                                                        Nenhum registro encontrado.
+                                                                    </div>
+                                                                    <table class="table table-borderless border-0 mb-0"
+                                                                        cellspacing="0" rules="all" border="1"
+                                                                        style="border-collapse:collapse;">
+                                                                        <tbody>
+                                                                            <tr class="border-bottom">
+                                                                                <th scope="col">&nbsp;</th>
+                                                                                <th scope="col"><a>Nome</a></th>
+                                                                                <th scope="col"><a>CPF</a></th>
+                                                                                <th scope="col"><a>Data Nascimento</a>
+                                                                                </th>
+                                                                                <th scope="col"><a>Tipo Contato</a></th>
+                                                                                <th scope="col"><a>Email</a></th>
+                                                                                <th scope="col"><a>Tratamento</a></th>
+                                                                                <th scope="col"><a>Cargo</a></th>
+                                                                                <th scope="col"><a>Telefone</a></th>
+                                                                                <th scope="col"><a>Celular</a></th>
+                                                                            </tr>
+                                                                            <tr *ngFor="let contato of contatos"
+                                                                                class="border-bottom">
+                                                                                <td class="text-center bg-white border-right"
+                                                                                    style="width:3%;"><a><i
+                                                                                            class="fas fa-edit"></i></a>
+                                                                                </td>
+                                                                                <td>{{contato.nome}}</td>
+                                                                                <td>{{contato.cpf || '-'}}</td>
+                                                                                <td>{{contato.dtNascimento || '-'}}</td>
+                                                                                <td>{{ getTipoContatos(contato.tipo) }}
+                                                                                </td>
+                                                                                <td>{{contato.email || '-'}}</td>
+                                                                                <td>{{contato.tratamento || '-'}}</td>
+                                                                                <td>{{contato.cargo || '-'}}</td>
+                                                                                <td>{{contato.telefone || '-'}}</td>
+                                                                                <td>{{contato.celular || '-'}}</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <ul class="pagination justify-content-center mt-3">
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">« Anterior</a>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span
+                                                                            class="page-text page-text-active">1</span>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span class="page-text">de</span>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span
+                                                                            class="page-text page-text-active">1</span>
+                                                                    </li>
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">Próxima »</a>
+                                                                    </li>
+                                                                </ul>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" [class.show]="activeTab === 'oportunidades'"
+                                            [class.active]="activeTab === 'oportunidades'">
+                                            <div class="page-header border-bottom mb-3">
+                                                <div class="container-fluid">
+                                                    <div class="row pb-3 pt-2 align-items-center">
+                                                        <div class="col">
+                                                            <h4 class="page-title"><i
+                                                                    class="fas fa-star mr-2"></i>Oportunidades</h4>
+                                                        </div>
+                                                        <div class="col-auto ms-auto">
+                                                            <div class="btn-list">
+                                                                <a class="btn btn-success">
+                                                                    <i class="fas fa-plus"></i>
+                                                                    <span class="d-none d-md-inline ml-2">Novo
+                                                                        Registro</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div>
+                                                            <div class="table-responsive">
+                                                                <div>
+                                                                    <table class="table table-borderless border-0 mb-0"
+                                                                        cellspacing="0" rules="all" border="1"
+                                                                        style="border-collapse:collapse;">
+                                                                        <tbody>
+                                                                            <tr class="border-bottom">
+                                                                                <th scope="col">&nbsp;</th>
+                                                                                <th scope="col"><a>Oportunidade</a>
+                                                                                </th>
+                                                                                <th scope="col">Descrição</th>
+                                                                                <th scope="col"><a>Fase</a>
+                                                                                </th>
+                                                                                <th scope="col"><a>Data</a>
+                                                                                </th>
+                                                                            </tr>
+                                                                            <tr class="border-bottom">
+                                                                                <td class="text-center bg-white border-right"
+                                                                                    style="width:3%;">
+                                                                                    <a><i class="fas fa-edit"></i></a>
+                                                                                </td>
+                                                                                <td>MAURICIO FRANCHINI GOMES</td>
+                                                                                <td>
+                                                                                    <span>
+                                                                                        <p>Teste</p>
+                                                                                    </span>
+                                                                                </td>
+                                                                                <td>Cotação</td>
+                                                                                <td>03/01/2025</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <ul class="pagination justify-content-center mt-3">
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">« Anterior</a>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span
+                                                                            class="page-text page-text-active">1</span>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span class="page-text">de</span>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span
+                                                                            class="page-text page-text-active">1</span>
+                                                                    </li>
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">Próxima »</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" [class.show]="activeTab === 'apolices'"
+                                            [class.active]="activeTab === 'apolices'">
+                                            <div class="page-header border-bottom mb-3">
+                                                <div class="container-fluid">
+                                                    <div class="row pb-3 pt-2 align-items-center">
+                                                        <div class="col">
+                                                            <h4 class="page-title"><i
+                                                                    class="fas fa-file-alt mr-2"></i>Apólices</h4>
+                                                        </div>
+                                                        <div class="col-auto ms-auto">
+                                                            <div class="btn-list">
+                                                                <a class="btn btn-success">
+                                                                    <i class="fas fa-plus"></i>
+                                                                    <span class="d-none d-md-inline ml-2">Novo
+                                                                        Registro</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div>
+                                                            <div class="table-responsive">
+                                                                <div>
+                                                                    <table class="table table-borderless border-0 mb-0"
+                                                                        cellspacing="0" rules="all" border="1"
+                                                                        style="border-collapse:collapse;">
+                                                                        <tbody>
+                                                                            <tr class="border-bottom">
+                                                                                <th scope="col">&nbsp;</th>
+                                                                                <th scope="col">&nbsp;</th>
+                                                                                <th scope="col"><a>Documento</a></th>
+                                                                                <th scope="col"><a>SeqEndosso</a></th>
+                                                                                <th scope="col"><a>Número da apólice</a>
+                                                                                </th>
+                                                                                <th scope="col"><a>Proposta</a></th>
+                                                                                <th scope="col"><a>Seguradora</a></th>
+                                                                                <th scope="col">Produto</th>
+                                                                                <th scope="col"><a>Inicio vigência</a>
+                                                                                </th>
+                                                                                <th scope="col"><a>Termino vigência</a>
+                                                                                </th>
+                                                                                <th scope="col">Situação</th>
+                                                                            </tr>
+                                                                            <tr class="border-bottom">
+                                                                                <td class="text-center bg-white border-right"
+                                                                                    style="width:3%;">
+                                                                                    <a><i class="fas fa-edit"></i></a>
+                                                                                </td>
+                                                                                <td class="text-center bg-white border-right"
+                                                                                    style="width:3%;">
+                                                                                    <a data-toggle="tooltip"
+                                                                                        data-placement="top"
+                                                                                        data-original-title="Visualizar Itens">
+                                                                                        <i class="far fa-eye"></i>
+                                                                                    </a>
+                                                                                </td>
+                                                                                <td>60670</td>
+                                                                                <td>0</td>
+                                                                                <td>-</td>
+                                                                                <td>616396507</td>
+                                                                                <td>BRADESCO AUTO/RE CIA DE SEGUROS
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                    <i class="fas fa-car"
+                                                                                        style="font-size:22px;"
+                                                                                        data-toggle="tooltip"
+                                                                                        data-placement="top"
+                                                                                        data-original-title="AUTOMÓVEL">
+                                                                                    </i>
+                                                                                </td>
+                                                                                <td>28/12/2024</td>
+                                                                                <td>28/12/2025</td>
+                                                                                <td class="text-center">
+                                                                                    <span
+                                                                                        class="badge badge-warning d-block">Aguardando
+                                                                                        Emissão</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <ul class="pagination justify-content-center mt-3">
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">« Anterior</a>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span
+                                                                            class="page-text page-text-active">1</span>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span class="page-text">de</span>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span
+                                                                            class="page-text page-text-active">1</span>
+                                                                    </li>
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">Próxima »</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" [class.show]="activeTab === 'arquivos'"
+                                            [class.active]="activeTab === 'arquivos'">
+                                            <div>
+                                                <div class="page-header border-bottom mb-3">
+                                                    <div class="container-fluid">
+                                                        <div class="row pb-3 pt-2 align-items-center">
+                                                            <div class="col">
+                                                                <h4 class="page-title"><i
+                                                                        class="fas fa-folder mr-2"></i>Arquivos</h4>
+                                                            </div>
+                                                            <div class="col-auto ms-auto">
+                                                                <div class="btn-list">
+                                                                    <a class="btn btn-success">
+                                                                        <i class="fas fa-arrow-alt-circle-right"></i>
+                                                                        <span class="d-none d-md-inline ml-2">Associar
+                                                                            arquivo</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="col-lg-5">
+                                                                <div class="form-group">
+                                                                    <label>Nome do arquivo:</label>
+                                                                    <input type="text" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-5">
+                                                                <div class="form-group">
+                                                                    <label>Título do arquivo:</label>
+                                                                    <input type="text" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-2">
+                                                                <div class="form-group">
+                                                                    <label>&nbsp;</label>
+                                                                    <div class="btn-group w-100">
+                                                                        <a class="btn btn-success">Pesquisar</a>
+                                                                        <a class="btn btn-danger">Limpar</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="table-responsive">
+                                                            <div>
+                                                                <div>
+                                                                    <table class="table table-borderless border-0"
+                                                                        cellspacing="0" cellpadding="4" rules="all"
+                                                                        border="1"
+                                                                        style="width:100%;border-collapse:collapse;">
+                                                                        <tbody>
+                                                                            <tr class="border-bottom">
+                                                                                <th scope="col">&nbsp;</th>
+                                                                                <th scope="col">Nome do Arquivo</th>
+                                                                                <th scope="col">Título</th>
+                                                                                <th scope="col">Status</th>
+                                                                                <th scope="col">Data Criação</th>
+                                                                                <th scope="col">&nbsp;</th>
+                                                                                <th scope="col">&nbsp;</th>
+                                                                            </tr>
+                                                                            <tr class="border-bottom">
+                                                                                <td class="bg-white text-center border-right"
+                                                                                    style="width:3%;">
+                                                                                    <input type="checkbox">
+                                                                                </td>
+                                                                                <td>proposta_0616396507.pdf</td>
+                                                                                <td>Proposta de Renovação</td>
+                                                                                <td>Ativo</td>
+                                                                                <td>01/01/2025</td>
+                                                                                <td class="border-left text-center"
+                                                                                    style="width:3%;">
+                                                                                    <div class="btn-group">
+                                                                                        <a data-toggle="tooltip"
+                                                                                            data-placement="top"
+                                                                                            data-original-title="Editar registro"><i
+                                                                                                class="fas fa-edit"></i></a>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="border-left text-center"
+                                                                                    style="width:3%;">
+                                                                                    <a data-toggle="tooltip"
+                                                                                        data-placement="top"
+                                                                                        data-original-title="Visualizar arquivo"
+                                                                                        target="_blank"><i
+                                                                                            class="fas fa-search"></i></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div>
+                                                                    <ul class="pagination justify-content-center">
+                                                                        <li class="page-item disabled">
+                                                                            <a class="page-link">« Anterior</a>
+                                                                        </li>
+                                                                        <li class="page-item">
+                                                                            <span
+                                                                                class="page-text page-text-active">1</span>
+                                                                        </li>
+                                                                        <li class="page-item">
+                                                                            <span class="page-text">de</span>
+                                                                        </li>
+                                                                        <li class="page-item">
+                                                                            <span
+                                                                                class="page-text page-text-active">1</span>
+                                                                        </li>
+                                                                        <li class="page-item disabled">
+                                                                            <a class="page-link">Próxima »</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" [class.show]="activeTab === 'sinistros'"
+                                            [class.active]="activeTab === 'sinistros'">
+                                            <div class="page-header border-bottom mb-3">
+                                                <div class="container-fluid">
+                                                    <div class="row pb-3 pt-2 align-items-center">
+                                                        <div class="col">
+                                                            <h4 class="page-title"><i
+                                                                    class="fas fa-shield-alt mr-2"></i>Sinistros
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-auto ms-auto">
+                                                            <div class="btn-list">
+                                                                <a class="btn btn-success">
+                                                                    <i class="fas fa-plus"></i>
+                                                                    <span class="d-none d-md-inline ml-2">Novo
+                                                                        Registro</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div>
+                                                            <div class="table-responsive">
+                                                                <div>
+                                                                    <table class="table table-borderless border-0 mb-0"
+                                                                        cellspacing="0" rules="all" border="1"
+                                                                        style="border-collapse:collapse;">
+                                                                        <tbody>
+                                                                            <tr class="border-bottom">
+                                                                                <th scope="col">&nbsp;</th>
+                                                                                <th scope="col"><a>Relativo a</a></th>
+                                                                                <th scope="col"><a>Tipo do Caso</a></th>
+                                                                                <th scope="col"><a>Severidade</a></th>
+                                                                                <th scope="col"><a>Origem</a></th>
+                                                                                <th scope="col"><a>Status</a></th>
+                                                                                <th scope="col"><a>Funcionário</a></th>
+                                                                                <th scope="col"><a>Atribuído para</a>
+                                                                                </th>
+                                                                            </tr>
+                                                                            <tr class="border-bottom">
+                                                                                <td class="text-center bg-white border-right"
+                                                                                    style="width:3%;">
+                                                                                    <a><i class="fas fa-edit"></i></a>
+                                                                                </td>
+                                                                                <td>Apólice</td>
+                                                                                <td>PERDA PARCIAL</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                                <td>ABERTO</td>
+                                                                                <td>-</td>
+                                                                                <td>-</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <ul class="pagination justify-content-center mt-3">
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">« Anterior</a>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span
+                                                                            class="page-text page-text-active">1</span>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span class="page-text">de</span>
+                                                                    </li>
+                                                                    <li class="page-item">
+                                                                        <span
+                                                                            class="page-text page-text-active">1</span>
+                                                                    </li>
+                                                                    <li class="page-item disabled">
+                                                                        <a class="page-link">Próxima »</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,142 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Atividades</li>
+                <li class="breadcrumb-menu d-md-down-none" style="display: none;">
+                    <div class="btn-group">
+                        <a class="btn">
+                            <i class="fas fa-question mr-2"></i>Ajuda
+                        </a>
+                    </div>
+                </li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div>
+                        <div class="form-row">
+                            <div class="col-lg-12">
+                                <div class="card card-accent-crm">
+                                    <div class="card-header">
+                                        <strong><i class="fas fa-filter me-2"></i>Filtros</strong>
+                                        <div class="card-header-actions">
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-dark" (click)="voltar()">
+                                                    <i class="fas fa-arrow-alt-circle-left me-2"></i>Voltar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>Tipo Atribuição:</label>
+                                                    <select class="form-control" [(ngModel)]="filtros.tipoAtribuicao">
+                                                        <option value="P">Alguém</option>
+                                                        <option value="D">Departamento</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="filtros.tipoAtribuicao === 'P'">
+                                            <div class="form-row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Atribuído para:</label>
+                                                        <select class="form-control" [(ngModel)]="filtros.atribuidoPara"
+                                                            >
+                                                            <option value="10402">ALEX MATTOS</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Filtros:</label>
+                                                        <select class="form-control" [(ngModel)]="filtros.filtro"
+                                                            >
+                                                            <option value="H">Hoje</option>
+                                                            <option value="SA">Somente Atrasadas</option>
+                                                            <option value="A">Amanhã</option>
+                                                            <option value="S">Esta Semana</option>
+                                                            <option value="M">Este Mês</option>
+                                                            <option value="T">Todas</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="text-center">
+                                            <button class="btn btn-primary" >Pesquisar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-accent-crm">
+                            <div class="card-header">
+                                <strong><i class="fas fa-bars me-2"></i>Listagem</strong>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-borderless mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>Status</th>
+                                            <th>Data/Hora</th>
+                                            <th>Assunto</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let atividade of atividades" class="border-bottom border-top">
+                                            <td class="border-right text-center" style="width:5%;">
+                                                <i class="fas fa-comment-alt" style="font-size: 22px;"
+                                                    data-toggle="tooltip" data-placement="bottom"
+                                                    [title]="atividade.tipo"></i>
+                                            </td>
+                                            <td class="border-right text-center" style="width:5%;">
+                                                <i class="fas fa-circle text-info" data-toggle="tooltip"
+                                                    data-placement="bottom" title="Status da atividade"></i>
+                                            </td>
+                                            <td>
+                                                <div>{{atividade.data | date:'dd/MM/yyyy'}}</div>
+                                                <div class="small text-muted">
+                                                    <i class="fas fa-clock me-2"></i>{{atividade.data | date:'HH:mm'}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>{{atividade.descricao}}</div>
+                                                <div class="small text-muted">
+                                                    <i class="fas fa-user me-2"></i>{{atividade.responsavel}}
+                                                </div>
+                                            </td>
+                                            <td class="border-left text-center" style="width: 5%;">
+                                                <a [routerLink]="['/atividades/editar', atividade.id]">
+                                                    <i class="fas fa-search"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="atividades.length === 0">
+                                            <td colspan="5">
+                                                <div class="alert alert-warning text-center m-0">
+                                                    Nenhuma atividade encontrada.
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

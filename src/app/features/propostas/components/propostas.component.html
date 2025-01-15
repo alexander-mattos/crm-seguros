@@ -1,0 +1,231 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form [formGroup]="form">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Apólices</li>
+                <li class="breadcrumb-menu d-md-down-none" style="display: none;">
+                    <div class="btn-group" role="group" aria-label="Button group">
+                        <a class="btn" href="javascript:void(0);">
+                            <i class="fas fa-question mr-2"></i>Ajuda
+                        </a>
+                    </div>
+                </li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div class="alert alert-info">
+                        Você possui apólices vencidas e não renovadas. <a href="https://app.com.br/Baixas">Clique
+                            aqui</a> para
+                        visualizá-las e baixá-las.
+                    </div>
+                    <div>
+                        <div class="card card-accent-crm">
+                            <div class="card-header">
+                                <strong><i class="fas fa-filter mr-2"></i>Filtros</strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Cliente:</label>
+                                            <input formControlName="cliente" type="text" maxlength="50" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Número da proposta:</label>
+                                            <input formControlName="numeroProposta" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Situação Documento:</label>
+                                            <select formControlName="documento" class="form-control">
+                                                <option value="0">Selecione</option>
+                                                <option value="1">Aguardando Emissão</option>
+                                                <option selected="selected" value="3">Vigente</option>
+                                                <option value="4">Cancelado</option>
+                                                <option value="5">Renovado</option>
+                                                <option value="7">Recusada</option>
+                                                <option value="9">Vencido/Não Renovado</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Número da Apólice:</label>
+                                            <input formControlName="numeroApolice" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Placa:</label>
+                                            <input formControlName="placa" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Unidade de Negócio:</label>
+                                            <select formControlName="unidadeNegocio" class="form-control">
+                                                <option selected="selected" value="0">Selecione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Dependente:</label>
+                                            <input formControlName="dependente" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Seguradora:</label>
+                                            <select formControlName="seguradora" class="form-control">
+                                                <option selected="selected" value="0">Selecione</option>
+                                                <option value="141183">ACE SEGURADORA SA</option>
+                                                <option value="141184">AIG SEGUROS BRASIL S/A</option>
+                                                <option value="141185">ALFA SEGURADORA SA</option>
+                                                <option value="141186">ALLIANZ SEGUROS</option>
+                                                <option value="141187">AMIL</option>
+                                                <option value="141188">AZUL CIA. DE SEGUROS GERAIS</option>
+                                                <option value="141189">BARELA SEGUROS</option>
+                                                <option value="141190">BRADESCO AUTO/RE CIA DE SEGUROS</option>
+                                                <option value="141191">BRADESCO SAÚDE S/A</option>
+                                                <option value="141192">BRASIL ASSISTÊNCIA (MAPFRE VIAGEM)</option>
+                                                <option value="141193">CARE PLUS MEDICINA ASSISTENCIAL</option>
+                                                <option value="141194">CHUBB DO BRASIL CIA. DE SEGUROS</option>
+                                                <option value="141195">GENERALI DO BRASIL - CIA. NACIONAL DE SEGUROS
+                                                </option>
+                                                <option value="141196">ICATU HARTFORD SEGUROS S/A</option>
+                                                <option value="141197">INPAO DENTAL - INST DE PREVIDENCIA E
+                                                    ASSISTENCIA ODONTOLOGICA LTDA</option>
+                                                <option value="141198">INTERMÉDICA SISTEMA DE SAÚDE S/A</option>
+                                                <option value="141199">INTERODONTO SISTEMA DE SAÚDE ODONTOLÓGICA
+                                                    LTDA.</option>
+                                                <option value="141200">ITAÚ SEGUROS S/A</option>
+                                                <option value="141201">JLK CORRETORA</option>
+                                                <option value="141202">KAWAN CONSULTORIA (JLK)</option>
+                                                <option value="141203">LIBERTY SEGUROS S/A</option>
+                                                <option value="141204">MAPFRE BARCELONA VGBL II</option>
+                                                <option value="141205">MAPFRE MADRID VGBL</option>
+                                                <option value="141206">MAPFRE SEGURVIAJE</option>
+                                                <option value="141207">MAPFRE VERA CRUZ PREVIDÊNCIA</option>
+                                                <option value="141208">MAPFRE VERA CRUZ SEGURADORA S/A.</option>
+                                                <option value="141209">MARITIMA SEGUROS</option>
+                                                <option value="141210">MET LIFE SEGUROS E PREVIDÊNCIA PRIVADA SA
+                                                </option>
+                                                <option value="141211">METLIFE PLANOS ODONTOLÓGICOS</option>
+                                                <option value="141212">NOTRE DAME SEGUROS SAÚDE</option>
+                                                <option value="141213">NOVO CICLO - PREVENT SENIOR</option>
+                                                <option value="141214">NOVO CICLO PREVENT SENIOR - 50%</option>
+                                                <option value="141215">ODONTOPREV S/A</option>
+                                                <option value="141216">OMINT SERVIÇOS DE SAÚDE</option>
+                                                <option value="141217">PORTO SEGURO CIA. DE SEGUROS GERAIS</option>
+                                                <option value="141218">RSA SEGUROS</option>
+                                                <option value="141219">SUL AMERICA CAPITALIZAÇÃO</option>
+                                                <option value="141220">SUL AMÉRICA COMPANHIA NACIONAL DE SEGUROS
+                                                </option>
+                                                <option value="141221">SUL AMERICA SEGURO SAÚDE</option>
+                                                <option value="141222">SUL AMÉRICA SEGUROS DE PESSOAS E PREVIDENCIA
+                                                </option>
+                                                <option value="141223">TEMPO SAÚDE</option>
+                                                <option value="141224">TOKIO MARINE SEGURADORA S/A</option>
+                                                <option value="141225">UNIMED DO ESTADO DE SP - FEDERAÇÃO ESTADUAL
+                                                    DAS COOP MEDICAS</option>
+                                                <option value="141226">UNIMED PAULISTANA</option>
+                                                <option value="141227">UNIMED SEGURADORA S/A</option>
+                                                <option value="141228">YASUDA SEGUROS S/A</option>
+                                                <option value="141229">ZURICH - CIA. DE SEGUROS MINAS BRASIL
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Produto:</label>
+                                            <select formControlName="produto" class="form-control"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Ramo:</label>
+                                            <select formControlName="ramo" class="form-control">
+                                                <option selected="selected" value="0">Selecione</option>
+                                                <option value="1">AUTOMÓVEL</option>
+                                                <option value="7">FIANÇA LOCATÍCIA</option>
+                                                <option value="8">IMOBILIÁRIO</option>
+                                                <option value="2">VIDA</option>
+                                                <option value="3">SAÚDE</option>
+                                                <option value="4">RESIDENCIAL</option>
+                                                <option value="6">GARANTIA</option>
+                                                <option value="5">GENÉRICA</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-right">
+                                    <div class="btn-group" role="group" aria-label="botões grupo">
+                                        <button type="button" (click)="pesquisar()"
+                                            class="btn btn-primary">Pesquisar</button>
+                                        <button (click)="limpar()" class="btn btn-danger">Redefinir pesquisa</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card card-accent-crm">
+                            <div class="card-header">
+                                <strong><i class="fas fa-bars mr-2"></i>Listagem</strong>
+                                <div class="card-header-actions">
+                                    <a class="btn btn-success" href="/propostas"><i
+                                            class="fas fa-plus mr-2"></i>Adicionar Apólice</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Nº Proposta</th>
+                                                <th>Data</th>
+                                                <th>Status</th>
+                                                <th>Cliente</th>
+                                                <th>Seguradora</th>
+                                                <th>Produto</th>
+                                                <th>Ramo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let proposta of propostas">
+                                                <td>{{proposta.numero}}</td>
+                                                <td>{{proposta.dataProposta | date:'dd/MM/yyyy'}}</td>
+                                                <td>{{proposta.status}}</td>
+                                                <td>{{proposta.cliente?.nome}}</td>
+                                                <td>{{proposta.seguradora?.nome}}</td>
+                                                <td>{{proposta.produto?.nome}}</td>
+                                                <td>{{proposta.ramo?.nome}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="alert alert-warning text-center mb-0" *ngIf="propostas.length === 0">
+                                        Nenhum registro encontrado.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>
