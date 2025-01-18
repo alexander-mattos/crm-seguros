@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { Request, Response } from 'express';
 import { Decimal } from '@prisma/client/runtime/library';
 

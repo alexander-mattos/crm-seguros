@@ -109,9 +109,7 @@ export type IClienteCreate = Omit<ICliente, 'id' | 'dtInclusao' | 'dtAlteracao'>
 // Interface para atualizar cliente (todos os campos são opcionais exceto id)
 export type IClienteUpdate = Partial<IClienteCreate> & { id: number };
 
-// Tipo para o formulário (usando strings para campos de data e enum)
 export interface IClienteForm {
-  // ... similar ao ICliente mas com tipos adaptados para formulário
   dtNascimento?: string;
   dtExpedicao?: string;
   dtvencCnh?: string;
@@ -136,11 +134,11 @@ export const FORM_OPTIONS = {
     { value: 'J', label: 'JURÍDICA', dbValue: TipoPessoa.JURIDICA }
   ],
   status: [
-    { value: '1', label: 'CLIENTE', dbValue: StatusCliente.CLIENTE },
-    { value: '2', label: 'PROSPECT', dbValue: StatusCliente.PROSPECT },
-    { value: '3', label: 'PARCEIRO', dbValue: StatusCliente.PARCEIRO },
-    { value: '4', label: 'NÃO INFORMADO', dbValue: StatusCliente.NAO_INFORMADO },
-    { value: '8', label: 'INATIVO', dbValue: StatusCliente.INATIVO },
+    { value: 'CLIENTE', label: '1', dbValue: StatusCliente.CLIENTE },
+    { value: 'PROSPECT', label: '2', dbValue: StatusCliente.PROSPECT },
+    { value: 'PARCEIRO', label: '3', dbValue: StatusCliente.PARCEIRO },
+    { value: 'NÃO INFORMADO', label: '4', dbValue: StatusCliente.NAO_INFORMADO },
+    { value: 'INATIVO', label: '8', dbValue: StatusCliente.INATIVO },
   ],
   sexo: [
     { value: 'M', label: 'MASCULINO', dbValue: Sexo.MASCULINO },
@@ -181,7 +179,7 @@ export interface IClienteImportacao {
   nomeSocial?: string;
   tipoPessoa: string;  // 'F' para física ou 'J' para jurídica
   cnpjCpf?: string;    // Opcional pois pode não estar disponível no momento da importação
-  status?: string;     // Se não fornecido, usaremos 'CLIENTE' como padrão
+  status?: string;     // Se não fornecido, usaremos 'PROSPECT' como padrão
   origem?: string;
   unidadeNegocio?: string;
   responsavel?: string;
@@ -189,17 +187,11 @@ export interface IClienteImportacao {
   telefone?: string;
   email?: string;
   site?: string;
-
-  // Dados financeiros e sociais
-  faturamento?: number | string; // Aceitamos string para facilitar a importação de planilhas
+  faturamento?: number | string;
   atividade?: string;
   instagram?: string;
   facebook?: string;
-
-  // Dados específicos para Pessoa Jurídica
   nrFuncionarios?: string;
-
-  // Dados específicos para Pessoa Física
   dtNascimento?: string | Date;
   sexo?: string;
   rg?: string;
@@ -211,11 +203,8 @@ export interface IClienteImportacao {
   estadoCivil?: string;
   conjuge?: string;
 
-  // Relacionamentos - Arrays de telefones e endereços
   telefones: ITelefone[];
   enderecos: IEndereco[];
-
-  // Campos de controle
   lgpd?: string;       // 'S' ou 'N', com default 'S'
   dtInclusao?: Date;   // Será preenchida automaticamente se não fornecida
   dtAlteracao?: Date;  // Atualizada automaticamente pelo Prisma

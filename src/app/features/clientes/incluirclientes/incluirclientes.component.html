@@ -71,7 +71,7 @@
                       <div class="col-lg-3">
                         <div class="form-group">
                           <label>CNPJ/CPF:</label>
-                          <input formControlName="cnpjCpf" type="text" class="form-control"
+                          <input formControlName="cnpjCpf" class="form-control"
                             [cpfCnpjMask]="form.get('tipoPessoa')?.value || 'F'"
                             [maxlength]="form.get('tipoPessoa')?.value === 'F' ? '14' : '18'"
                             [class.is-invalid]="isFieldInvalid('cnpjCpf')">
@@ -228,7 +228,7 @@
                         <div class="col-lg-6">
                           <div class="form-group">
                             <label>Faturamento/Renda:</label>
-                            <input formControlName='faturamento' type="text" class="form-control" mask="separator.2"
+                            <input formControlName='faturamento' class="form-control" mask="separator.2"
                               prefix="R$ " thousandSeparator="." decimalMarker=",">
                           </div>
                         </div>
@@ -288,7 +288,7 @@
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>Data inclusão:</label>
-                          <input formControlName="dtInclusao" type="text" id="DataInclusao" class="form-control">
+                          <input formControlName="dtInclusao" class="form-control">
                         </div>
                       </div>
                       <div class="col-lg-4">

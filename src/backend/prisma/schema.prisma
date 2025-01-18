@@ -8,36 +8,42 @@ datasource db {
 }
 
 model Cliente {
-  id             Int       @id @default(autoincrement())
-  nome           String    @db.VarChar(50)
-  nomeSocial     String?   @db.VarChar(30)
-  tipoPessoa     String    @db.VarChar(8)
-  cnpjCpf        String?   @db.VarChar(14)
-  status         String    @db.VarChar(20)
-  clienteDesde   String?   @db.VarChar(7)
-  email          String?   @db.VarChar(70)
-  site           String?   @db.VarChar(100)
-  faturamento    Decimal?  @db.Decimal(15, 2)
-  atividade      String?   @db.VarChar(100)
-  instagram      String?   @db.VarChar(100)
-  facebook       String?   @db.VarChar(100)
-  nrFuncionarios String?   @db.VarChar(20)
-  dtNascimento   DateTime? @db.Date
-  sexo           String?   @db.Char(9)
-  rg             String?   @db.VarChar(20)
-  dtExpedicao    DateTime? @db.Date
-  emissor        String?   @db.VarChar(10)
-  cnh            String?   @db.VarChar(20)
-  emissorCnh     String?   @db.VarChar(10)
-  dtvencCnh      DateTime? @db.Date
-  estadoCivil    String?   @db.VarChar(20)
-  conjuge        String?   @db.VarChar(40)
-  lgpd           String?   @default("S") @db.Char(1)
-  dtInclusao     DateTime? @default(now())
-  dtAlteracao    DateTime? @updatedAt
-  origem         String?   @db.VarChar(20)
-  responsavel    String?   @db.VarChar(30)
-  unidadeNegocio String?   @db.VarChar(30)
+  id             Int         @id @default(autoincrement())
+  nome           String      @db.VarChar(50)
+  nomeSocial     String?     @db.VarChar(30)
+  tipoPessoa     String      @db.VarChar(8)
+  cnpjCpf        String?     @unique @db.VarChar(14)
+  status         String      @db.VarChar(20)
+  clienteDesde   String?     @db.VarChar(7)
+  email          String?     @db.VarChar(70)
+  site           String?     @db.VarChar(100)
+  faturamento    Decimal?    @db.Decimal(15, 2)
+  atividade      String?     @db.VarChar(100)
+  instagram      String?     @db.VarChar(100)
+  facebook       String?     @db.VarChar(100)
+  nrFuncionarios String?     @db.VarChar(20)
+  dtNascimento   DateTime?   @db.Date
+  sexo           String?     @db.Char(9)
+  rg             String?     @db.VarChar(20)
+  dtExpedicao    DateTime?   @db.Date
+  emissor        String?     @db.VarChar(10)
+  cnh            String?     @db.VarChar(20)
+  emissorCnh     String?     @db.VarChar(10)
+  dtvencCnh      DateTime?   @db.Date
+  estadoCivil    String?     @db.VarChar(20)
+  conjuge        String?     @db.VarChar(40)
+  lgpd           String?     @default("S") @db.Char(1)
+  dtInclusao     DateTime?   @default(now())
+  dtAlteracao    DateTime?   @updatedAt
+  origem         String?     @db.VarChar(20)
+  responsavel    String?     @db.VarChar(30)
+  unidadeNegocio String?     @db.VarChar(30)
+  Proposta       Proposta[]
+  atividades     Atividade[]
+  telefones      Telefone[]
+  enderecos      Endereco[]
+  contatos       Contato[]
+  notas          Nota[]
 
   @@map("clientes")
 }
@@ -50,10 +56,11 @@ model Telefone {
   ramal     String? @db.VarChar(10)
   contato   String? @db.VarChar(50)
 
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+
   @@map("telefones")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Endereco {
   id              Int     @id @default(autoincrement())
   clienteId       Int
@@ -67,6 +74,8 @@ model Endereco {
   estado          String  @db.Char(2)
   correspondencia String? @db.VarChar(5)
   aoscuidados     String? @db.VarChar(20)
+
+  cliente Cliente @relation(fields: [clienteId], references: [id])
 
   @@map("enderecos")
 }
@@ -86,19 +95,23 @@ model Contato {
   telefone     String? @db.VarChar(10)
   celular      String? @db.VarChar(11)
 
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+
   @@map("contatos")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Nota {
-  id        Int    @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   clienteId Int
-  notas     String @db.VarChar(200)
+  content   String   @db.VarChar(200)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cliente Cliente @relation(fields: [clienteId], references: [id])
 
   @@map("notas")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Apolice {
   id           Int      @id @default(autoincrement())
   numero       String   @db.VarChar(30)
@@ -115,10 +128,8 @@ model Apolice {
   propostaId   Int?
 
   @@map("apolices")
- 
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Proposta {
   id                 Int      @id @default(autoincrement())
   numero             String   @db.VarChar(30)
@@ -151,11 +162,20 @@ model Proposta {
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
+  // Relações
+  cliente          Cliente         @relation(fields: [clienteId], references: [id])
+  seguradora       Seguradora      @relation(fields: [seguradoraId], references: [id])
+  produto          Produto         @relation(fields: [produtoId], references: [id])
+  ramo             Ramo            @relation(fields: [ramoId], references: [id])
+  parcelas         Parcela[]
+  comissoes        Comissao[]
+  dadosBancarios   DadosBancarios? @relation(fields: [dadosBancariosId], references: [id])
+  repasses         Repasse[]
+  dadosBancariosId Int?
+
   @@map("propostas")
- 
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model DadosBancarios {
   id         Int    @id @default(autoincrement())
   propostaId Int
@@ -163,11 +183,11 @@ model DadosBancarios {
   agencia    String @db.VarChar(10)
   conta      String @db.VarChar(20)
 
+  Proposta Proposta[]
+
   @@map("dados_bancarios")
- 
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Parcela {
   id         Int      @id @default(autoincrement())
   propostaId Int
@@ -177,11 +197,42 @@ model Parcela {
   valor      Decimal  @db.Decimal(15, 2)
   status     String   @db.VarChar(20)
 
+  Proposta Proposta @relation(fields: [propostaId], references: [id])
+
   @@map("parcelas")
- 
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Lead {
+  id             Int      @id @default(autoincrement())
+  status         String   @db.VarChar(20)
+  origem         String?  @db.VarChar(20)
+  nome           String   @db.VarChar(100)
+  empresa        String?  @db.VarChar(100)
+  atividade      String?  @db.VarChar(100)
+  celular        String?  @db.VarChar(11)
+  telcomercial   String?  @db.VarChar(11)
+  telresidencial String?  @db.VarChar(11)
+  tipoPessoa     String?  @db.VarChar(8)
+  cpfCnpj        String?  @db.VarChar(14)
+  setor          String?  @db.VarChar(100)
+  email          String?  @db.VarChar(100)
+  site           String?  @db.VarChar(100)
+  cep            String?  @db.VarChar(9)
+  endereco       String?  @db.VarChar(100)
+  numero         String?  @db.VarChar(11)
+  complemento    String?  @db.VarChar(100)
+  bairro         String?  @db.VarChar(30)
+  cidade         String?  @db.VarChar(20)
+  estado         String?  @db.Char(2)
+  receita        String?  @db.VarChar(20)
+  nrFuncionarios String?  @db.VarChar(20)
+  descricao      String?  @db.Text
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("leads")
+}
+
 model Repasse {
   id         Int     @id @default(autoincrement())
   propostaId Int
@@ -190,11 +241,11 @@ model Repasse {
   valor      Decimal @db.Decimal(15, 2)
   status     String  @db.VarChar(20)
 
+  Proposta Proposta @relation(fields: [propostaId], references: [id])
+
   @@map("repasses")
- 
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Ramo {
   id        Int      @id @default(autoincrement())
   codigo    String   @db.VarChar(10)
@@ -204,11 +255,11 @@ model Ramo {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  Proposta Proposta[]
+
   @@map("ramos")
- 
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Produto {
   id        Int      @id @default(autoincrement())
   nome      String   @db.VarChar(100)
@@ -219,8 +270,9 @@ model Produto {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  Proposta Proposta[]
+
   @@map("produtos")
- 
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
@@ -237,8 +289,9 @@ model Seguradora {
   telefone   String?  @db.VarChar(15)
   telefone2  String?  @db.VarChar(15)
 
+  Proposta Proposta[]
+
   @@map("seguradoras")
- 
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
@@ -252,10 +305,8 @@ model Sinistro {
   status    String   @db.VarChar(20)
 
   @@map("sinistros")
- 
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Comissao {
   id            Int      @id @default(autoincrement())
   apoliceId     Int?
@@ -267,11 +318,11 @@ model Comissao {
   propostaId    Int?
   tipoComissao  String   @db.VarChar(20)
 
+  Proposta Proposta? @relation(fields: [propostaId], references: [id])
+
   @@map("comissoes")
- 
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Corretor {
   id       Int     @id @default(autoincrement())
   nome     String  @db.VarChar(100)
@@ -281,10 +332,8 @@ model Corretor {
   ativo    Boolean @default(true)
 
   @@map("corretores")
- 
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Atividade {
   id           Int       @id @default(autoincrement())
   clienteId    Int
@@ -307,12 +356,11 @@ model Atividade {
   departamento String?   @db.VarChar(50)
   oportunidade String?   @db.VarChar(100)
 
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+
   @@map("atividades")
- 
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model historicoapolice {
   id          Int      @id @default(autoincrement())
   apoliceId   Int
@@ -320,8 +368,6 @@ model historicoapolice {
   valorAntigo String?  @db.VarChar(255)
   valorNovo   String?  @db.VarChar(255)
   data        DateTime @default(now())
-
- 
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
@@ -333,5 +379,4 @@ model historicocliente {
   valorAntigo String?  @db.VarChar(255)
   valorNovo   String?  @db.VarChar(255)
   data        DateTime @default(now())
- 
 }

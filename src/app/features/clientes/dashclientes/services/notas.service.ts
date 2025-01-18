@@ -21,7 +21,7 @@ import { INota } from '../../../../shared/types/notas.types';
     }
 
     listarNotas(clienteId: string): Observable<INota[]> {
-        return this.http.get<INota[]>(`${this.apiUrl}/telefones/${clienteId}`);
+        return this.http.get<INota[]>(`${this.apiUrl}/notas/${clienteId}`);
     }
 
     excluirNota(id: number): Observable<void> {

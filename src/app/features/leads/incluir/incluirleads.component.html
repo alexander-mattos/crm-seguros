@@ -1,0 +1,494 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Início</li>
+                <li class="breadcrumb-item active">Leads</li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div class="page-header mb-3">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h4><i class="fas fa-users mr-2"></i>Leads</h4>
+                                </div>
+                                <div class="col-auto ml-auto">
+                                    <div class="btn-group">
+                                        <a class="btn btn-dark">
+                                            <i class="fas fa-arrow-alt-circle-left"></i>
+                                            <span class="d-none d-md-inline ml-2">Voltar</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row my-3">
+                        <div class="col-lg-12">
+                            <div class="card card-accent-crm">
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="req">
+                                                    <span>Proprietário:</span>
+                                                </label>
+                                                <select class="form-control">
+                                                    <option selected="selected" value="1">ALEXANDER MATTOS
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label for="status" class="req">
+                                                    <span>Status do Lead:</span>
+                                                </label>
+                                                <select id="status" formControlName="status" class="form-control">
+                                                    <option *ngFor="let status of statusLead" [value]="status">
+                                                        {{ status }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label for="origem">Origem:</label>
+                                                <select id="origem" formControlName="origem" class="form-control">
+                                                    <option value="0">Selecione</option>
+                                                    <option *ngFor="let origem of fontesLeads" [value]="origem">{{
+                                                        origem }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="req">
+                                                    <span>Nome/Razão Social:</span></label>
+                                                <input formControlName="nome" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Empresa:</span>
+                                                </label>
+                                                <input formControlName="empresa" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>Atividade:</label>
+                                                <input formControlName="atividade" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Telefone Celular:</span></label>
+                                                <div class="input-group">
+                                                    <input formControlName="celular" class="form-control" telefoneMask
+                                                        [class.is-invalid]="form.get('celular')?.invalid && form.get('celular')?.touched">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-phone"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Telefone Comercial:</span>
+                                                </label>
+                                                <input formControlName="telcomercial" class="form-control" telefoneMask
+                                                    [class.is-invalid]="form.get('telcomercial')?.invalid && form.get('telcomercial')?.touched">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Telefone Residencial:</span>
+                                                </label>
+                                                <div class="input-group">
+                                                    <input formControlName="telresidencial" class="form-control"
+                                                        telefoneMask
+                                                        [class.is-invalid]="form.get('telresidencial')?.invalid && form.get('telresidencial')?.touched">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-phone"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Tipo de Pessoa:</span></label>
+                                                <select formControlName="tipoPessoa" class="form-control">
+                                                    <option value="0">Selecione</option>
+                                                    <option value="F">Física</option>
+                                                    <option value="J">Jurídica</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label for="cpfCnpj">
+                                                    <span>CNPJ/CPF:</span>
+                                                </label>
+                                                <input id="cpfCnpj" formControlName="cpfCnpj" class="form-control"
+                                                    [cpfCnpjMask]="form.get('tipoPessoa')?.value || 'F'"
+                                                    [maxlength]="form.get('tipoPessoa')?.value === 'F' ? '14' : '18'">
+                                                <div
+                                                    *ngIf="form.get('cpfCnpj')?.invalid && form.get('cpfCnpj')?.touched">
+                                                    Invalid CPF or CNPJ
+                                                </div>
+                                                <div class="invalid-feedback"
+                                                    *ngIf="form.get('cpfCnpj')?.errors?.['cnpjInvalido']">
+                                                    CNPJ inválido
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Setor:</span>
+                                                </label>
+                                                <select formControlName="setor" class="form-control">
+                                                    <option value="0">Selecione</option>
+                                                    <option *ngFor="let setor of setores" [value]="setor">
+                                                        {{ setor }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Email:</span>
+                                                </label>
+                                                <div class="input-group">
+                                                    <input formControlName="email" class="form-control">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-envelope"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Site:</span>
+                                                </label>
+                                                <div class="input-group">
+                                                    <input formControlName="site" class="form-control">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-sitemap"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>CEP:</span></label>
+                                                <input formControlName="cep" class="form-control" cepMask
+                                                    (blur)="fetchAddress($event)" placeholder="00000-000" maxlength="9">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Endereço:</span>
+                                                </label>
+                                                <input formControlName="endereco" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Número:</span>
+                                                </label>
+                                                <input formControlName="numero" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Complemento:</span>
+                                                </label>
+                                                <input formControlName="complemento" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Bairro:</span>
+                                                </label>
+                                                <input formControlName="bairro" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Cidade:</span>
+                                                </label>
+                                                <input formControlName="cidade" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Estado:</span>
+                                                </label>
+                                                <input formControlName="estado" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Receita:</span>
+                                                </label>
+                                                <div class="input-group">
+                                                    <input formControlName="receita" class="form-control"
+                                                        mask="separator.2" prefix="R$ " thousandSeparator="."
+                                                        decimalMarker=",">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Nº de Funcionários:</span></label>
+                                                <input formControlName="nrFuncionarios" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span>Descrição:</span>
+                                                </label>
+                                                <textarea formControlName="descricao" rows="1" cols="80"
+                                                    class="form-control" style="overflow: hidden; height: 42px;">
+                                                </textarea>
+                                                <div
+                                                    style="position: absolute; display: none; overflow-wrap: break-word; white-space: pre-wrap; border-color: rgb(170, 170, 170); border-style: solid; border-width: 1px; font-weight: 400; width: 1591px; font-family: Nunito, sans-serif; line-height: 21px; font-size: 14px; padding: 6px 12px;">
+                                                    &nbsp;
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-success mx-2" [disabled]="!form.valid">
+                                            Salvar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalConversao" tabindex="-1" data-keyboard="false"
+                        data-backdrop="static">
+                        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div id="ctl00_ContentPlaceHolder1_wucConversao_UpdatePanel1">
+
+                                        <div class="card card-accent-crm mb-0">
+                                            <div class="card-header">
+                                                <strong class="align-middle"><i class="fas fa-edit mr-2"></i>Dados
+                                                    básicos</strong>
+                                                <div class="card-header-actions"></div>
+                                            </div>
+                                            <div class="card-body">
+
+
+                                                <div class="form-row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="req">Nome/Razão Social:</label>
+                                                            <input name="ctl00$ContentPlaceHolder1$wucConversao$txNome"
+                                                                type="text"
+                                                                id="ctl00_ContentPlaceHolder1_wucConversao_txNome"
+                                                                class="form-control" autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label class="req">CNPJ/CPF:</label>
+                                                            <input
+                                                                name="ctl00$ContentPlaceHolder1$wucConversao$txCnpjCpf"
+                                                                type="text"
+                                                                id="ctl00_ContentPlaceHolder1_wucConversao_txCnpjCpf"
+                                                                class="form-control" data-mask="cnpjcpf"
+                                                                autocomplete="off" inputmode="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Telefone:</label><i
+                                                                class="fas fa-question-circle ml-2"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                data-original-title="Caso o telefone informado seja um celular, o prefixo obrigatoriamente deve ser &#39;9&#39;."></i>
+                                                            <div class="input-group">
+                                                                <input
+                                                                    name="ctl00$ContentPlaceHolder1$wucConversao$txTelefone"
+                                                                    type="text"
+                                                                    id="ctl00_ContentPlaceHolder1_wucConversao_txTelefone"
+                                                                    class="form-control" data-mask="telefone"
+                                                                    autocomplete="off" inputmode="text">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i
+                                                                            class="fas fa-phone"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="req">Email:</label>
+                                                            <div class="input-group">
+                                                                <input
+                                                                    name="ctl00$ContentPlaceHolder1$wucConversao$txEmail"
+                                                                    type="text"
+                                                                    id="ctl00_ContentPlaceHolder1_wucConversao_txEmail"
+                                                                    class="form-control" autocomplete="off">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i
+                                                                            class="fas fa-at"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Site:</label>
+                                                            <div class="input-group">
+                                                                <input
+                                                                    name="ctl00$ContentPlaceHolder1$wucConversao$txSite"
+                                                                    type="text"
+                                                                    id="ctl00_ContentPlaceHolder1_wucConversao_txSite"
+                                                                    class="form-control" autocomplete="off">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i
+                                                                            class="fas fa-sitemap"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <h4 class="border-bottom pb-3 mb-3">Dados do Contato
+                                                        </h4>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="req">Nome (Contato):</label>
+                                                            <input
+                                                                name="ctl00$ContentPlaceHolder1$wucConversao$txNomeContato"
+                                                                type="text"
+                                                                id="ctl00_ContentPlaceHolder1_wucConversao_txNomeContato"
+                                                                class="form-control" autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label class="req">Telefone (Contato):</label><i
+                                                                class="fas fa-question-circle ml-2"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                data-original-title="Caso o telefone informado seja um celular, o prefixo obrigatoriamente deve ser &#39;9&#39;."></i>
+                                                            <div class="input-group">
+                                                                <input
+                                                                    name="ctl00$ContentPlaceHolder1$wucConversao$txTelefone1"
+                                                                    type="text"
+                                                                    id="ctl00_ContentPlaceHolder1_wucConversao_txTelefone1"
+                                                                    class="form-control" data-mask="telefone"
+                                                                    autocomplete="off" inputmode="text">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i
+                                                                            class="fas fa-phone"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label class="req">Celular (Contato):</label><i
+                                                                class="fas fa-question-circle ml-2"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                data-original-title="Caso o telefone informado seja um celular, o prefixo obrigatoriamente deve ser &#39;9&#39;."></i>
+                                                            <div class="input-group">
+                                                                <input
+                                                                    name="ctl00$ContentPlaceHolder1$wucConversao$txTelefone2"
+                                                                    type="text"
+                                                                    id="ctl00_ContentPlaceHolder1_wucConversao_txTelefone2"
+                                                                    class="form-control" data-mask="telefone"
+                                                                    autocomplete="off" inputmode="text">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i
+                                                                            class="fas fa-phone"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer d-flex">
+                                                <a id="ctl00_ContentPlaceHolder1_wucConversao_lnkCancelar"
+                                                    class="btn btn-danger mr-auto"
+                                                    href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$wucConversao$lnkCancelar&#39;,&#39;&#39;)">Cancelar</a>
+                                                <a id="ctl00_ContentPlaceHolder1_wucConversao_lnkConfirmar01"
+                                                    class="btn btn-primary mr-2"
+                                                    href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$wucConversao$lnkConfirmar01&#39;,&#39;&#39;)">Confirmar
+                                                    e Visualizar Cliente</a>
+                                                <a id="ctl00_ContentPlaceHolder1_wucConversao_lnkConfirmar02"
+                                                    class="btn btn-success"
+                                                    href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$wucConversao$lnkConfirmar02&#39;,&#39;&#39;)">Confirmar
+                                                    e Incluir Oportunidade</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

@@ -3,7 +3,6 @@ import { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
 import { AppError } from './error';
 
-const STATUS_VALUES = ['1', '2', '3', '4', '8'] as const;
 const SEXO_VALUES = ['M', 'F'] as const;
 const ESTADO_CIVIL_VALUES = ['1', '2', '3', '4', '5', '6', '7'] as const;
 const ORIGEM_VALUES = ['1', '2', '3', '4', '5', '6', '7', '99'] as const;
@@ -15,7 +14,7 @@ const clienteSchema = z.object({
     .max(50, "Nome deve ter no máximo 50 caracteres"),
 
   tipoPessoa: z.enum(['F', 'J']),
-  status: z.enum(STATUS_VALUES),
+  status: z.string(),
   origem: z.enum(ORIGEM_VALUES)
     .nullable()
     .optional(),
@@ -163,7 +162,7 @@ const contatoSchema = z.object({
   sexo: z.string().max(15),
   cargo: z.string().max(10).nullable().optional(),
   tratamento: z.string().max(50).nullable().optional(),
-  email: z.string().max(30).nullable().optional(),
+  email: z.string().email("Email inválido").max(70).nullable().optional().or(z.literal('')),
   dtNascimento: z.string().max(8).nullable().optional(),
   cpf: z.string().max(11).nullable().optional(),
   telefone: z.string().max(10).nullable().optional(),
@@ -188,5 +187,48 @@ export const validateNotasMiddleware = (req: Request, res: Response, next: NextF
 };
 
 const notaSchema = z.object({
-  notas: z.string().max(200)
+  content: z.string().max(200)
+});
+
+export const validateLeadsMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    req.body = leadsSchema.parse(req.body);
+    next();
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      const messages = error.errors.map(e => {
+        const field = e.path.join('.');
+        return `${field}: ${e.message}`;
+      }).join(', ');
+
+      throw new AppError(`Dados inválidos: ${messages}`, 400);
+    }
+    next(error);
+  }
+};
+
+const leadsSchema = z.object({
+  status: z.string().max(20),
+  origem: z.string().max(20).nullable().optional(),
+  nome: z.string().max(100),
+  empresa: z.string().max(100).nullable().optional(),
+  atividade: z.string().max(100).nullable().optional(),
+  telcomercial: z.string().max(11).nullable().optional(),
+  cpfCnpj: z.string().max(14).nullable().optional(),
+  telresidencial: z.string().max(11).nullable().optional(),
+  celular: z.string().max(11).nullable().optional(),
+  tipoPessoa: z.string().max(8).nullable().optional(),
+  setor: z.string().max(10).nullable().optional(),
+  email: z.string().email("Email inválido").max(70).nullable().optional().or(z.literal('')),
+  site: z.string().max(100).nullable().optional(),
+  cep: z.string().max(9).nullable().optional(),
+  endereco: z.string().max(100).nullable().optional(),
+  numero: z.string().max(11).nullable().optional(),
+  complemento: z.string().max(100).nullable().optional(),
+  bairro: z.string().max(30).nullable().optional(),
+  cidade: z.string().max(20).nullable().optional(),
+  estado: z.string().max(2).nullable().optional(),
+  receita: z.string().max(20).nullable().optional(),
+  nrFuncionarios: z.string().max(20).nullable().optional(),
+  descricao: z.string().max(100).nullable().optional(),
 });

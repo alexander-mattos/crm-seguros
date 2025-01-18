@@ -85,6 +85,23 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'leads',
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/leads/leads.component').then(m => m.LeadsComponent)
+      },
+      {
+        path: 'incluir',
+        loadComponent: () => import('./features/leads/incluir/incluirleads.component').then(m => m.IncluirLeadsComponent)
+      },
+      {
+        path: 'editar',
+        loadComponent: () => import('./features/leads/editar/editarleads.component').then(m => m.EditarleadsComponent)
+      },
+    ]
+  },
+  {
     path: 'financeiro',
     children: [
       {

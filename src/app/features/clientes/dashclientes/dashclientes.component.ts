@@ -8,9 +8,9 @@ import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { ClienteService } from '../services/cliente.service';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { AtividadeService } from '../../atividades/services/atividades.service';
-import { Atividade } from '../../../shared/types/atividade.types';
+import { Atividade } from '../types/atividade.types';
 import { ICliente, IClienteExibicao, FORM_OPTIONS } from '@/backend/src/shared/types/cliente.types';
-import { ApiResponse } from '../types/types';
+import { ApiResponse } from '../../../models/api.model';
 import { ITelefone, FORMS_OPTIONS, TipoTelefone } from '../../../shared/types/telefone.types';
 import { IEndereco, FORM_OPTION, TipoEndereco } from '../../../shared/types/endereco.types';
 import { IContato, FORM_OPTIONS_CONTATOS, TipoContato } from '../../../shared/types/contatos.types';
@@ -52,7 +52,7 @@ export class DashclientesComponent implements OnInit {
   telefones: ITelefone[] = [];
   enderecos: IEndereco[] = [];
   contatos: IContato[] = [];
-  notas: INota[] = [];
+  content: INota[] = [];
   formOptions = FORM_OPTIONS;
   formOptionsEnd = FORM_OPTION;
 
@@ -136,7 +136,7 @@ export class DashclientesComponent implements OnInit {
 
   private inicializarFormulario() {
     this.form = this.fb.group({
-      notas: ['']
+      content: ['']
     });
   }
 
@@ -165,7 +165,7 @@ export class DashclientesComponent implements OnInit {
   }
 
   formatarData(data: string | null | undefined): string {
-    if (!data) return 'Não informado';
+    if (!data) return 'NÃO INFORMADO';
     try {
       const dataObj = new Date(data);
       return dataObj.toLocaleDateString('pt-BR', {
@@ -179,7 +179,7 @@ export class DashclientesComponent implements OnInit {
   }
 
   formatarClienteDesde(data: string | null | undefined): string {
-    if (!data) return 'Não informado';
+    if (!data) return 'NÃO INFORMADO';
 
     if (/^\d{6}$/.test(data)) {
       const mes = data.slice(0, 2);
@@ -216,7 +216,7 @@ export class DashclientesComponent implements OnInit {
   /// }
 
   get clienteDesdeExibicao(): string {
-    return this.cliente?.clienteDesde || 'Não informado';
+    return this.cliente?.clienteDesde || 'NÃO INFORMADO';
   }
 
   ngOnInit() {
@@ -289,7 +289,7 @@ export class DashclientesComponent implements OnInit {
       if (clientId) {
         this.notasService.listarNotas(clientId).subscribe({
           next: (data) => {
-            this.notas = data;
+            this.content = data;
           },
           error: (error) => {
             console.error('Erro ao buscar nota:', error);
@@ -398,24 +398,36 @@ export class DashclientesComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.clienteId) {
-      console.log('Enviando nota para clienteId:', this.clienteId); // Log para verificar o `clientId`
-      const formValues = this.form.value;
-      const notaData = {
-        ...formValues,
-        notas: formValues.n
-      };
-
-      this.notasService.criarNota(String(this.clienteId), notaData).subscribe({
-        next: () => {
-          this.router.navigate(['/clientes/dash', this.clienteId]);
-        },
-        error: (error) => {
-          console.error('Erro ao criar nota:', error);
-        }
-      });
+    if (this.clienteId && this.form.valid) { // Verifica se o formulário é válido
+      const content = this.form.value.content;
+      this.notasService.criarNota(String(this.clienteId), { content })
+        .subscribe({
+          next: () => {
+            this.form.reset(); // Limpa o formulário após o sucesso
+            this.carregarNotas(); // Recarrega as notas
+            //this.router.navigate(['/clientes/dash', this.clienteId]); // Redirecionamento opcional
+          },
+          error: (error) => {
+            console.error('Erro ao criar nota:', error);
+            // Adicione tratamento de erro para exibir uma mensagem ao usuário
+          }
+        });
     } else {
       console.error('Formulário inválido ou clientId ausente');
+      // Adicione feedback visual para o usuário sobre o erro no formulário
     }
   }
+  
+  carregarNotas() {
+      if (this.clienteId) {
+        this.notasService.listarNotas(String(this.clienteId)).subscribe({
+          next: (data) => {
+            this.content = data;
+          },
+          error: (error) => {
+            console.error('Erro ao buscar nota:', error);
+          }
+        });
+      }
+    }
 }

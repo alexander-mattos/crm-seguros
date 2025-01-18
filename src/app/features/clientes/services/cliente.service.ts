@@ -86,8 +86,7 @@ export class ClienteService {
 
       return {
         ...dadosCliente,
-        status: dadosCliente.status || 'ATIVO',
-        // Agora com tipagem correta
+        status: dadosCliente.status || 'PROSPECT',
         telefones: (dadosCliente.telefones || []).map((tel: ITelefoneImportacao) => ({
           ...tel,
           numero: this.limparNumeroTelefone(tel.numero),

@@ -1,0 +1,956 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Início</li>
+                <li class="breadcrumb-item active">Leads</li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div id="ctl00_ContentPlaceHolder1_UpdatePanel1">
+                        <div class="page-header mb-3">
+                            <div class="container-fluid">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4><i class="fas fa-users mr-2"></i>Leads</h4>
+                                    </div>
+                                    <div class="col-auto ml-auto">
+                                        <div class="btn-group">
+
+                                            <a id="ctl00_ContentPlaceHolder1_lnkEditar" class="btn btn-primary"
+                                                href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkEditar&#39;,&#39;&#39;)"><i
+                                                    class="fas fa-edit"></i><span class="d-none d-md-inline ml-2">Editar
+                                                    Registro</span></a>
+                                            <a class="btn btn-danger"
+                                                href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkExcluir&#39;,&#39;&#39;)"><i
+                                                    class="fas fa-trash"></i><span
+                                                    class="d-none d-md-inline ml-2">Excluir Registro</span></a>
+                                            <a id="ctl00_ContentPlaceHolder1_lnkVoltar" class="btn btn-dark"
+                                                href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$lnkVoltar&#39;,&#39;&#39;)"><i
+                                                    class="fas fa-arrow-alt-circle-left"></i><span
+                                                    class="d-none d-md-inline ml-2">Voltar</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ctl00_ContentPlaceHolder1_pnlResumo">
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card-group">
+                                        <div class="card">
+                                            <div class="card-body text-center">
+                                                <h4 id="ctl00_ContentPlaceHolder1_lblPerfilNome"
+                                                    class="card-title pb-2">Não sei</h4>
+                                                <div class="avatar"
+                                                    style="font-size: 3rem; line-height: 6rem; height: 6rem; width: 6rem;">
+                                                    <span id="ctl00_ContentPlaceHolder1_lblInicial">N</span>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer text-center">
+                                                <a class="btn btn-dark" href="javascript:void(0);"
+                                                    onclick="visualizarPerfil();"><i
+                                                        class="fas fa-eye mr-2"></i>Visualizar Perfil</a>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <p class="card-text"><b>CNPJ/CPF:</b> 010.510.977-03</p>
+                                                        <p class="card-text"><b>Proprietário:</b> ALEX MATTOS</p>
+                                                        <p class="card-text"><b>Status:</b> AGUARDANDO CONTATO</p>
+                                                        <p class="card-text"><b>Origem:</b> Não informado</p>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <ul class="list-group rounded border mt-3">
+                                                            <li
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                Seguros à vencer
+
+                                                                <span
+                                                                    id="ctl00_ContentPlaceHolder1_lblPerfilQtdeVencimentos"
+                                                                    class="badge badge-success badge-pill">0</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title font-weight-bold">Email</h5>
+                                                <p class="card-text">aaasergmail.com</p>
+                                                <h5 class="card-title font-weight-bold">Contatos</h5>
+                                                <p class="card-text">(21)98766-5557 (Celular), (21)3456-7654
+                                                    (Comercial), (21)3213-2333 (Residencial)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row my-3" id="pnlDadosBasicos" style="display: none;">
+                            <div class="col-lg-12">
+                                <div class="card card-accent-crm">
+                                    <div class="card-body">
+
+                                        <div class="form-row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="req">
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblProprietario">Proprietário:</span></label>
+                                                    <select name="ctl00$ContentPlaceHolder1$ddlProprietario"
+                                                        id="ctl00_ContentPlaceHolder1_ddlProprietario"
+                                                        disabled="disabled" class="form-control" autocomplete="off">
+                                                        <option selected="selected" value="10402">ALEX MATTOS
+                                                        </option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="req">
+                                                        <span id="ctl00_ContentPlaceHolder1_lblFase">Status do
+                                                            Lead:</span></label>
+                                                    <select name="ctl00$ContentPlaceHolder1$ddlFase"
+                                                        id="ctl00_ContentPlaceHolder1_ddlFase" disabled="disabled"
+                                                        class="form-control" autocomplete="off">
+                                                        <option selected="selected" value="5689">AGUARDANDO CONTATO
+                                                        </option>
+                                                        <option value="5690">CONTACTADO</option>
+                                                        <option value="5692">FECHADO - CONVERTIDO</option>
+                                                        <option value="5691">FECHADO - NÃO CONVERTIDO</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Origem:</label>
+                                                    <select name="ctl00$ContentPlaceHolder1$ddlOrigem"
+                                                        id="ctl00_ContentPlaceHolder1_ddlOrigem" disabled="disabled"
+                                                        class="form-control" autocomplete="off">
+                                                        <option selected="selected" value="0">Selecione</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="req">
+                                                        <span id="ctl00_ContentPlaceHolder1_lblNome">Nome/Razão
+                                                            Social:</span></label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txNome" type="text"
+                                                        value="Não sei" id="ctl00_ContentPlaceHolder1_txNome"
+                                                        disabled="disabled" class="form-control" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblEmpresa">Empresa:</span></label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txEmpresa" type="text"
+                                                        value="Xpto" id="ctl00_ContentPlaceHolder1_txEmpresa"
+                                                        disabled="disabled" class="form-control" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Atividade:</label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txAtividade" type="text"
+                                                        value="Alguma" id="ctl00_ContentPlaceHolder1_txAtividade"
+                                                        disabled="disabled" class="form-control" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span id="ctl00_ContentPlaceHolder1_lblTelefoneCelular">Telefone
+                                                            Celular:</span></label>
+                                                    <div class="input-group">
+                                                        <input name="ctl00$ContentPlaceHolder1$txCelular" type="text"
+                                                            value="(21)98766-5557"
+                                                            id="ctl00_ContentPlaceHolder1_txCelular" disabled="disabled"
+                                                            class="form-control" data-mask="telefone" autocomplete="off"
+                                                            inputmode="text">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="fas fa-phone"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblTelefoneComercial">Telefone
+                                                            Comercial:</span></label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txTelefoneComercial"
+                                                        type="text" value="(21)3456-7654"
+                                                        id="ctl00_ContentPlaceHolder1_txTelefoneComercial"
+                                                        disabled="disabled" class="form-control" data-mask="telefone"
+                                                        autocomplete="off" inputmode="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblTelefoneResidencial">Telefone
+                                                            Residencial:</span></label>
+                                                    <div class="input-group">
+                                                        <input name="ctl00$ContentPlaceHolder1$txTelefoneResidencial"
+                                                            type="text" value="(21)3213-2333"
+                                                            id="ctl00_ContentPlaceHolder1_txTelefoneResidencial"
+                                                            disabled="disabled" class="form-control"
+                                                            data-mask="telefone" autocomplete="off" inputmode="text">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="fas fa-phone"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span id="ctl00_ContentPlaceHolder1_lblTipoPessoa">Tipo de
+                                                            Pessoa:</span></label>
+                                                    <select name="ctl00$ContentPlaceHolder1$ddlTipoPessoa"
+                                                        id="ctl00_ContentPlaceHolder1_ddlTipoPessoa" disabled="disabled"
+                                                        class="form-control" autocomplete="off">
+                                                        <option value="0">Selecione</option>
+                                                        <option selected="selected" value="F">Física</option>
+                                                        <option value="J">Jurídica</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblCnpjCpf">CNPJ/CPF:</span></label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txCnpjCpf" type="text"
+                                                        value="010.510.977-03" id="ctl00_ContentPlaceHolder1_txCnpjCpf"
+                                                        disabled="disabled" class="form-control" data-mask="cnpjcpf"
+                                                        autocomplete="off" inputmode="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblSetor">Setor:</span></label>
+                                                    <select name="ctl00$ContentPlaceHolder1$ddlSetor"
+                                                        id="ctl00_ContentPlaceHolder1_ddlSetor" disabled="disabled"
+                                                        class="form-control" autocomplete="off">
+                                                        <option selected="selected" value="0">Selecione</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblEmail">Email:</span></label>
+                                                    <div class="input-group">
+                                                        <input name="ctl00$ContentPlaceHolder1$txEmail" type="text"
+                                                            value="aaaser@gmail.com"
+                                                            id="ctl00_ContentPlaceHolder1_txEmail" disabled="disabled"
+                                                            class="form-control" data-mask="email" autocomplete="off">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="fas fa-envelope"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblSite">Site:</span></label>
+                                                    <div class="input-group">
+                                                        <input name="ctl00$ContentPlaceHolder1$txSite" type="text"
+                                                            id="ctl00_ContentPlaceHolder1_txSite" disabled="disabled"
+                                                            class="form-control" data-mask="site" autocomplete="off">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="fas fa-sitemap"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span id="ctl00_ContentPlaceHolder1_lblCep">CEP:</span></label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txCep" type="text"
+                                                        value="20725-220" id="ctl00_ContentPlaceHolder1_txCep"
+                                                        disabled="disabled" class="form-control" data-mask="cep"
+                                                        autocomplete="off" inputmode="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblEndereco">Endereço:</span></label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txEndereco" type="text"
+                                                        value="Rua do Algo" id="ctl00_ContentPlaceHolder1_txEndereco"
+                                                        disabled="disabled" class="form-control" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblNumero">Número:</span></label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txNumero" type="text"
+                                                        value="223" id="ctl00_ContentPlaceHolder1_txNumero"
+                                                        disabled="disabled" class="form-control" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblComplemento">Complemento:</span></label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txComplemento" type="text"
+                                                        value="990" id="ctl00_ContentPlaceHolder1_txComplemento"
+                                                        disabled="disabled" class="form-control" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblBairro">Bairro:</span></label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txBairro" type="text"
+                                                        value="Serumim" id="ctl00_ContentPlaceHolder1_txBairro"
+                                                        disabled="disabled" class="form-control" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblCidade">Cidade:</span></label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txCidade" type="text"
+                                                        value="Rio de Janeiro" id="ctl00_ContentPlaceHolder1_txCidade"
+                                                        disabled="disabled" class="form-control" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblEstado">Estado:</span></label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txEstado" type="text"
+                                                        value="RJ" maxlength="2" id="ctl00_ContentPlaceHolder1_txEstado"
+                                                        disabled="disabled" class="form-control" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblReceita">Receita:</span></label>
+                                                    <div class="input-group">
+                                                        <input name="ctl00$ContentPlaceHolder1$txReceita" type="text"
+                                                            value="10.000,00" id="ctl00_ContentPlaceHolder1_txReceita"
+                                                            disabled="disabled" class="form-control" data-mask="moeda"
+                                                            autocomplete="off" style="text-align: right;">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="fas fa-dollar-sign"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span id="ctl00_ContentPlaceHolder1_lblNumeroFuncionarios">Nº
+                                                            de Funcionários:</span></label>
+                                                    <input name="ctl00$ContentPlaceHolder1$txNumeroFuncionarios"
+                                                        type="text" value="900"
+                                                        id="ctl00_ContentPlaceHolder1_txNumeroFuncionarios"
+                                                        disabled="disabled" class="form-control"
+                                                        data-mask="somenteNumeros" autocomplete="off" inputmode="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <span
+                                                            id="ctl00_ContentPlaceHolder1_lblDescricao">Descrição:</span></label>
+                                                    <textarea name="ctl00$ContentPlaceHolder1$txDescricao" rows="1"
+                                                        cols="80" id="ctl00_ContentPlaceHolder1_txDescricao"
+                                                        disabled="disabled" class="form-control" autocomplete="off"
+                                                        style="overflow: hidden; height: 63px;">Legal</textarea>
+                                                    <div
+                                                        style="position: absolute; display: none; overflow-wrap: break-word; white-space: pre-wrap; border-color: rgb(170, 170, 170); border-style: solid; border-width: 1px; font-weight: 400; width: 100%; font-family: Nunito, sans-serif; line-height: 21px; font-size: 14px; padding: 6px 12px;">
+                                                        Legal&nbsp;</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="pnlGrids">
+                            <div class="row my-3">
+                                <div class="col-lg-12">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" [class.active]="activeTab === 'atividades'"
+                                            (click)="setActiveTab('atividades')">
+                                                <i class="fas fa-calendar mr-2"></i>Atividades</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" [class.active]="activeTab === 'segAVencer'"
+                                            (click)="setActiveTab('segAVencer')">
+                                                <i class="fas fa-shield mr-2"></i>Seguros à Vencer</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade" id="abaAtividades">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div id="ctl00_ContentPlaceHolder1_grdAtividades_UpdatePanel1">
+
+                                                        <div class="card card-accent-crm">
+                                                            <div class="card-header">
+                                                                <strong class="align-middle"><i
+                                                                        class="fas fa-calendar mr-2"></i>Atividades</strong>
+
+                                                                <div id="ctl00_ContentPlaceHolder1_grdAtividades_pnlAcoes"
+                                                                    class="card-header-actions">
+                                                                    <div class="btn-group" role="group"
+                                                                        aria-label="grupo">
+                                                                        <a class="btn btn-success"
+                                                                            href="https://app.crmseguros.com.br/Atividades/edit.aspx?IdLead=oyy+I3BHIMU=&amp;origem=e7G225J3pM4H9ag69X3NtA=="><i
+                                                                                class="fas fa-plus"></i><span
+                                                                                class="d-none d-md-inline ml-2">Nova
+                                                                                atividade</span></a>
+                                                                        <a class="btn btn-primary"
+                                                                            href="https://app.crmseguros.com.br/Atividades/followup.aspx?IdLead=oyy+I3BHIMU=&amp;origem=e7G225J3pM4H9ag69X3NtA=="><i
+                                                                                class="fas fa-phone-volume"></i><span
+                                                                                class="d-none d-md-inline ml-2">Registrar
+                                                                                uma Ligação</span></a>
+
+                                                                        <a id="ctl00_ContentPlaceHolder1_grdAtividades_lnkEnviarWhatsApp"
+                                                                            class="btn btn-warning"
+                                                                            href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$grdAtividades$lnkEnviarWhatsApp&#39;,&#39;&#39;)"><i
+                                                                                class="fab fa-whatsapp"></i><span
+                                                                                class="d-none d-md-inline ml-2">Enviar
+                                                                                WhatsApp</span></a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="table-responsive">
+
+                                                                <div
+                                                                    id="ctl00_ContentPlaceHolder1_grdAtividades_pnlSemRegistros">
+
+                                                                    <div class="alert alert-warning text-center m-3">
+                                                                        Nenhuma atividade encontrada. :)</div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden"
+                                                            name="ctl00$ContentPlaceHolder1$grdAtividades$hfFiltro"
+                                                            id="ctl00_ContentPlaceHolder1_grdAtividades_hfFiltro"
+                                                            value="1" autocomplete="off">
+                                                        <input type="submit"
+                                                            name="ctl00$ContentPlaceHolder1$grdAtividades$btnFake"
+                                                            value=""
+                                                            id="ctl00_ContentPlaceHolder1_grdAtividades_btnFake"
+                                                            style="display: none;" autocomplete="off">
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div
+                                                        id="ctl00_ContentPlaceHolder1_grdAtividadesHistorico_UpdatePanel1">
+
+                                                        <div class="card card-accent-crm">
+                                                            <div class="card-header">
+                                                                <strong class="align-middle"><i
+                                                                        class="fas fa-calendar-minus mr-2"></i>Histórico
+                                                                    de atividades</strong>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="table-responsive">
+
+                                                                    <div
+                                                                        id="ctl00_ContentPlaceHolder1_grdAtividadesHistorico_pnlSemRegistros">
+
+                                                                        <div
+                                                                            class="alert alert-warning text-center mb-0">
+                                                                            Nenhuma atividade encontrada. :)</div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade active show" id="abaSeguros">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="card card-accent-crm mb-0">
+                                                        <div class="card-header">
+                                                            <strong class="align-middle"><i
+                                                                    class="fas fa-shield mr-2"></i>Seguros à
+                                                                Vencer</strong>
+                                                        </div>
+
+                                                        <div style="position: relative;">
+                                                            <div class="table-responsive">
+                                                                <div>
+                                                                    <table class="table table-borderless border-0 mb-0"
+                                                                        cellspacing="0" rules="all" border="1"
+                                                                        id="ctl00_ContentPlaceHolder1_grdLeadsVencimentos"
+                                                                        style="border-collapse:collapse;">
+                                                                        <tbody>
+                                                                            <tr class="border-bottom">
+                                                                                <th scope="col">Ramo</th>
+                                                                                <th scope="col">Mês</th>
+                                                                                <th scope="col">&nbsp;</th>
+                                                                            </tr>
+                                                                            <tr class="border-bottom">
+                                                                                <td>
+                                                                                    <span
+                                                                                        id="ctl00_ContentPlaceHolder1_grdLeadsVencimentos_ctl02_lblRamo">AUTOMÓVEL</span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <span
+                                                                                        id="ctl00_ContentPlaceHolder1_grdLeadsVencimentos_ctl02_lblMes">08
+                                                                                        - Agosto</span>
+                                                                                </td>
+                                                                                <td class="text-center"
+                                                                                    style="width:15%;">
+                                                                                    <div class="btn-group">
+                                                                                        <a id="ctl00_ContentPlaceHolder1_grdLeadsVencimentos_ctl02_lnkEditarRegistro"
+                                                                                            class="btn btn-sm btn-warning"
+                                                                                            data-toggle="tooltip"
+                                                                                            data-placement="top"
+                                                                                            title=""
+                                                                                            href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$grdLeadsVencimentos$ctl02$lnkEditarRegistro&#39;,&#39;&#39;)"
+                                                                                            data-original-title="Editar"><i
+                                                                                                class="fas fa-edit"></i></a>
+                                                                                        <a
+                                                                                            class="btn btn-sm btn-danger"><i
+                                                                                                class="fas fa-trash"></i></a>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr style="background-color:#F1F1F1;">
+                                                                                <td>
+                                                                                    <input
+                                                                                        name="ctl00$ContentPlaceHolder1$grdLeadsVencimentos$ctl03$txRamoNew"
+                                                                                        type="text"
+                                                                                        id="ctl00_ContentPlaceHolder1_grdLeadsVencimentos_ctl03_txRamoNew"
+                                                                                        class="form-control">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <select
+                                                                                        name="ctl00$ContentPlaceHolder1$grdLeadsVencimentos$ctl03$ddlMesNew"
+                                                                                        id="ctl00_ContentPlaceHolder1_grdLeadsVencimentos_ctl03_ddlMesNew"
+                                                                                        class="form-control"
+                                                                                        autocomplete="off">
+                                                                                        <option selected="selected"
+                                                                                            value="0">Selecione
+                                                                                        </option>
+                                                                                        <option value="1">01 -
+                                                                                            Janeiro</option>
+                                                                                        <option value="2">02 -
+                                                                                            Fevereiro</option>
+                                                                                        <option value="3">03 - Março
+                                                                                        </option>
+                                                                                        <option value="4">04 - Abril
+                                                                                        </option>
+                                                                                        <option value="5">05 - Maio
+                                                                                        </option>
+                                                                                        <option value="6">06 - Junho
+                                                                                        </option>
+                                                                                        <option value="7">07 - Julho
+                                                                                        </option>
+                                                                                        <option value="8">08 -
+                                                                                            Agosto</option>
+                                                                                        <option value="9">09 -
+                                                                                            Setembro</option>
+                                                                                        <option value="10">10 -
+                                                                                            Outubro</option>
+                                                                                        <option value="11">11 -
+                                                                                            Novembro</option>
+                                                                                        <option value="12">12 -
+                                                                                            Dezembro</option>
+
+                                                                                    </select>
+                                                                                </td>
+                                                                                <td class="text-center"
+                                                                                    style="width:15%;">
+                                                                                    <a id="ctl00_ContentPlaceHolder1_grdLeadsVencimentos_ctl03_lnkInserirRegistro"
+                                                                                        class="btn btn-sm btn-block btn-success text-white"
+                                                                                        data-toggle="tooltip"
+                                                                                        data-placement="top" title=""
+                                                                                        href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$grdLeadsVencimentos$ctl03$lnkInserirRegistro&#39;,&#39;&#39;)"
+                                                                                        data-original-title="Novo registro"><i
+                                                                                            class="fas fa-plus"></i></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div id="autocomplete-new" class="autocomplete-menu">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal fade" id="modalConversao" tabindex="-1" data-keyboard="false"
+                            data-backdrop="static">
+                            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div id="ctl00_ContentPlaceHolder1_wucConversao_UpdatePanel1">
+
+                                            <div class="card card-accent-crm mb-0">
+                                                <div class="card-header">
+                                                    <strong class="align-middle"><i class="fas fa-edit mr-2"></i>Dados
+                                                        básicos</strong>
+                                                    <div class="card-header-actions"></div>
+                                                </div>
+                                                <div class="card-body">
+
+
+                                                    <div class="form-row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="req">Nome/Razão Social:</label>
+                                                                <input
+                                                                    name="ctl00$ContentPlaceHolder1$wucConversao$txNome"
+                                                                    type="text"
+                                                                    id="ctl00_ContentPlaceHolder1_wucConversao_txNome"
+                                                                    class="form-control" autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label class="req">CNPJ/CPF:</label>
+                                                                <input
+                                                                    name="ctl00$ContentPlaceHolder1$wucConversao$txCnpjCpf"
+                                                                    type="text"
+                                                                    id="ctl00_ContentPlaceHolder1_wucConversao_txCnpjCpf"
+                                                                    class="form-control" data-mask="cnpjcpf"
+                                                                    autocomplete="off" inputmode="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Telefone:</label><i
+                                                                    class="fas fa-question-circle ml-2"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    data-original-title="Caso o telefone informado seja um celular, o prefixo obrigatoriamente deve ser &#39;9&#39;."></i>
+                                                                <div class="input-group">
+                                                                    <input
+                                                                        name="ctl00$ContentPlaceHolder1$wucConversao$txTelefone"
+                                                                        type="text"
+                                                                        id="ctl00_ContentPlaceHolder1_wucConversao_txTelefone"
+                                                                        class="form-control" data-mask="telefone"
+                                                                        autocomplete="off" inputmode="text">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i
+                                                                                class="fas fa-phone"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="req">Email:</label>
+                                                                <div class="input-group">
+                                                                    <input
+                                                                        name="ctl00$ContentPlaceHolder1$wucConversao$txEmail"
+                                                                        type="text"
+                                                                        id="ctl00_ContentPlaceHolder1_wucConversao_txEmail"
+                                                                        class="form-control" autocomplete="off">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i
+                                                                                class="fas fa-at"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>Site:</label>
+                                                                <div class="input-group">
+                                                                    <input
+                                                                        name="ctl00$ContentPlaceHolder1$wucConversao$txSite"
+                                                                        type="text"
+                                                                        id="ctl00_ContentPlaceHolder1_wucConversao_txSite"
+                                                                        class="form-control" autocomplete="off">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i
+                                                                                class="fas fa-sitemap"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <h4 class="border-bottom pb-3 mb-3">Dados do Contato
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="req">Nome (Contato):</label>
+                                                                <input
+                                                                    name="ctl00$ContentPlaceHolder1$wucConversao$txNomeContato"
+                                                                    type="text"
+                                                                    id="ctl00_ContentPlaceHolder1_wucConversao_txNomeContato"
+                                                                    class="form-control" autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label class="req">Telefone (Contato):</label><i
+                                                                    class="fas fa-question-circle ml-2"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    data-original-title="Caso o telefone informado seja um celular, o prefixo obrigatoriamente deve ser &#39;9&#39;."></i>
+                                                                <div class="input-group">
+                                                                    <input
+                                                                        name="ctl00$ContentPlaceHolder1$wucConversao$txTelefone1"
+                                                                        type="text"
+                                                                        id="ctl00_ContentPlaceHolder1_wucConversao_txTelefone1"
+                                                                        class="form-control" data-mask="telefone"
+                                                                        autocomplete="off" inputmode="text">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i
+                                                                                class="fas fa-phone"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label class="req">Celular (Contato):</label><i
+                                                                    class="fas fa-question-circle ml-2"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    data-original-title="Caso o telefone informado seja um celular, o prefixo obrigatoriamente deve ser &#39;9&#39;."></i>
+                                                                <div class="input-group">
+                                                                    <input
+                                                                        name="ctl00$ContentPlaceHolder1$wucConversao$txTelefone2"
+                                                                        type="text"
+                                                                        id="ctl00_ContentPlaceHolder1_wucConversao_txTelefone2"
+                                                                        class="form-control" data-mask="telefone"
+                                                                        autocomplete="off" inputmode="text">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"><i
+                                                                                class="fas fa-phone"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer d-flex">
+                                                    <a id="ctl00_ContentPlaceHolder1_wucConversao_lnkCancelar"
+                                                        class="btn btn-danger mr-auto"
+                                                        href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$wucConversao$lnkCancelar&#39;,&#39;&#39;)">Cancelar</a>
+                                                    <a id="ctl00_ContentPlaceHolder1_wucConversao_lnkConfirmar01"
+                                                        class="btn btn-primary mr-2"
+                                                        href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$wucConversao$lnkConfirmar01&#39;,&#39;&#39;)">Confirmar
+                                                        e Visualizar Cliente</a>
+                                                    <a id="ctl00_ContentPlaceHolder1_wucConversao_lnkConfirmar02"
+                                                        class="btn btn-success"
+                                                        href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$wucConversao$lnkConfirmar02&#39;,&#39;&#39;)">Confirmar
+                                                        e Incluir Oportunidade</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" name="ctl00$ContentPlaceHolder1$btnFake" value=""
+                id="ctl00_ContentPlaceHolder1_btnFake" style="display: none;" autocomplete="off">
+            <input type="hidden" name="ctl00$ContentPlaceHolder1$hfCodigoLead"
+                id="ctl00_ContentPlaceHolder1_hfCodigoLead" value="33513" autocomplete="off">
+            <input type="hidden" name="ctl00$ContentPlaceHolder1$hfTipo" id="ctl00_ContentPlaceHolder1_hfTipo"
+                value="VIEW" autocomplete="off">
+            <script>
+                var codigoPais = '1';
+                var tp = "view";
+
+                function visualizarPerfil() {
+                    $("#pnlDadosBasicos").fadeToggle();
+                }
+
+                function limparFormularioCEP() {
+                    $("#ctl00_ContentPlaceHolder1_txEndereco").val("");
+                    $("#ctl00_ContentPlaceHolder1_txNumero").val("");
+                    $("#ctl00_ContentPlaceHolder1_txBairro").val("");
+                    $("#ctl00_ContentPlaceHolder1_txCidade").val("");
+                    $("#ctl00_ContentPlaceHolder1_txEstado").val("");
+                }
+
+                function pesquisarCEP() {
+                    $("#ctl00_ContentPlaceHolder1_txCep").blur(function () {
+                        var cep = $(this).val().replace(/\D/g, "");
+                        if (cep != "") {
+                            var validacep = /^[0-9]{8}$/;
+                            if (validacep.test(cep)) {
+                                $.getJSON("http://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+                                    if (!("erro" in dados)) {
+                                        $("#ctl00_ContentPlaceHolder1_txEndereco").val(dados.logradouro.toUpperCase());
+                                        $("#ctl00_ContentPlaceHolder1_txBairro").val(dados.bairro.toUpperCase());
+                                        $("#ctl00_ContentPlaceHolder1_txCidade").val(dados.localidade.toUpperCase());
+                                        $("#ctl00_ContentPlaceHolder1_txEstado").val(dados.uf.toUpperCase());
+                                        $("#ctl00_ContentPlaceHolder1_txNumero").focus();
+                                    } else {
+                                        limparFormularioCEP();
+                                        alert("CEP não encontrado.");
+                                    }
+                                });
+                            } else {
+                                limparFormularioCEP();
+                                alert("Formato de CEP inválido.");
+                            }
+                        } else {
+                            limparFormularioCEP();
+                        }
+                    });
+                }
+
+                function pesquisarRamo(campo, container) {
+                    if ($("#" + campo).val().length >= 3) {
+                        $.ajax({
+                            url: '/_api/ramos.asmx/PesquisarRamo',
+                            data: JSON.stringify({
+                                codigoEmpresa: 8284,
+                                query: $("#" + campo).val()
+                            }),
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                var val = '';
+                                $.map(data.d, function (item) {
+                                    val += '<a class="autocomplete-item"';
+                                    if (container == 'edit') {
+                                        val += ' style="color:#ffffff;';
+                                    }
+                                    val += ' href="javascript:void(0);" data-codigo="' + item.IdRamo + '" data-texto="' + item.Descricao + '">' + item.Descricao + '</a>'
+                                });
+                                $("#autocomplete-" + container).show();
+                                $("#autocomplete-" + container).html(val);
+                                $("#autocomplete-" + container + " a.autocomplete-item").on("click", function () {
+                                    $("#" + campo).val($(this).attr("data-texto"));
+                                    $("#autocomplete-" + container).hide();
+                                });
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            }
+                        });
+                    }
+                }
+
+                function funcoesLeads() {
+                    var tp = $("#ctl00_ContentPlaceHolder1_hfTipo").val();
+                    if (tp == "NEW" || tp == "EDIT") {
+                        $("#pnlDadosBasicos").show();
+                    }
+
+                    $('#ctl00_ContentPlaceHolder1_txDescricao').elastic();
+                    if (codigoPais == 2) {
+                        $('#ctl00_ContentPlaceHolder1_txCnpjCpf').removeAttr("onkeypress").removeAttr("maxlength").attr("maxlength", "14");
+                    } else {
+                        pesquisarCEP();
+                    }
+                }
+
+                $(document).ready(function () {
+                    funcoesLeads();
+                    var prmLeads = Sys.WebForms.PageRequestManager.getInstance();
+                    prmLeads.add_endRequest(function () {
+                        funcoesLeads();
+                    });
+                });
+            </script>
+
+            <span style="display: none !important;"><input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value=""
+                    autocomplete="off"></span><span style="display: none !important;"><input type="hidden"
+                    name="__EVENTTARGET" id="__EVENTTARGET" value="" autocomplete="off"></span><span
+                style="display: none !important;"><input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT"
+                    value="" autocomplete="off"></span><span style="display: none !important;"><input type="hidden"
+                    name="__VIEWSTATE" id="__VIEWSTATE"
+                    value="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"
+                    autocomplete="off"></span><span style="display: none !important;"><input type="hidden"
+                    name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="D1C27C9D"
+                    autocomplete="off"></span><span style="display: none !important;"><input type="hidden"
+                    name="__EVENTVALIDATION" id="__EVENTVALIDATION"
+                    value="q9Pddg1jUnTKQPkkPVe02w/fJW7lKQXC4+nDx526fbz5sYchz0ICFegM4fD9UkPSve9rkact/SSGIsucbBGE6UiY897fvdJvCTDML476FVYZA8eX6cg+qYBXDd9JnCPjTj1hqubrvSWfo1Bn2AqwSV4SKCX2TTqOvAGRC+9iAPPAHB7ZcIYW9eN2a41SEx11qpvX+zaN44BM6sraw48vvZJfmqcD++2QkI35ryXUCOMsIO2q80JN44g2KznmfcrVZXaF3qX7BjjWHvroQJEW37yRIBZPoXtMXjOVQN9byvAs8OKLoG6J0QE9i31k8aeZzCop1wfHkgE8a2kit4Kv6xd9aePIdia+LUQCNG+jgw1ODdDgIq/D0IYdEi7cecTNXuUhaZQjv6SkkZrZqPjqhjt3/TFpfBVQscCqMY6ajGjPFU61TiGk8cWqd5vLsrZQtE9saNmTr7sOYQZRKMUNJHlmkVpOQWYdiyjWZhHAZYSU/HDpZ/Dd7f6mmgYIvkWKTatQmmLtEpM0xdhZOHVajLla/elLdVQQYrW+WERSo8YBA8U90BHg1AvEI39zBPqbX4jCylhacLVoyaeBaU6BdDXq3uSXrRO4mCyp8b4Z5MBfcmXJO4OgJW3gA/VB/Kwt76tqycjNkb/koHmEqSbuBKwVcCpFJ3vgAA5LjhGiTuJ4I4yuEKur0uNfevbS4tdPAB+NSq2K1l3MbHVbxK338HAyan5SycSxxJmoBHOaxgBL5PDT4QsE1+oy+M9z7koHV5cU6g0Cu+BeU3+tz2vcwTyQa+qDRDBN/30dBI8ARlynsDqMCblCERc4R7TYvMWS7qm922ivbAj/0o2/wDGGl4LNhrPenZGILfK66x/dN63ro1LZUNm8tm3NPSo5CIaY3Ru7rvLlU8mlt26pftuFjBQIaDyeShEnN5tz3K81fqyRuvTXfDUEpL98U+A+nsSlhBhDhHFIgR52Zu6GMPH7vIk/VSjJweXzLRNj0XKptrI/tjpQ+hZIcXPjbaH/1GVV3GZHMdltcY6wnWPXhWmwyN/O8d3UCxRRodZu/Gy3k6HWSdo3jnwiKcTbOOSn65VLdMzktB9V5PLowQSkrqOqev5lHrHNMEi8LbI9GS7WqMIhX6c29a/xfMB4p9yIBj5r0HHwWGHyJfHHhzBJ5KX8DHQNdmNpAvjHBj3wCtU1vsFor92CIxok4+S+rQnZgYTlBFZyHcAFZEJKi+qF1ldV1rYORS5MBEFwYMv+wnWUzMTwsBfFJJwtjANYqpRQcxHMFYXcPwXR8RLcURvS8+ZDULW0Kz4ixuB3bOOGcpWMwkLLwaXT1ctaHsCv5k6zvAyIab9rlchpDaRY1qm3n/f/RDMGJ90rEIWwti4Wl325cmXMe1Z0BsFsgO9djHnd56ib7SB7J2z+zmv4d4l4QBYIrPzFQLw07WgDRN5HHqUy1eSVahjhitK8+HPJvZTl6cWdccHC+cu+OsS7nYlGKFQpd/RMqaqNr+2d7zk6tr+iRmc="
+                    autocomplete="off"></span><span style="display: none !important;"><input type="hidden"
+                    name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" autocomplete="off"></span>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

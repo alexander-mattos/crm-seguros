@@ -8,16 +8,7 @@ import { CpfCnpjMaskDirective } from '../../../shared/directives/cpf-cnpj-mask.d
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { ClienteService } from '../services/cliente.service';
-import {
-  IClienteForm,
-  FORM_OPTIONS,
-  TipoPessoa,
-  StatusCliente,
-  Sexo,
-  EstadoCivil,
-  NrFuncionarios,
-  Origem
-} from '../../../../backend/src/shared/types/cliente.types';
+import { IClienteForm, FORM_OPTIONS } from '../../../../backend/src/shared/types/cliente.types';
 
 
 @Component({
@@ -61,7 +52,6 @@ export class IncluirclientesComponent implements OnInit {
 
   private inicializarFormulario(): FormGroup {
     return this.fb.group({
-      // Dados Básicos
       id: [''],
       nome: ['', Validators.required],
       nomeSocial: [''],
@@ -71,27 +61,17 @@ export class IncluirclientesComponent implements OnInit {
       clienteDesde: [''],
       dtInclusao: [{ value: '', disabled: true }],
       dtAlteracao: [{ value: '', disabled: true }],
-
-      // Contatos e Redes Sociais
       email: ['', [Validators.email]],
       site: [''],
       telefone: [''],
       facebook: [''],
       instagram: [''],
-
-      // Dados Comerciais
       origem: [''],
       responsavel: [''],
       unidadeNegocio: [''],
-
-      // Dados Financeiros
       faturamento: [''],
       atividade: [''],
-
-      // Dados específicos PJ
       nrFuncionarios: [''],
-
-      // Dados específicos PF
       dtNascimento: [''],
       sexo: [''],
       rg: [''],
@@ -102,8 +82,6 @@ export class IncluirclientesComponent implements OnInit {
       dtvencCnh: [''],
       estadoCivil: [''],
       conjuge: [''],
-
-      // Endereço
       cep: [''],
       endereco: [''],
       numero: [''],
@@ -111,8 +89,6 @@ export class IncluirclientesComponent implements OnInit {
       bairro: [''],
       cidade: [''],
       estado: [''],
-
-      // LGPD
       lgpd: ['S']
     });
   }
@@ -169,11 +145,9 @@ export class IncluirclientesComponent implements OnInit {
           const dadosParaForm: IClienteForm = {
             ...cliente,
             tipoPessoa: this.formOptions.tipoPessoa.find(t => t.dbValue === cliente.tipoPessoa)?.value || 'F',
-            status: this.formOptions.status.find(s => s.dbValue === cliente.status)?.value || '2',
             dtNascimento: this.formatarDataParaForm(cliente.dtNascimento),
             dtExpedicao: this.formatarDataParaForm(cliente.dtExpedicao),
             dtvencCnh: this.formatarDataParaForm(cliente.dtvencCnh),
-            // ... outras conversões necessárias
           };
 
           this.form.patchValue(dadosParaForm);
@@ -243,10 +217,8 @@ export class IncluirclientesComponent implements OnInit {
         dtNascimento: formatarData(formValues.dtNascimento),
         dtExpedicao: formatarData(formValues.dtExpedicao),
         dtvencCnh: formatarData(formValues.dtvencCnh),
-
-        // Resto do mapeamento
         tipoPessoa: FORM_OPTIONS.tipoPessoa.find(t => t.value === formValues.tipoPessoa)?.value || 'F',
-        status: FORM_OPTIONS.status.find(s => s.value === formValues.status)?.value || '2',
+        
         sexo: formValues.sexo
           ? FORM_OPTIONS.sexo.find(s => s.value === formValues.sexo)?.value
           : null,
@@ -318,63 +290,5 @@ export class IncluirclientesComponent implements OnInit {
   voltar
     (): void {
     this.router.navigate(['/clientes']);
-  }
-
-  private mapearStatus(status: string): string {
-    const statusMap: { [key: string]: string } = {
-      'CLIENTE': '1',
-      'PROSPECT': '2',
-      'PARCEIRO': '3',
-      'INATIVO': '8',
-      'NÃO INFORMADO': '0'
-    };
-    return statusMap[status] || '2'; // Default para PROSPECT
-  }
-
-  private mapearSexo(sexo: string): string | null {
-    const sexoMap: { [key: string]: string } = {
-      'Masculino': 'M',
-      'Feminino': 'F'
-    };
-    return sexoMap[sexo] || null;
-  }
-
-  private mapearEstadoCivil(estadoCivil: string): string | null {
-    const estadoCivilMap: { [key: string]: string } = {
-      'Casado(a)': '1',
-      'Viúvo(a)': '2',
-      'Desquitado(a)': '3',
-      'Solteiro(a)': '4',
-      'Divorciado(a)': '5',
-      'Separado(a)': '6',
-      'União Estável': '7'
-    };
-    return estadoCivilMap[estadoCivil] || null;
-  }
-
-  private mapearNrFuncionarios(nr: string): string | null {
-    const nrFuncionariosMap: { [key: string]: string } = {
-      'até 200': '1',
-      'de 200 a 500': '2',
-      'de 500 a 1000': '3',
-      'de 1000 a 3000': '4',
-      'de 3000 a 5000': '5',
-      '+ de 5000': '6'
-    };
-    return nrFuncionariosMap[nr] || null;
-  }
-
-  private mapearOrigem(origem: string): string | null {
-    const origemMap: { [key: string]: string } = {
-      'INTERNET': '1',
-      'TELEFONE': '2',
-      'INDICAÇÃO': '3',
-      'ANÚNCIO': '4',
-      'INSTAGRAM': '5',
-      'FACEBOOK': '6',
-      'GOOGLE': '7',
-      'OUTROS': '99'
-    };
-    return origemMap[origem] || null;
   }
 }

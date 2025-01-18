@@ -11,7 +11,7 @@ export class NotasController {
 
   async criar(req: Request, res: Response) {
     const { clienteId } = req.params;
-    const { notas } = req.body;
+    const { content } = req.body;
   
     try {
       if (!clienteId) {
@@ -20,14 +20,14 @@ export class NotasController {
   
       const nota = await this.prisma.nota.create({
         data: {
-          notas,
+          content,
           cliente: {
             connect: { id: parseInt(clienteId) }, 
           },
         },
       });
   
-      res.status(201).json(notas);
+      res.status(201).json(content);
     } catch (error) {
       console.error('Erro detalhado ao criar nota:', error);
   

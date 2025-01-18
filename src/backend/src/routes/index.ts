@@ -8,7 +8,8 @@ import atividadesRoutes from './features/atividades/routes';
 import telefonesRoutes from './features/telefones/routes';
 import enderecoRoutes from './features/enderecos/routes';
 import contatoRoutes from './features/contatos/routes'
-import notaRoutes from './features/notas/routes'
+import notaRoutes from './features/notas/routes';
+import leadsRoutes from '../leads/leads.routes';
 
 const router = Router();
 
@@ -22,6 +23,7 @@ router.use('/clientes/telefones', telefonesRoutes);
 router.use('/clientes/endereco', enderecoRoutes);
 router.use('/clientes/contatos', contatoRoutes);
 router.use('/clientes/notas', notaRoutes);
+router.use('/leads', leadsRoutes);
 
 router.get('/health', (req, res) => {
     res.json({ 

@@ -1,5 +1,6 @@
 export interface INota {
     id?: number;
     clienteId: number;
-    notas: string;
+    content: string;
+    createdAt: Date;
 }

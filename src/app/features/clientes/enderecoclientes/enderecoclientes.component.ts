@@ -4,12 +4,12 @@ import { SidebarComponent } from '../../../components/sidebar/sidebar.component'
 import { FooterComponent } from '../../../components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FORM_OPTION } from '@/app/shared/types/endereco.types';
+import { FORM_OPTION } from '../../../shared/types/endereco.types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 import { EnderecoService } from './services/endereco.service';
 import { HttpClient } from '@angular/common/http';
-import { CepMaskDirective } from '@/app/shared/directives/cep-mask.directive';
+import { CepMaskDirective } from '../../../shared/directives/cep-mask.directive';
 
 @Component({
   selector: 'app-enderecoclientes',

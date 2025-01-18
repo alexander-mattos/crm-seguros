@@ -1,0 +1,31 @@
+-- CreateTable
+CREATE TABLE `leads` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `status` VARCHAR(20) NOT NULL,
+    `origem` VARCHAR(20) NULL,
+    `nome` VARCHAR(100) NOT NULL,
+    `empresa` VARCHAR(100) NULL,
+    `atividade` VARCHAR(100) NULL,
+    `celular` VARCHAR(11) NULL,
+    `telcomercial` VARCHAR(11) NULL,
+    `telresidencial` VARCHAR(11) NULL,
+    `tipoPessoa` VARCHAR(8) NULL,
+    `cpfCnpj` VARCHAR(14) NULL,
+    `setor` VARCHAR(100) NULL,
+    `email` VARCHAR(100) NULL,
+    `site` VARCHAR(100) NULL,
+    `cep` VARCHAR(9) NULL,
+    `endereco` VARCHAR(100) NULL,
+    `numero` VARCHAR(11) NULL,
+    `complemento` VARCHAR(100) NULL,
+    `bairro` VARCHAR(30) NULL,
+    `cidade` VARCHAR(20) NULL,
+    `estado` CHAR(2) NULL,
+    `receita` VARCHAR(20) NULL,
+    `nrFuncionarios` VARCHAR(20) NULL,
+    `descricao` TEXT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

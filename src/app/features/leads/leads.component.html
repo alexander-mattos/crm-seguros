@@ -1,0 +1,205 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Home</li>
+                <li class="breadcrumb-item">Leads</li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div class="card card-accent-crm">
+                        <div class="card-header">
+                            <strong><i class="fas fa-filter mr-2"></i>Filtros</strong>
+                            <div class="card-header-actions">
+                                <button class="btn btn-dark" (click)="voltar()">
+                                    <i class="fas fa-arrow-alt-circle-left mr-2"></i>Voltar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Nome:</label>
+                                        <input formControlName="nome" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>CNPJ/CPF:</label>
+                                        <input formControlName="cpfCnpj" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Atividade:</label>
+                                        <input formControlName="atividade" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Proprietário:</label>
+                                        <select formControlName="proprietario" class="form-control">
+                                            <option selected="selected" value="1">ALEX MATTOS</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Fase:</label>
+                                        <select formControlName="status" class="form-control">
+                                            <option selected="selected" value="0">Selecione</option>
+                                            <option value="5689">AGUARDANDO CONTATO</option>
+                                            <option value="5690">CONTACTADO</option>
+                                            <option value="5692">FECHADO - CONVERTIDO</option>
+                                            <option value="5691">FECHADO - NÃO CONVERTIDO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Origem:</label>
+                                        <select formControlName="origem" class="form-control">
+                                            <option selected="selected" value="0">Selecione</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Mês vencimento:</label>
+                                        <select class="form-control">
+                                            <option selected="selected" value="0">Selecione</option>
+                                            <option value="1">01 - Janeiro</option>
+                                            <option value="2">02 - Fevereiro</option>
+                                            <option value="3">03 - Março</option>
+                                            <option value="4">04 - Abril</option>
+                                            <option value="5">05 - Maio</option>
+                                            <option value="6">06 - Junho</option>
+                                            <option value="7">07 - Julho</option>
+                                            <option value="8">08 - Agosto</option>
+                                            <option value="9">09 - Setembro</option>
+                                            <option value="10">10 - Outubro</option>
+                                            <option value="11">11 - Novembro</option>
+                                            <option value="12">12 - Dezembro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger" (click)="redefinirPesquisa()">
+                                        Redefinir pesquisa
+                                    </button>
+                                    <button type="submit" class="btn btn-primary ml-auto">
+                                        Pesquisar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card card-accent-crm">
+                        <div class="card-header">
+                            <strong><i class="fas fa-bars mr-2"></i>Listagem</strong>
+                            <div class="card-header-actions">
+                                <div class="btn-group">
+                                    <a class="btn btn-success">
+                                        <i class="fas fa-plus"></i>
+                                        <span class="d-none d-md-inline ml-2">Adicionar Lead</span>
+                                    </a>
+                                    <a class="btn btn-warning">
+                                        <i class="fas fa-file-import mr-2"></i>Importar Leads
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="loading" class="text-center">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Carregando...</span>
+                            </div>
+                        </div>
+                        <div *ngIf="!loading && !error" class="row" class="table-responsive">
+                            <table *ngIf="leads.length > 0" class="table table-borderless border-0 mb-0" cellspacing="0" rules="all" border="1"
+                                style="border-collapse:collapse;">
+                                <tbody>
+                                    <tr class="border-bottom">
+                                        <th scope="col">&nbsp;</th>
+                                        <th scope="col">
+                                            <a>Nome</a>
+                                        </th>
+                                        <th scope="col">
+                                            <a>Empresa</a>
+                                        </th>
+                                        <th scope="col">
+                                            <a>Telefone</a>
+                                        </th>
+                                        <th scope="col">
+                                            <a>Celular</a>
+                                        </th>
+                                        <th scope="col">
+                                            <a>Email</a>
+                                        </th>
+                                        <th scope="col">
+                                            <a>Fase</a>
+                                        </th>
+                                        <th scope="col">
+                                            <a>Proprietário</a>
+                                        </th>
+                                        <th scope="col">
+                                            <a>Nº de Funcionários</a>
+                                        </th>
+                                        <th scope="col">
+                                            <a>Origem</a>
+                                        </th>
+                                        <th scope="col">
+                                            <a>Criação</a>
+                                        </th>
+                                    </tr>
+                                    <tr *ngFor="let lead of leads" class="border-bottom">
+                                        <td class="text-center bg-white border-right" style="width:3%;">
+                                            <a><i class="fas fa-edit"></i></a>
+                                        </td>
+                                        <td>{{lead.nome}}</td>
+                                        <td>Xpto</td>
+                                        <td>(21)3213-2333</td>
+                                        <td>(21)98766-5557</td>
+                                        <td>aaasergmail.com</td>
+                                        <td>AGUARDANDO CONTATO</td>
+                                        <td>ALEX MATTOS</td>
+                                        <td>900</td>
+                                        <td>-</td>
+                                        <td>15/01/2025</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div>
+                            <ul class="pagination justify-content-center mt-3">
+                                <li class="page-item disabled">
+                                    <a class="page-link">« Anterior</a>
+                                </li>
+                                <li class="page-item">
+                                    <span class="page-text page-text-active">1</span>
+                                </li>
+                                <li class="page-item"><span class="page-text">de</span></li>
+                                <li class="page-item">
+                                    <span class="page-text page-text-active">1</span>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link">Próxima »</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

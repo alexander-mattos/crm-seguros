@@ -30,7 +30,7 @@ export class ImportacaoController {
                 data: {
                   nome: clienteData.nome,
                   tipoPessoa: clienteData.tipoPessoa,
-                  status: clienteData.status || '1',
+                  status: clienteData.status || 'PROSPECT',
                   email: clienteData.email,
                   dtAlteracao: new Date()
                 }
@@ -49,7 +49,7 @@ export class ImportacaoController {
                   nome: clienteData.nome,
                   tipoPessoa: clienteData.tipoPessoa,
                   cnpjCpf: clienteData.cnpjCpf,
-                  status: clienteData.status || '1',
+                  status: clienteData.status || 'PROSPECT',
                   email: clienteData.email,
                   lgpd: 'S',
                   dtInclusao: new Date()

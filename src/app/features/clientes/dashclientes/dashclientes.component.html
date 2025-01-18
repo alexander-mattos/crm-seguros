@@ -20,15 +20,15 @@
                                         <div>
                                             <button class="btn btn-primary button-space" (click)="editarCliente()">
                                                 <i class="fas fa-pen"></i>
-                                                <span class="d-none d-md-inline">Editar Registro</span>
+                                                <span class="d-none d-md-inline"> Editar Registro</span>
                                             </button>
                                             <button class="btn btn-danger button-space" (click)="excluirCliente()">
                                                 <i class="fas fa-trash"></i>
-                                                <span class="d-none d-md-inline">Excluir Registro</span>
+                                                <span class="d-none d-md-inline"> Excluir Registro</span>
                                             </button>
                                             <button class="btn btn-dark" (click)="voltar()">
                                                 <i class="fas fa-arrow-alt-circle-left"></i>
-                                                <span class="d-none d-md-inline">Voltar</span>
+                                                <span class="d-none d-md-inline"> Voltar</span>
                                             </button>
                                         </div>
                                     </div>
@@ -41,7 +41,6 @@
                                     <span class="sr-only">Carregando...</span>
                                 </div>
                             </div>
-
                             <!-- Erro -->
                             <div *ngIf="erro" class="alert alert-danger" role="alert">
                                 {{ erro }}
@@ -70,18 +69,18 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <p class="card-text"><b>Nome Social:</b>
-                                                                {{cliente?.nomeSocial || 'Não informado'}}</p>
+                                                                {{cliente?.nomeSocial || 'NÃO INFORMADO'}}</p>
                                                             <p class="card-text"><b>Tipo de Pessoa:</b>
                                                                 {{cliente?.tipoPessoaFormatado}}</p>
                                                             <p class="card-text"><b>CNPJ/CPF:</b>
-                                                                {{cliente?.cnpjCpf || 'Não informado'}}</p>
+                                                                {{cliente?.cnpjCpf || 'NÃO INFORMADO'}}</p>
                                                             <p class="card-text"><b>Status:</b>
                                                                 {{cliente?.statusFormatado}}</p>
                                                             <p class="card-text"><b>Cliente desde:</b>
-                                                                {{cliente?.clienteDesdeFormatado || 'Não informado'}}
+                                                                {{cliente?.clienteDesdeFormatado || 'NÃO INFORMADO'}}
                                                             </p>
                                                             <p class="card-text"><b>Data de Nascimento:</b>
-                                                                {{ cliente?.dtNascimentoFormatado || 'Não informado'}}
+                                                                {{ cliente?.dtNascimentoFormatado || 'NÃO INFORMADO'}}
                                                             </p>
                                                             <p class="card-text"><b>Gênero:</b>
                                                                 {{cliente?.sexoFormatado}}</p>
@@ -108,7 +107,7 @@
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h5 class="card-title font-weight-bold">Email</h5>
-                                                    <p class="card-text">{{cliente?.email || 'Não informado'}}</p>
+                                                    <p class="card-text">{{cliente?.email || 'NÃO INFORMADO'}}</p>
                                                     <h5 class="card-title font-weight-bold">Contatos</h5>
                                                     <p class="card-text">{{cliente?.nome || 'Sem contatos
                                                         cadastrados!'}}</p>
@@ -118,7 +117,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="row my-3" [style.display]="mostrarPerfil ? 'block' : 'none'">
                             <div class="col-lg-12">
@@ -396,7 +394,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div id="pnlGrids">
                             <div class="row my-3">
                                 <div class="col-lg-12">
                                     <ul class="nav nav-tabs">
@@ -637,7 +635,7 @@
                                                     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="col-lg-12">
                                                         <div class="form-group">
                                                             <div class="input-group">
-                                                                <input formControlName="notas" class="form-control"
+                                                                <input formControlName="content" class="form-control"
                                                                     placeholder="Adicionar nota">
                                                                 <span class="input-group-append">
                                                                     <button type="submit" class="btn btn-success">
@@ -650,6 +648,9 @@
                                                         </div>
                                                     </form>
                                                     <div class="col-lg-12">
+                                                        <div *ngIf="content && content.length == 0">
+                                                            <h3>Não há notas para este cliente.</h3>
+                                                        </div>
                                                         <div class="table-responsive">
                                                             <div>
                                                                 <div>
@@ -663,19 +664,17 @@
                                                                                 <th scope="col">Criado por</th>
                                                                                 <th scope="col">Data Criação</th>
                                                                             </tr>
-                                                                            <tr class="border-bottom">
+                                                                            <tr *ngFor="let nota of content"
+                                                                                class="border-bottom">
                                                                                 <td class="text-center bg-white border-right"
                                                                                     style="width:3%;">
-                                                                                    <a data-toggle="tooltip"
-                                                                                        data-placement="bottom"
-                                                                                        data-original-title="Excluir nota"><i
+                                                                                    <a><i
                                                                                             class="fas fa-trash-alt"></i></a>
                                                                                 </td>
-                                                                                <td>Teste de notas</td>
-                                                                                <td style="width:25%;">ALEX MATTOS
-                                                                                </td>
-                                                                                <td style="width:10%;">03/01/2025
-                                                                                </td>
+                                                                                <td>{{ nota.content }}</td>
+                                                                                <td style="width:25%;">ALEX MATTOS</td>
+                                                                                <td style="width:10%;">{{ nota.createdAt
+                                                                                    | date:'dd/MM/yyyy' }}</td>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
@@ -1261,9 +1260,7 @@
                                                                                 <td class="border-left text-center"
                                                                                     style="width:3%;">
                                                                                     <div class="btn-group">
-                                                                                        <a data-toggle="tooltip"
-                                                                                            data-placement="top"
-                                                                                            data-original-title="Editar registro"><i
+                                                                                        <a><i
                                                                                                 class="fas fa-edit"></i></a>
                                                                                     </div>
                                                                                 </td>

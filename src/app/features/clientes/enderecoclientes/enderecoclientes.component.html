@@ -37,7 +37,7 @@
                                         <div class="col-lg-2">
                                             <div class="form-group">
                                                 <label for="cep" class="req"><span>CEP:</span></label>
-                                                <input formControlName="cep" type="text" class="form-control" cepMask
+                                                <input formControlName="cep" class="form-control" cepMask
                                                     (blur)="fetchAddress($event)" placeholder="00000-000" maxlength="9">
                                                 <div
                                                     *ngIf="form.get('cep')?.invalid && (form.get('cep')?.dirty || form.get('cep')?.touched)">

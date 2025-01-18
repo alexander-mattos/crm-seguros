@@ -23,8 +23,6 @@ export interface IClienteImportacao {
   // Propriedade de controle para a interface
   selecionado?: boolean;
   valido?: boolean;
-
-  // Dados básicos do cliente
   nome: string;
   nomeSocial?: string;
   tipoPessoa: string;  // F ou J
@@ -36,17 +34,11 @@ export interface IClienteImportacao {
   clienteDesde?: string;
   email?: string;
   site?: string;
-  
-  // Dados financeiros e sociais
   faturamento?: number;
   atividade?: string;
   instagram?: string;
   facebook?: string;
-  
-  // Dados específicos para Pessoa Jurídica
   nrFuncionarios?: string;
-  
-  // Dados específicos para Pessoa Física
   dtNascimento?: string;
   sexo?: string;
   rg?: string;
@@ -57,11 +49,8 @@ export interface IClienteImportacao {
   dtvencCnh?: string;
   estadoCivil?: string;
   conjuge?: string;
-  
-  // Dados de controle
   lgpd?: string;
   
-  // Arrays para dados relacionados
   telefones: ITelefoneImportacao[];
   enderecos: IEnderecoImportacao[];
 }

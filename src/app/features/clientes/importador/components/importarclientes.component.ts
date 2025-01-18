@@ -125,6 +125,17 @@ export class ImportarclientesComponent {
           cnpjCpf: this.formatarDocumento(linha[15]?.toString()),
           status: linha[1] || '1',
           email: linha[10]?.toString().trim() || '',
+          dtNascimento: linha[11],
+          sexo: linha[13],
+          estadoCivil: linha[12],
+          rg: linha[16],
+          dtExpedicao: linha[17],
+          emissor: linha[18],
+          cnh: linha[20],
+          dtvencCnh: linha[19],
+          atividade: linha[21],
+
+
 
           // Aqui devemos processar os endereços
           enderecos: [{

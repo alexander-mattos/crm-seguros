@@ -7,8 +7,8 @@ import { HeaderComponent } from '../../../components/header/header.component';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 import { FooterComponent } from '../../../components/footer/footer.component';
 import { Cliente } from '../../../../backend/src/models';
-import { TipoPessoaPipe } from '@/app/shared/pipes/tipo-pessoa.pipe';
-import { StatusClientePipe } from '@/app/shared/pipes/status.pipe';
+import { TipoPessoaPipe } from '../../../shared/pipes/tipo-pessoa.pipe';
+import { StatusClientePipe } from '../../../shared/pipes/status.pipe';
 
 @Component({
   selector: 'app-clientes',

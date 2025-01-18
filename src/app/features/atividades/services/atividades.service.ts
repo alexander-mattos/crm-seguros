@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../../backend/src/environments/environment';
-import { Atividade, AtividadeCreate, AtividadeUpdate, AtividadeFiltro } from '../../../shared/types/atividade.types';
+import { Atividade, AtividadeCreate, AtividadeUpdate, AtividadeFiltro } from '../../clientes/types/atividade.types';
 
 
 @Injectable({
