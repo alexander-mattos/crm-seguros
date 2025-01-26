@@ -232,3 +232,132 @@ const leadsSchema = z.object({
   nrFuncionarios: z.string().max(20).nullable().optional(),
   descricao: z.string().max(100).nullable().optional(),
 });
+
+export const validateUsuariosMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    req.body = usuariosSchema.parse(req.body);
+    next();
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      const messages = error.errors.map(e => {
+        const field = e.path.join('.');
+        return `${field}: ${e.message}`;
+      }).join(', ');
+
+      throw new AppError(`Dados inválidos: ${messages}`, 400);
+    }
+    next(error);
+  }
+};
+
+const usuariosSchema = z.object({
+  status: z.string().max(20),
+  nome: z.string().max(100),
+  gestor: z.string().max(100).nullable().optional(),
+  telefone: z.string().max(11).nullable().optional(),
+  celular: z.string().max(11).nullable().optional(),
+  administrador: z.string().max(8),
+  emailDiario: z.string().max(1),
+  email: z.string().email("Email inválido").max(70).or(z.literal('')),
+  criadoPor: z.string().max(100).nullable().optional(),
+});
+
+export const validateUnidadeNegocioMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    req.body = unidadeNegocioSchema.parse(req.body);
+    next();
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      const messages = error.errors.map(e => {
+        const field = e.path.join('.');
+        return `${field}: ${e.message}`;
+      }).join(', ');
+
+      throw new AppError(`Dados inválidos: ${messages}`, 400);
+    }
+    next(error);
+  }
+};
+
+const unidadeNegocioSchema = z.object({
+  nome: z.string().max(100),
+  responsavel: z.string().max(100).nullable().optional(),
+  susep: z.string().max(11).nullable().optional(),
+  email: z.string().email("Email inválido").max(100).nullable().optional(),
+  cep: z.string().max(8).nullable().optional(),
+  endereco: z.string().max(150).nullable().optional(),
+  numero: z.string().max(20).nullable().optional(),
+  complemento: z.string().max(50).nullable().optional(),
+  bairro: z.string().max(70).nullable().optional(),
+  cidade: z.string().max(30).nullable().optional(),
+  estado: z.string().max(2).nullable().optional(),
+  telefone1: z.string().max(10).nullable().optional(),
+  telefone2: z.string().max(10).nullable().optional(),
+  celular: z.string().max(11).nullable().optional(),
+  dataCriacao: z.string().max(100).nullable().optional(),
+  dataAlteracao: z.string().max(100).nullable().optional(),
+});
+
+export const validateSeguradorasMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    req.body = segurosSchema.parse(req.body);
+    next();
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      const messages = error.errors.map(e => {
+        const field = e.path.join('.');
+        return `${field}: ${e.message}`;
+      }).join(', ');
+
+      throw new AppError(`Dados inválidos: ${messages}`, 400);
+    }
+    next(error);
+  }
+};
+
+const segurosSchema = z.object({
+  nome: z.string().max(100),
+  susep: z.string().max(11).nullable().optional(),
+  cep: z.string().max(8).nullable().optional(),
+  ddd: z.string().max(150).nullable().optional(),
+  ddd2: z.string().max(20).nullable().optional(),
+  telefone: z.string().max(10).nullable().optional(),
+  telefone2: z.string().max(10).nullable().optional(),
+  dataCriacao: z.string().max(100).nullable().optional(),
+  dataAlteracao: z.string().max(100).nullable().optional(),
+});
+
+export const validateProdutosMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    req.body = produtosSchema.parse(req.body);
+    next();
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      const messages = error.errors.map(e => {
+        const field = e.path.join('.');
+        return `${field}: ${e.message}`;
+      }).join(', ');
+
+      throw new AppError(`Dados inválidos: ${messages}`, 400);
+    }
+    next(error);
+  }
+};
+
+const produtosSchema = z.object({
+  nome: z.string().max(100),
+  codigo: z.string().max(6),
+  descricao: z.string().max(20),
+  ativo: z.boolean(),
+  exibirNoOrcamento: z.boolean(),
+  comissaoSobreAdicional: z.boolean(),
+  iof: z.string().max(5).nullable().optional(),
+  seguroPorAssinatura: z.boolean(),
+  valorPrimeira: z.string().max(15).nullable().optional(),
+  valorDemais: z.string().max(15).nullable().optional(),
+  questionarioDeVenda: z.string().nullable().optional(),
+  ramoId: z.number(),  
+  seguradoraId: z.number(),
+  createdAt: z.string().max(100).nullable().optional(),
+  updatedAt: z.string().max(100).nullable().optional(),
+});

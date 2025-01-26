@@ -47,6 +47,7 @@ export class IncluirLeadsComponent implements OnInit {
   form: FormGroup;
   leadId: number | null = null;
   isEditMode: boolean = false;
+  lead: Lead | null = null;
 
   fontesLeads: string[] = [
     'Site',
@@ -146,21 +147,21 @@ export class IncluirLeadsComponent implements OnInit {
       if (this.isEditMode && this.leadId) {
         this.leadService.atualizarLead(this.leadId, lead).subscribe({
           next: () => {
-            console.log('Customer updated successfully');
-            this.router.navigate(['/leads/editar/leadId']);
+            console.log('Lead updated successfully');
+            this.router.navigate(['/leads/editar', this.leadId]);
           },
           error: (err) => {
-            console.error('Error updating customer:', err);
+            console.error('Error updating lead:', err);
           }
         });
       } else {
         this.leadService.criarLead(lead).subscribe({
-          next: () => {
-            console.log('Customer created successfully');
-            this.router.navigate(['/leads/editar']);
+          next: (createdLead) => {
+            console.log('Lead created successfully');
+            this.router.navigate(['/leads/editar', createdLead.id]);
           },
           error: (err) => {
-            console.error('Error creating customer:', err);
+            console.error('Error creating lead:', err);
           }
         });
       }
@@ -201,4 +202,3 @@ export class IncluirLeadsComponent implements OnInit {
     this.router.navigate(['/']);
   }
 }
-

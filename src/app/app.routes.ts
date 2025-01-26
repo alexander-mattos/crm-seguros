@@ -8,7 +8,60 @@ export const routes: Routes = [
   },
   {
     path: 'configuracoes',
-    loadComponent: () => import('./features/configuracoes/components/configuracoes.component').then(m => m.ConfiguracoesComponent)
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./features/configuracoes/components/configuracoes.component').then(m => m.ConfiguracoesComponent)
+      },
+      {
+        path: 'corretora',
+        loadComponent: () => import('./features/configuracoes/corretora/corretora.component').then(m => m.CorretoraComponent)
+      },
+      {
+        path: 'usuarios',
+        loadComponent: () => import('./features/configuracoes/usuarios/usuarios.component').then(m => m.UsuariosComponent)
+      },
+      {
+        path: 'usuarios/incluir',
+        loadComponent: () => import('./features/configuracoes/usuarios/incluir/incluirusuario.component').then(m => m.IncluirusuarioComponent)
+      },
+      {
+        path: 'usuarios/dash/:id',
+        loadComponent: () => import('./features/configuracoes/usuarios/dash/dashusuario.component').then(m => m.DashusuarioComponent)
+      },
+      {
+        path: 'unidadenegocio',
+        loadComponent: () => import('./features/configuracoes/unidadenegocio/unidadenegocio.component').then(m => m.UnidadenegocioComponent)
+      },
+      {
+        path: 'unidadenegocio/incluir',
+        loadComponent: () => import('./features/configuracoes/unidadenegocio/incluir/incluirunidadenegocio.component').then(m => m.IncluirunidadenegocioComponent)
+      },
+      {
+        path: 'produtos',
+        loadComponent: () => import('./features/configuracoes/produtos/produtos.component').then(m => m.ProdutosComponent)
+      },
+      {
+        path: 'produtos/incluir',
+        loadComponent: () => import('./features/configuracoes/produtos/incluir/incluirprodutos.component').then(m => m.IncluirprodutosComponent)
+      },
+      {
+        path: 'ramos',
+        loadComponent: () => import('./features/configuracoes/produtos/produtos.component').then(m => m.ProdutosComponent)
+      },
+      {
+        path: 'ramos/incluir',
+        loadComponent: () => import('./features/configuracoes/produtos/incluir/incluirprodutos.component').then(m => m.IncluirprodutosComponent)
+      },
+      {
+        path: 'seguradoras',
+        loadComponent: () => import('./features/configuracoes/seguradoras/seguradoras.component').then(m => m.SeguradorasComponent)
+      },
+      {
+        path: 'seguradoras/incluir',
+        loadComponent: () => import('./features/configuracoes/seguradoras/incluir/incluirseguradora.component').then(m => m.IncluirseguradoraComponent)
+      },
+    ],
   },
   {
     path: 'atividades',
@@ -96,9 +149,15 @@ export const routes: Routes = [
         loadComponent: () => import('./features/leads/incluir/incluirleads.component').then(m => m.IncluirLeadsComponent)
       },
       {
-        path: 'editar',
+        path: 'editar/:id',
         loadComponent: () => import('./features/leads/editar/editarleads.component').then(m => m.EditarleadsComponent)
       },
+      { path: '',
+        redirectTo: '', pathMatch: 'full'
+      },
+      { path: '**',
+        redirectTo: ''
+      }
     ]
   },
   {

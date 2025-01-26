@@ -1,0 +1,115 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Configurações</li>
+                <li class="breadcrumb-item">Produtos</li>
+                <li class="breadcrumb-menu d-md-down-none">
+                    <div class="btn-group">
+                        <a class="btn">
+                            <i class="fas fa-question mr-2"></i>Ajuda
+                        </a>
+                    </div>
+                </li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div class="card card-accent-crm">
+                        <div class="card-header">
+                            <strong><i class="fas fa-filter"></i></strong>
+                            <div class="card-header-actions">
+                                <a class="btn btn-dark">
+                                    <i class="fas fa-arrow-alt-circle-left mr-2"></i>Voltar
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-row">
+                                        <label>Seguradora:</label>
+                                        <select class="form-control">
+                                            <option selected="selected" value="0">Selecione</option>
+                                            <option *ngFor="let seguradora of seguradoras" [value]="seguradora.id">
+                                                {{ seguradora.nome }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-row">
+                                        <label>Produto:</label>
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-right">
+                                <div class="btn-group">
+                                    <input type="submit" value="Pesquisar" class="btn btn-primary">
+                                    <input type="button" value="Redefinir Pesquisa" class="btn btn-danger">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-accent-crm">
+                        <div class="card-header">
+                            <strong><i class="fas fa-bars mr-2"></i>Produtos</strong>
+                            <div class="card-header-actions">
+                                <a class="btn btn-success">
+                                    <i class="fas fa-plus mr-2"></i>Adicionar produto
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div>
+                                    <table class="table table-borderless border-0 mb-0"
+                                        border="1" style="border-collapse:collapse;">
+                                        <tbody>
+                                            <tr class="border-bottom">
+                                                <th scope="col">&nbsp;</th>
+                                                <th scope="col"><a>Seguradora</a></th>
+                                                <th scope="col"><a>Descrição</a></th>
+                                                <th scope="col"><a>Ramo</a></th>
+                                            </tr>
+                                            <tr *ngFor="let produto of produtos; trackBy: trackByFn" class="border-bottom">
+                                                <td class="text-center bg-white border-right" style="width:3%;">
+                                                    <a><i class="fas fa-edit"></i></a>
+                                                </td>
+                                                <td>{{ produto.seguradora?.nome }}</td>
+                                                <td>{{ produto.nome }}</td>
+                                                <td>{{ produto.ramo?.nome }}</td>
+                                            </tr>                                
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div>
+                                <ul class="pagination justify-content-center mt-3">
+                                    <li class="page-item" [class.disabled]="currentPage === 1">
+                                        <a class="page-link" (click)="previousPage()" style="cursor: pointer">« Anterior</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <span class="page-text page-text-active">{{currentPage}}</span>
+                                    </li>
+                                    <li class="page-item"><span class="page-text">de</span></li>
+                                    <li class="page-item">
+                                        <span class="page-text page-text-active">{{totalPages}}</span>
+                                    </li>
+                                    <li class="page-item" [class.disabled]="currentPage === totalPages">
+                                        <a class="page-link" (click)="nextPage()" style="cursor: pointer">Próxima »</a>
+                                    </li>
+                                </ul>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

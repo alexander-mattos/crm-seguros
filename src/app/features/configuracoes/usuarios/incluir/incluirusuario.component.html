@@ -1,0 +1,199 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Início</li>
+                <li class="breadcrumb-item">Configurações</li>
+                <li class="breadcrumb-item">Corretora, Usuários</li>
+                <li class="breadcrumb-item">Usuários</li>
+                <li class="breadcrumb-menu d-md-down-none" style="display: none;">
+                    <div class="btn-group" role="group" aria-label="Button group">
+                        <a class="btn">
+                            <i class="fas fa-question mr-2"></i>Ajuda
+                        </a>
+                    </div>
+                </li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div class="row align-items-center mb-3">
+                        <div class="col">
+                            <h4><i class="fas fa-cog mr-2"></i>Usuários</h4>
+                        </div>
+                        <div class="col-auto">
+                            <div class="btn-group">
+                                <button (click)="voltar()" class="btn btn-dark" class="btn btn-dark">
+                                    <i class="fas fa-arrow-alt-circle-left"></i>
+                                    <span class="d-none d-md-inline ml-2">Voltar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-{{feedback.tipo}}" *ngIf="feedback">
+                        {{ feedback.mensagem }}
+                    </div>
+                    <div class="email-app mb-4">
+                        <nav style="flex: 0 0 300px; display: none;"></nav>
+                        <main class="inbox">
+                            <div class="form-row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="req">Nome:</label>
+                                        <input formControlName="nome" class="form-control"
+                                        [class.is-invalid]="isFieldInvalid('nome')">
+                                        <div class="text-danger"
+                                            *ngIf="form.get('nome')?.errors?.['required'] && form.get('nome')?.touched">
+                                            Nome é obrigatório
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <label class="req">Email:</label>
+                                        <div class="input-group">
+                                            <input formControlName='email' class="form-control"
+                                                [class.is-invalid]="isFieldInvalid('email')">
+                                            <div class="text-danger"
+                                                *ngIf="form.get('email')?.errors?.['required'] && form.get('email')?.touched">
+                                                E-mail é obrigatório
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-envelope"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="req">Status:</label>
+                                        <select formControlName='status' class="form-control">
+                                            <option selected="selected" value="Ativo">Ativo</option>
+                                            <option value="Inativo">Inativo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group" style="position: relative;">
+                                        <label>Gestor:</label>
+                                        <div class="input-group">
+                                            <input formControlName='gestor' class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-search"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Telefone:</label>
+                                        <div class="input-group">
+                                            <input formControlName='telefone' class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-phone"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Celular:</label>
+                                        <div class="input-group">
+                                            <input formControlName='celular' class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-mobile"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="req">Administrador do sistema?</label>
+                                        <select formControlName='administrador' class="form-control">
+                                            <option selected="selected" value="0">Selecione</option>
+                                            <option value="1">Sim</option>
+                                            <option value="2">Não</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="req">Email diário:</label>
+                                        <select formControlName='emailDiario' class="form-control">
+                                            <option selected="selected" value="S">Sim, quero receber emails
+                                                diariamente</option>
+                                            <option value="N">Não quero receber emails diariamente</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Criado por:</label>
+                                        <select disabled="disabled" class="form-control">
+                                            <option value="Selecione">Selecione</option>
+                                            <option selected="selected" value="1">ALEXANDER MATTOS</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Data Criação:</label>
+                                        <div class="input-group">
+                                            <input formControlName='dataCriacao' class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Alterado por:</label>
+                                        <select disabled="disabled" class="form-control">
+                                            <option value="0">Selecione</option>
+                                            <option selected="selected" value="1">ALEXANDER MATTOS</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Data Alteração:</label>
+                                        <div class="input-group">
+                                            <input formControlName="dtAlteracao" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-top">
+                                <div class="text-center mt-3">
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+                                            Cadastrar usuário
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

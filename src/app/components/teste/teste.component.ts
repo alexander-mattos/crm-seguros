@@ -20,9 +20,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { Seguradora } from '../../models/seguradora.model';
-import { Ramo } from '../../models/ramo.model';
-import { Produto } from '../../models/produto.model';
 import { SeguradoraService } from '@/app/features/propostas/services/seguradora.service';
 import { RamoService } from '../../features/propostas/services/ramo.service';
 import { ProdutoService } from '../../features/propostas/services/produto.service';
@@ -76,9 +73,6 @@ interface Agent {
 })
 export class TesteComponent implements OnInit {
   form: FormGroup;
-  seguradoras: Seguradora[] = [];
-  ramos: Ramo[] = [];
-  produtos: Produto[] = [];
   isEndosso: boolean = false;
   clientes: ICliente[] = [];
   clientesFiltrados: Observable<ICliente[]> = observableOf([]);
@@ -136,8 +130,6 @@ export class TesteComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.loadSeguradoras();
-    this.loadRamos();
     this.valores.at(0).valueChanges.subscribe(totalValue => {
       this.form.get('comissaoBase')?.setValue(totalValue, { emitEvent: false });
     });
@@ -202,19 +194,6 @@ export class TesteComponent implements OnInit {
       }
     });
 
-    // Monitorar `ramoId` para carregar produtos
-    this.form.get('ramoId')?.valueChanges.subscribe((ramoId: number) => {
-      const produtoControl = this.form.get('produtoId');
-      if (ramoId && produtoControl) {
-        produtoControl.enable();
-        this.loadProdutos(ramoId);
-      } else {
-        produtoControl?.disable();
-        this.produtos = [];
-        this.form.patchValue({ produtoId: null });
-      }
-    });
-
     // Monitorar campos de cálculo
     ['premioLiquido', 'adicional', 'desconto', 'custoApolice', 'iof'].forEach(campo => {
       this.form.get(campo)?.valueChanges.subscribe(() => {
@@ -276,29 +255,11 @@ export class TesteComponent implements OnInit {
     });
   }
 
-  private async loadSeguradoras(): Promise<void> {
-    try {
-      this.seguradoras = await this.seguradoraService.listarSeguradoras().toPromise() || [];
-    } catch (error) {
-      console.error('Erro ao carregar seguradoras:', error);
-    }
-  }
+  
 
-  private async loadRamos(): Promise<void> {
-    try {
-      this.ramos = await this.ramoService.listarRamos().toPromise() || [];
-    } catch (error) {
-      console.error('Erro ao carregar ramos:', error);
-    }
-  }
+ 
 
-  private async loadProdutos(ramoId: number): Promise<void> {
-    try {
-      this.produtos = await this.produtoService.listarProdutosPorRamo(ramoId).toPromise() || [];
-    } catch (error) {
-      console.error('Erro ao carregar produtos:', error);
-    }
-  }
+  
 
   calculateTotal() {
     const valorLiquido = parseFloat(this.valores.at(0).value) || 0;

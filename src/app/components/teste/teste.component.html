@@ -99,8 +99,8 @@
                         <mat-form-field appearance="outline">
                           <mat-label>Seguradora</mat-label>
                           <mat-select formControlName="seguradoraId">
-                            <mat-option *ngFor="let seg of seguradoras" [value]="seg.id">
-                              {{seg.nome}}
+                            <mat-option >
+                             
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
@@ -109,8 +109,8 @@
                         <mat-form-field appearance="outline">
                           <mat-label>Ramo</mat-label>
                           <mat-select formControlName="ramoId">
-                            <mat-option *ngFor="let ramo of ramos" [value]="ramo.id">
-                              {{ramo.codigo}} - {{ramo.nome}}
+                            <mat-option >
+                              
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
@@ -120,8 +120,8 @@
                         <mat-form-field appearance="outline">
                           <mat-label>Produto</mat-label>
                           <mat-select formControlName="produtoId">
-                            <mat-option *ngFor="let produto of produtos" [value]="produto.id">
-                              {{produto.codigo}} - {{produto.nome}}
+                            <mat-option>
+                              
                             </mat-option>
                           </mat-select>
                         </mat-form-field>

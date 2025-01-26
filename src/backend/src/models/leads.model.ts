@@ -1,4 +1,5 @@
 export interface Lead {
+    data: any;
     id?: number;
     status: string;
     origem?: string;

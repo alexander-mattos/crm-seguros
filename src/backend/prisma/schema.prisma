@@ -7,6 +7,94 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Corretora {
+  id                      Int                 @id @default(autoincrement())
+  nome                    String
+  tipoPessoa              TipoPessoa
+  cnpjCpf                 String
+  cep                     String
+  endereco                String
+  numero                  String
+  complemento             String?
+  bairro                  String
+  cidade                  String
+  estado                  String
+  telefone                String?
+  telefone2               String?
+  fax                     String?
+  segmento                Segmento
+  centralAtendimento      String?
+  site                    String?
+  email                   String?
+  status                  Status
+  diasParaEntrarEmContato Int?
+  emailDiario             EmailDiario
+  faseImportacaoLeads     FaseImportacaoLeads
+  origemImportacaoLeads   Int
+  dataInclusao            DateTime
+  dataExpiracao           DateTime
+  observacao              String?
+
+  @@map("corretoras")
+}
+
+enum TipoPessoa {
+  FISICA
+  JURIDICA
+}
+
+enum Segmento {
+  SIM
+  NAO
+}
+
+enum Status {
+  NOVO
+  EM_TESTES
+  AGUARDANDO_PAGAMENTO
+  ATIVO
+}
+
+enum EmailDiario {
+  SIM
+  NAO
+}
+
+enum FaseImportacaoLeads {
+  AGUARDANDO_CONTATO
+  CONTACTADO
+  FECHADO_CONVERTIDO
+  FECHADO_NAO_CONVERTIDO
+}
+
+model Usuario {
+  id            Int             @id @default(autoincrement())
+  nome          String
+  email         String          @unique
+  status        StatusUser
+  gestor        String?
+  telefone      String?
+  celular       String?
+  administrador Boolean
+  emailDiario   EmailDiarioUser
+  criadoPor     String
+  dataCriacao   DateTime        @default(now())
+  alteradoPor   String?
+  dataAlteracao DateTime?       @updatedAt
+
+  @@map("usuarios")
+}
+
+enum StatusUser {
+  Ativo
+  Inativo
+}
+
+enum EmailDiarioUser {
+  S
+  N
+}
+
 model Cliente {
   id             Int         @id @default(autoincrement())
   nome           String      @db.VarChar(50)
@@ -80,7 +168,6 @@ model Endereco {
   @@map("enderecos")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Contato {
   id           Int     @id @default(autoincrement())
   clienteId    Int
@@ -110,6 +197,28 @@ model Nota {
   cliente Cliente @relation(fields: [clienteId], references: [id])
 
   @@map("notas")
+}
+
+model UnidadeNegocio {
+  id            Int       @id @default(autoincrement())
+  nome          String
+  responsavel   String?
+  susep         String?
+  email         String?   @unique
+  cep           String?
+  endereco      String?
+  numero        String?
+  complemento   String?
+  bairro        String?
+  cidade        String?
+  estado        String?
+  telefone1     String?
+  telefone2     String?
+  celular       String?
+  dataCriacao   DateTime  @default(now())
+  dataAlteracao DateTime? @updatedAt
+
+  @@map("unidadenegocios")
 }
 
 model Apolice {
@@ -241,7 +350,7 @@ model Repasse {
   valor      Decimal @db.Decimal(15, 2)
   status     String  @db.VarChar(20)
 
-  Proposta Proposta @relation(fields: [propostaId], references: [id])
+  proposta Proposta @relation(fields: [propostaId], references: [id])
 
   @@map("repasses")
 }
@@ -256,30 +365,40 @@ model Ramo {
   updatedAt DateTime @updatedAt
 
   Proposta Proposta[]
+  Produto  Produto[]
 
   @@map("ramos")
 }
 
 model Produto {
-  id        Int      @id @default(autoincrement())
-  nome      String   @db.VarChar(100)
-  codigo    String   @db.VarChar(20)
-  descricao String?  @db.Text
-  ativo     Boolean  @default(true)
-  ramoId    Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                        Int      @id @default(autoincrement())
+  nome                      String   @db.VarChar(100)
+  codigo                    String   @db.VarChar(20)
+  descricao                 String?  @db.Text
+  ativo                     Boolean  @default(true)
+  exibirNoOrcamento         Boolean  @default(false)
+  comissaoSobreAdicional    Boolean  @default(false)
+  iof                       Decimal? @db.Decimal(8, 2)
+  seguroPorAssinatura       Boolean  @default(false)
+  valorPrimeira             Decimal? @db.Decimal(10, 2)
+  valorDemais               Decimal? @db.Decimal(10, 2)
+  questionarioDeVenda       String?  @db.Text
+  ramoId                    Int
+  seguradoraId              Int
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+
+  ramo       Ramo       @relation(fields: [ramoId], references: [id])
+  seguradora Seguradora @relation(fields: [seguradoraId], references: [id])
 
   Proposta Proposta[]
 
   @@map("produtos")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Seguradora {
   id         Int      @id @default(autoincrement())
   nome       String   @db.VarChar(100)
-  cnpj       String?  @db.VarChar(14)
   susep      String?  @db.VarChar(20)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -290,11 +409,11 @@ model Seguradora {
   telefone2  String?  @db.VarChar(15)
 
   Proposta Proposta[]
+  Produto  Produto[]
 
   @@map("seguradoras")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Sinistro {
   id        Int      @id @default(autoincrement())
   numero    String   @db.VarChar(30)
@@ -370,8 +489,6 @@ model historicoapolice {
   data        DateTime @default(now())
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model historicocliente {
   id          Int      @id @default(autoincrement())
   clienteId   Int

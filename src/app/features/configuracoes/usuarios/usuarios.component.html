@@ -1,0 +1,125 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form [formGroup]="filtroForm" (ngSubmit)="pesquisar()">
+            <div>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Configurações</li>
+                    <li class="breadcrumb-item">Corretora, Usuários</li>
+                    <li class="breadcrumb-item">Usuários</li>
+                    <li class="breadcrumb-menu d-md-down-none">
+                        <div class="btn-group">
+                            <a class="btn">
+                                <i class="fas fa-question mr-2"></i>Ajuda
+                            </a>
+                        </div>
+                    </li>
+                </ol>
+                <div class="container-fluid">
+                    <div class="animated fadeIn">
+                        <div class="card card-accent-crm">
+                            <div class="card-header">
+                                <strong><i class="fas fa-filter mr-2"></i>Filtros</strong>
+                                <div class="card-header-actions">
+                                    <a class="btn btn-dark">
+                                        <i class="fas fa-arrow-alt-circle-left mr-2"></i>Voltar
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Nome:</label>
+                                            <input formControlName="nome" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-right">
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn-primary" >
+                                            Pesquisar
+                                        </button>
+                                        <button type="button" class="btn btn-danger" (click)="redefinirPesquisa()">
+                                            Redefinir pesquisa
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-accent-crm">
+                            <div class="card-header">
+                                <i class="fas fa-bars"></i>
+                                <div class="card-header-actions">
+                                    <a [routerLink]="['/configuracoes/usuarios/incluir']" class="btn btn-success">
+                                        <i class="fas fa-plus mr-2"></i>Adicionar Usuário
+                                    </a>
+                                </div>
+                            </div>
+                            <div *ngIf="loading" class="text-center">
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Carregando...</span>
+                                </div>
+                            </div>
+                            <div *ngIf="!loading && !error" class="row" class="table-responsive">
+                                <div>
+                                    <table *ngIf="usuarios.length > 0" class="table table-borderless border-0 mb-0"
+                                        cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+                                        <tbody>
+                                            <tr class="border-bottom">
+                                                <th scope="col">&nbsp;</th>
+                                                <th scope="col">&nbsp;</th>
+                                                <th scope="col"><a>Nome</a></th>
+                                                <th scope="col"><a>Email</a></th>
+                                                <th scope="col"><a>Divisão</a></th>
+                                            </tr>
+                                            <tr *ngFor="let usuario of usuarios" class="border-bottom">
+                                                <td class="text-center bg-white border-right" style="width:3%;">
+                                                    <a [routerLink]="['/configuracoes/usuarios/dash', usuario.id]">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                </td>
+                                                <td class="border-right text-center" style="width:3%;">
+                                                    <div class="avatar bg-white rounded-0"
+                                                        style="background-image: url(perfil.png); height:46px; width:46px;">
+                                                    </div>
+                                                </td>
+                                                <td>{{ usuario.nome }}</td>
+                                                <td>{{ usuario.email }}</td>
+                                                <td>{{ usuario.gestor || '-' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div *ngIf="usuarios.length === 0" class="alert alert-warning text-center">
+                                Nenhum usuário encontrado.
+                            </div>
+                            <div>
+                                <ul class="pagination justify-content-center mt-3">
+                                    <li class="page-item disabled">
+                                        <a class="page-link">« Anterior</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <span class="page-text page-text-active">1</span>
+                                    </li>
+                                    <li class="page-item"><span class="page-text">de</span></li>
+                                    <li class="page-item">
+                                        <span class="page-text page-text-active">1</span>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <a class="page-link">Próxima »</a>
+                                    </li>
+                                </ul>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

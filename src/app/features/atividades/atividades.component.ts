@@ -6,7 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
-import { Atividade, AtividadeFiltro } from '@/app/shared/types/atividade.types';
+import { Atividade, AtividadeFiltro } from '../clientes/types/atividade.types';
 
 @Component({
   selector: 'app-atividades',

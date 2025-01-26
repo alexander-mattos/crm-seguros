@@ -387,7 +387,6 @@ export class DashclientesComponent implements OnInit {
       '5': 'Contato',
       '21': 'Reunião Agendada',
       '22': 'Reunião Realizada',
-      // Adicione outros mapeamentos conforme necessário
     };
 
     return tipos[tipo] || 'Atividade';

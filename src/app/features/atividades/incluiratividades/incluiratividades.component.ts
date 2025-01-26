@@ -7,7 +7,7 @@ import { HeaderComponent } from '../../../components/header/header.component';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 import { FooterComponent } from '../../../components/footer/footer.component';
 import { ClienteService } from '../../clientes/services/cliente.service';
-import { AtividadeCreate } from '../../../shared/types/atividade.types';
+import { AtividadeCreate } from '../../clientes/types/atividade.types';
 
 
 @Component({

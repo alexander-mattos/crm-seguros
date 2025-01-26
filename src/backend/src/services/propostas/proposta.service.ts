@@ -1,7 +1,7 @@
 
 import { PrismaClient } from '@prisma/client';
-import { Proposta } from '../models/proposta.model';
-import { AppError } from '../middlewares/error';
+import { Proposta } from '@/models/proposta.model';
+import { AppError } from '@/middlewares/error';
 
 export class PropostaService {
   private prisma: PrismaClient;

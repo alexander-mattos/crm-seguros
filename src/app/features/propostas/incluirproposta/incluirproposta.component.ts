@@ -20,9 +20,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { Seguradora } from '../../../models/seguradora.model';
-import { Ramo } from '../../../models/ramo.model';
-import { Produto } from '../../../models/produto.model';
+import { Seguradoras } from '../../../../backend/src/models/seguradoras.model';
+import { Ramos } from '../../../../backend/src/models/ramos.model';
+import { Produtos } from '../../../../backend/src/models/produtos.model';
 import { SeguradoraService } from '@/app/features/propostas/services/seguradora.service';
 import { RamoService } from '../../../features/propostas/services/ramo.service';
 import { ProdutoService } from '../../../features/propostas/services/produto.service';
@@ -77,9 +77,9 @@ interface Agent {
 })
 export class IncluirPropostaComponent implements OnInit {
   form: FormGroup;
-  seguradoras: Seguradora[] = [];
-  ramos: Ramo[] = [];
-  produtos: Produto[] = [];
+  seguradoras: Seguradoras[] = [];
+  ramos: Ramos[] = [];
+  produtos: Produtos[] = [];
   isEndosso: boolean = false;
   clientes: ICliente[] = [];
   clientesFiltrados: Observable<ICliente[]> = observableOf([]);

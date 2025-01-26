@@ -1,0 +1,275 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Configurações</li>
+                    <li class="breadcrumb-item">Produtos</li>
+                    <li class="breadcrumb-menu d-md-down-none">
+                        <div class="lnk-group">
+                            <a class="lnk">
+                                <i class="fas fa-question mr-2"></i>Ajuda
+                            </a>
+                        </div>
+                    </li>
+                </ol>
+                <div class="container-fluid">
+                    <div class="animated fadeIn">
+                        <div class="form-row">
+                            <div class="col-lg-12">
+                                <div class="card card-accent-crm">
+                                    <div class="card-header">
+                                        <strong><i class="fas fa-edit mr-2"></i>Dados Básicos</strong>
+                                        <div class="card-header-actions">
+                                            <div class="btn-group">
+                                                <a class="btn btn-dark">
+                                                    <i class="fas fa-arrow-alt-circle-left mr-2"></i>Voltar
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div *ngIf="feedback" class="alert alert-{{ feedback.tipo }} mb-3" role="alert">
+                                            {{ feedback.mensagem }}
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="req">Exibir no Orçamento?</label>
+                                                    <select formControlName="exibirNoOrcamento" class="form-control">
+                                                        <option value="0">Selecione</option>
+                                                        <option value="S">Sim</option>
+                                                        <option value="N">Não</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <div class="form-group">
+                                                    <label class="req">Seguradora:</label>
+                                                    <select formControlName="seguradoraId" 
+                                                            class="form-control"
+                                                            [class.is-invalid]="isFieldInvalid('seguradoraId')">
+                                                        <option value="0">Selecione</option>
+                                                        <option *ngFor="let seguradora of seguradoras" [value]="seguradora.id">
+                                                            {{ seguradora.nome }}
+                                                        </option>
+                                                    </select>
+                                                    <div class="invalid-feedback" *ngIf="isFieldInvalid('seguradoraId')">
+                                                        {{ getErrorMessage('seguradoraId') }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="req">Nome:</label>
+                                                    <input formControlName="nome" 
+                                                           class="form-control" 
+                                                           [class.is-invalid]="isFieldInvalid('nome')">
+                                                    <div class="invalid-feedback" *ngIf="isFieldInvalid('nome')">
+                                                        {{ getErrorMessage('nome') }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="req">Código:</label>
+                                                    <input formControlName="codigo" 
+                                                           class="form-control"
+                                                           [class.is-invalid]="isFieldInvalid('codigo')">
+                                                    <div class="invalid-feedback" *ngIf="isFieldInvalid('codigo')">
+                                                        {{ getErrorMessage('codigo') }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="req">Ativo:</label>
+                                                    <select formControlName="ativo" class="form-control">
+                                                        <option value="A">Ativo</option>
+                                                        <option value="I">Inativo</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="req">Descrição:</label>
+                                                    <select formControlName="descricao" class="form-control">
+                                                        <option value="0">Selecione</option>
+                                                        <option value="1">AUTOMÓVEL</option>
+                                                        <option value="7">FIANÇA LOCATÍCIA</option>
+                                                        <option value="8">IMOBILIÁRIO</option>
+                                                        <option value="2">VIDA</option>
+                                                        <option value="3">SAÚDE</option>
+                                                        <option value="4">RESIDENCIAL</option>
+                                                        <option value="6">GARANTIA</option>
+                                                        <option value="5">GENÉRICA</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="req">Ramo:</label>
+                                                    <select formControlName="ramoId" class="form-control">
+                                                        <option value="0">Selecione</option>
+                                                        <option *ngFor="let ramo of ramos" [value]="ramo.id">
+                                                            {{ ramo.nome }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="req">Comissão incide sobre adicional?</label>
+                                                    <select formControlName="comissaoSobreAdicional"
+                                                        class="form-control">
+                                                        <option value="S">Sim</option>
+                                                        <option value="N">Não</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>IOF:</label>
+                                                    <input formControlName="iof" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Seguro por Assinatura?</label>
+                                                    <select formControlName="seguroPorAssinatura" class="form-control"
+                                                        autocomplete="off">
+                                                        <option value="S">Sim</option>
+                                                        <option selected="selected" value="N">Não</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Valor primeira:</label>
+                                                    <input formControlName="valorPrimeira" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Valor demais:</label>
+                                                    <input formControlName="valorDemais" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label>Questionário de venda:</label>
+                                                    <app-text-editor formControlName="questionarioDeVenda"></app-text-editor>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="text-center">
+                                            <button type="submit" 
+                                                    class="btn btn-success" 
+                                                    [disabled]="form.invalid">
+                                                <i class="fas fa-save mr-2"></i>
+                                                {{ modoEdicao ? 'Atualizar' : 'Inserir' }} produto
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="modalCoberturas">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <div class="col-lg-12">
+                                        <div class="card card-accent-crm mb-0">
+                                            <div class="card-header">
+                                                <strong><i class="fas fa-edit mr-2"></i>Coberturas</strong>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label class="req">Cobertura:</label>
+                                                            <select class="form-control"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Valor padrão:</label>
+                                                            <input class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="req">Ordem:</label>
+                                                            <input class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="text-center">
+                                                    <a class="btn btn-success"></a>
+                                                    <a class="btn btn-danger">Cancelar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="modalRegras">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <div class="col-lg-12">
+                                        <div class="card card-accent-crm mb-0">
+                                            <div class="card-header">
+                                                <strong><i class="fas fa-edit mr-2"></i>Associar regra</strong>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label class="req">Regra:</label>
+                                                            <select class="form-control"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="req">Seguradora:</label>
+                                                            <select class="form-control"></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="req">Produto:</label>
+                                                            <select class="form-control"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

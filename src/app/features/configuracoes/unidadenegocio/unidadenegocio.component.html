@@ -1,0 +1,113 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form [formGroup]="filtroForm" (ngSubmit)="pesquisar()">
+            <div>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Início</li>
+                    <li class="breadcrumb-item">Configurações</li>
+                    <li class="breadcrumb-item">Corretora, Usuários</li>
+                    <li class="breadcrumb-item">Unidades de Negócio</li>
+                    <li class="breadcrumb-menu d-md-down-none">
+                        <div class="btn-group">
+                            <a class="btn">
+                                <i class="fas fa-question mr-2"></i>Ajuda
+                            </a>
+                        </div>
+                    </li>
+                </ol>
+                <div class="container-fluid">
+                    <div class="animated fadeIn">
+                        <div class="row align-items-center mb-3">
+                            <div class="col">
+                                <h4><i class="fas fa-cog mr-2"></i>Unidades de Negócio</h4>
+                            </div>
+                            <div class="col-auto">
+                                <a class="btn btn-dark">
+                                    <i class="fas fa-arrow-alt-circle-left mr-2"></i>Voltar
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card card-accent-crm">
+                            <div class="card-header">
+                                <strong><i class="fas fa-filter"></i></strong>
+                                <div class="card-header-actions">
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Nome:</label>
+                                            <input formControlName="nome" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex">
+                                <button type="button" class="btn btn-danger" (click)="redefinirPesquisa()">
+                                    Redefinir pesquisa
+                                </button>
+                                <button type="submit" class="btn btn-primary ml-auto">
+                                    Pesquisar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card card-accent-crm">
+                            <div class="card-header">
+                                <strong><i class="fas fa-bars"></i></strong>
+                                <div class="card-header-actions">
+                                    <a [routerLink]="['/configuracoes/unidadenegocio/incluir']" class="btn btn-success">
+                                        <i class="fas fa-plus mr-2"></i>Adicionar Unidade de Negócio
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <div>
+                                    <table class="table table-borderless border-0 mb-0" cellspacing="0" rules="all"
+                                        border="1" style="border-collapse:collapse;">
+                                        <tbody>
+                                            <tr class="border-bottom">
+                                                <th scope="col">&nbsp;</th>
+                                                <th scope="col"><a>Nome</a></th>
+                                                <th scope="col"><a>Responsável</a></th>
+                                                <th scope="col"><a>Email</a></th>
+                                            </tr>
+                                            <tr *ngFor="let unidadeNegocio of unidadeNegocio" class="border-bottom">
+                                                <td class="text-center bg-white border-right" style="width:3%;">
+                                                    <a><i class="fas fa-edit"></i></a>
+                                                </td>
+                                                <td>{{ unidadeNegocio.nome }}</td>
+                                                <td>{{ unidadeNegocio.responsavel }}</td>
+                                                <td>{{ unidadeNegocio.email }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div>
+                                <ul class="pagination justify-content-center mt-3">
+                                    <li class="page-item disabled">
+                                        <a class="page-link">« Anterior</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <span class="page-text page-text-active">1</span>
+                                    </li>
+                                    <li class="page-item"><span class="page-text">de</span></li>
+                                    <li class="page-item">
+                                        <span class="page-text page-text-active">1</span>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <a class="page-link">Próxima »</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,426 @@
+<app-header></app-header>
+<div class="app-body">
+    <app-sidebar></app-sidebar>
+    <main class="main">
+        <form>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Configurações</li>
+                <li class="breadcrumb-item">Corretora, Usuários</li>
+                <li class="breadcrumb-item">Corretora</li>
+                <li class="breadcrumb-menu d-md-down-none">
+                    <div class="btn-group" role="group" aria-label="Button group">
+                        <a class="btn">
+                            <i class="fas fa-question mr-2"></i>Ajuda
+                        </a>
+                    </div>
+                </li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div id="dados"></div>
+                    <div class="d-flex justify-content-between mb-4">
+                        <div>
+                            <h4 class="page-title"><i class="fas fa-briefcase mr-2"></i>Corretora</h4>
+                        </div>
+                        <div class="btn-toolbar">
+                            <div class="btn-group">
+                                <a class="btn btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                    <span class="d-none d-md-inline ml-2">Editar Registro</span>
+                                </a>
+                                <a class="btn btn-dark">
+                                    <i class="fas fa-arrow-alt-circle-left"></i>
+                                    <span class="d-none d-md-inline ml-2">Voltar</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="email-app mb-4">
+                        <nav style="flex: 0 0 300px;">
+                            <div class="mb-3">
+                                <div class="text-center mb-3">
+                                    <img src="perfil.png" class="img-avatar avatar-6xl" style="border-radius: 0;">
+                                </div>
+                                <div class="text-center">
+                                    <div class="btn-group d-block">
+                                        <a class="btn btn-success btn-sm">
+                                            <i class="fas fa-plus mr-2"></i>Incluir imagem
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <ul class="nav">
+                                    <li class="nav-item border-top">
+                                        <a class="nav-link">
+                                            <i class="fas fa-edit mr-2"></i>Dados básicos
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            <i class="fas fa-users mr-2"></i>Usuários
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">
+                                            <i class="fas fa-link mr-2"></i>Integrações
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <main class="inbox">
+                            <div class="form-row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="req">Nome:</label>
+                                        <input disabled="disabled" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="req">Tipo pessoa:</label>
+                                        <select disabled="disabled" class="form-control">
+                                            <option value="0">Selecione</option>
+                                            <option value="F">Física</option>
+                                            <option selected="selected" value="J">Jurídica</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="req">CNPJ/CPF:</label>
+                                        <input disabled="disabled" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label class="req">CEP:</label>
+                                        <input disabled="disabled" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <label class="req">Endereço:</label>
+                                        <input disabled="disabled" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label class="req">Número:</label>
+                                        <input disabled="disabled" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Complemento:</label>
+                                        <input disabled="disabled" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="req">Bairro:</label>
+                                        <input disabled="disabled" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="req">Cidade:</label>
+                                        <input disabled="disabled" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="req">Estado:</label>
+                                        <input disabled="disabled" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Telefone:</label>
+                                        <div class="input-group">
+                                            <input disabled="disabled" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-phone"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Telefone 2:</label>
+                                        <div class="input-group">
+                                            <input disabled="disabled" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-phone"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Fax:</label>
+                                        <div class="input-group">
+                                            <input disabled="disabled" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-print"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Segmento:</label>
+                                        <select disabled="disabled" class="form-control">
+                                            <option value="0">Selecione</option>
+                                            <option selected="selected" value="S">Sim</option>
+                                            <option value="N">Não</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Central de Atendimento:</label>
+                                        <div class="input-group">
+                                            <input disabled="disabled" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-phone"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Site:</label>
+                                        <div class="input-group">
+                                            <input disabled="disabled" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-sitemap"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Email:</label>
+                                        <div class="input-group">
+                                            <input disabled="disabled" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-envelope"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Status:</label>
+                                        <select disabled="disabled" class="form-control">
+                                            <option selected="selected" value="1">Novo</option>
+                                            <option value="2">Em Testes</option>
+                                            <option value="3">Aguardando Pagamento</option>
+                                            <option value="4">Ativo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Dias para entrar em contato:</label>
+                                        <input name="ctl00$ContentPlaceHolder1$txDias" type="text"
+                                            id="ctl00_ContentPlaceHolder1_txDias" disabled="disabled"
+                                            class="form-control" data-mask="somenteNumeros" autocomplete="off"
+                                            inputmode="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Email diário:</label>
+                                        <select disabled="disabled" class="form-control">
+                                            <option selected="selected" value="S">Sim, quero receber emails
+                                                diariamente</option>
+                                            <option value="N">Não quero receber emails diariamente</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Fase importação de Leads (Facebook):</label>
+                                        <select disabled="disabled" class="form-control">
+                                            <option value="0">Selecione</option>
+                                            <option selected="selected" value="1">AGUARDANDO CONTATO</option>
+                                            <option value="2">CONTACTADO</option>
+                                            <option value="3">FECHADO - CONVERTIDO</option>
+                                            <option value="4">FECHADO - NÃO CONVERTIDO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Origem importação de Leads (Facebook):</label>
+                                        <select disabled="disabled" class="form-control">
+                                            <option selected="selected" value="0">Selecione</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label>Data Inclusão:</label>
+                                        <div class="input-group">
+                                            <input disabled="disabled" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label>Data Expiração:</label>
+                                        <div class="input-group">
+                                            <input disabled="disabled" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Observação:</label>
+                                        <textarea rows="5" cols="80" disabled="disabled"
+                                            class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                    <div id="pnlInformacoesAdicionais">
+                        <div id="usuarios"></div>
+                        <div class="card card-accent-crm">
+                            <div class="card-header">
+                                <i class="fas fa-users mr-2"></i>Usuários
+                                <div class="card-header-actions">
+                                    <a class="btn btn-success">
+                                        <i class="fas fa-plus mr-2"></i>Adicionar Usuário
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="pnlUsuarios">
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless border-0 mb-0" cellspacing="0" rules="all"
+                                            border="1" style="border-collapse:collapse;">
+                                            <tbody>
+                                                <tr class="border-bottom">
+                                                    <th scope="col">&nbsp;</th>
+                                                    <th scope="col">&nbsp;</th>
+                                                    <th scope="col"><a>Nome</a></th>
+                                                    <th scope="col"><a>Email</a></th>
+                                                    <th scope="col"><a>Divisão</a></th>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td class="text-center bg-white border-right" style="width:3%;">
+                                                        <a>
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td class="border-right text-center" style="width:3%;">
+                                                        <div class="avatar bg-white rounded-0"
+                                                            style="background-image: url(perfil.png); height:46px; width:46px;">
+                                                        </div>
+                                                    </td>
+                                                    <td>ALEXANDER MATTOS</td>
+                                                    <td>alexintegroseguros.com.br</td>
+                                                    <td>-</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <ul class="pagination justify-content-center mt-3">
+                                        <li class="page-item disabled">
+                                            <a class="page-link">« Anterior</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <span class="page-text page-text-active">1</span>
+                                        </li>
+                                        <li class="page-item"><span class="page-text">de</span></li>
+                                        <li class="page-item">
+                                            <span class="page-text page-text-active">1</span>
+                                        </li>
+                                        <li class="page-item disabled">
+                                            <a class="page-link">Próxima »</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="pnlIntegracoes">
+                            <div id="integracoes"></div>
+                            <div class="card card-accent-crm">
+                                <div class="card-header">
+                                    <i class="fas fa-link mr-2"></i>Integrações
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="mb-0"><i class="fab fa-facebook mr-2"></i>FORMULÁRIOS DE LEAD</h5>
+                                    <p>Meus Aplicativos &gt; Escolha seu Aplicativo &gt; Adicionar Produto &gt;
+                                        Webhooks &gt; No dropdown, escolha PÁGINA &gt; Assinar &gt; No campo URL DE
+                                        RETORNO DA CHAMADA, informe a url abaixo &gt; No campo TOKEN DE VERIFICAÇÃO,
+                                        informe o token disponibilizado à você. &gt; Assinar LEADGEN. Seu formulário
+                                        deve conter os seguintes campos nessa exata ordem: nome_completo, email,
+                                        telefone.</p>
+                                    <div class="form-row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>URL de retorno da chamada:</label>
+                                                <input value="EM BREVE" disabled="disabled" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>Token de Verificação:</label>
+                                                <input value="EM BREVE" disabled="disabled" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h5 class="mb-0"><i class="fas fa-user-friends mr-2"></i>MICROSOFT TEAMS</h5>
+                                    <p>Abra seu Canal &gt; Clique no ícone <i class="fas fa-ellipsis"></i> no topo
+                                        da janela &gt; Conectores &gt; Selecione Webhook de Entrada e clique em
+                                        Configurar &gt; Forneca um Nome e clique em Criar &gt; Copie e cole a URL de
+                                        webhook exclusiva presente na caixa de diálogo no campo abaixo &gt; Clique
+                                        em Atualizar.</p>
+                                    <div class="form-row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>URL do Webhook:</label>
+                                                <div class="input-group">
+                                                    <input class="form-control">
+                                                    <a class="btn btn-success">Atualizar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+<app-footer></app-footer>

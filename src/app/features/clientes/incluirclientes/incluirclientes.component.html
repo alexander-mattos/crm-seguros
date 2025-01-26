@@ -43,7 +43,7 @@
                       <div class="col-lg-8">
                         <div class="form-group">
                           <label class="req">Nome:</label>
-                          <input formControlName="nome" type="text" maxlength="100" class="form-control"
+                          <input formControlName="nome" class="form-control"
                             [class.is-invalid]="isFieldInvalid('nome')">
                           <div class="text-danger"
                             *ngIf="form.get('nome')?.errors?.['required'] && form.get('nome')?.touched">
@@ -213,13 +213,13 @@
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>E-mail:</label>
-                          <input formControlName='email' type="text" maxlength="70" class="form-control">
+                          <input formControlName='email' class="form-control">
                         </div>
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>Site:</label>
-                          <input formControlName='site' type="text" class="form-control">
+                          <input formControlName='site' class="form-control">
                         </div>
                       </div>
                     </div>
@@ -294,7 +294,7 @@
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>Data alteração:</label>
-                          <input formControlName="dtAlteracao" type="text" id="dtAlteracao" class="form-control">
+                          <input formControlName="dtAlteracao" id="dtAlteracao" class="form-control">
                         </div>
                       </div>
                     </div>
